@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<title>M00-B 合成 DOM 样本</title>
+<p>所有内容及 ID 为测试合成。样本不访问外部网站。</p>
+
+<template id="home">
+  <section id="TopstoryContent">
+    <article class="TopstoryItem">
+      <h2 class="ContentItem-title"><a href="/question/990001/answer/990011?utm_source=fixture">模拟推荐条目</a></h2>
+      <span class="AuthorInfo-name">合成作者</span><p class="RichContent-inner">推荐摘要</p>
+    </article>
+    <article class="TopstoryItem" hidden>
+      <h2 class="ContentItem-title"><a href="/question/990002">隐藏候选</a></h2>
+    </article>
+    <article class="TopstoryItem">
+      <h2 class="ContentItem-title"><a href="/question/990001/answer/990011">重复候选</a></h2>
+    </article>
+  </section>
+</template>
+
+<template id="follow">
+  <section class="FollowFeed">
+    <article class="ContentItem">
+      <h2 class="ContentItem-title"><a href="/pin/990021">模拟关注动态</a></h2>
+      <span class="AuthorInfo-name">合成关注作者</span><p class="RichContent-inner">关注摘要</p>
+    </article>
+  </section>
+</template>
+
+<template id="hot">
+  <section class="HotList">
+    <article class="HotItem">
+      <a href="/question/990031"><h2 class="HotItem-title">模拟热榜第一项</h2></a>
+      <p class="HotItem-excerpt">热榜摘要</p>
+    </article>
+    <article class="HotItem">
+      <a href="/question/990032"><h2 class="HotItem-title">模拟热榜第二项</h2></a>
+    </article>
+  </section>
+</template>
+
+<template id="search">
+  <main class="SearchMain">
+    <article class="SearchResult-Card"><h2 class="ContentItem-title"><a href="https://zhuanlan.zhihu.com/p/990041">模拟专栏结果</a></h2>
+      <span class="AuthorInfo-name">合成搜索作者</span><p class="RichContent-inner">搜索摘要</p>
+    </article>
+    <article class="SearchResult-Card"><h2 class="ContentItem-title"><a href="/question/990042/answer/990043">模拟回答结果</a></h2></article>
+    <article class="SearchResult-Card"><h2 class="ContentItem-title"><a href="https://example.invalid/question/990044">不在知乎范围内</a></h2></article>
+    <article class="SearchResult-Card"><h2 class="ContentItem-title"><a href="/question/990042/answer/990043#same">重复回答记录</a></h2></article>
+  </main>
+</template>
+
+<template id="question">
+  <h1 class="QuestionHeader-title">模拟问题</h1>
+  <section class="QuestionAnswers-answers">
+    <article class="AnswerItem">
+      <meta itemprop="url" content="https://www.zhihu.com/question/990050/answer/990051">
+      <span class="AuthorInfo-name">合成回答作者甲</span>
+      <div class="RichContent-inner"><div class="RichText">
+        <p>第一条已经渲染的回答正文。</p><p>保留 &lt;b&gt;文字&lt;/b&gt; 的纯文本。</p>
+        <img data-fixture-image="loaded" alt="模拟已加载图片">
+        <img data-fixture-image="failed" alt="模拟失败图片">
+        <img data-fixture-image="pending" alt="模拟待加载图片">
+        <template><script type="text/plain">INERT_FIXTURE_MARKER</script></template>
+      </div></div>
+    </article>
+    <article class="AnswerItem">
+      <div class="ContentItem-time"><a href="/question/990050/answer/990052">原生回答链接</a></div>
+      <span class="AuthorInfo-name">合成回答作者乙</span>
+      <div class="RichContent-inner"><div class="RichText"><p>第二条已经渲染的回答正文。</p></div></div>
+    </article>
+  </section>
+</template>
+
+<template id="article">
+  <article class="Post-Main">
+    <header class="Post-Header"><h1 class="Post-Title">模拟专栏题名</h1>
+      <div class="Post-Author"><span class="AuthorInfo-name">合成专栏作者</span></div>
+    </header>
+    <div class="Post-RichTextContainer"><div class="Post-RichText RichText ztext">
+      <p>专栏正文段落。</p><p>第二个正文段落。</p>
+    </div></div>
+  </article>
+</template>
+
+<template id="login">
+  <main class="SearchMain"><p>登录知乎，您可以享受以下权益：</p><button>立即登录/注册</button></main>
+</template>
+
+<template id="empty">
+  <main class="SearchMain"><p>暂无搜索结果</p></main>
+</template>
+
+<template id="missing">
+  <article class="Post-Main"><h1 class="Post-Title">缺少正文的模拟专栏</h1></article>
+</template>
+
+<template id="dom-changed">
+  <main class="SearchMain"><section class="DifferentResult"><h2>模拟改版的结果外壳</h2></section></main>
+</template>
+
+<template id="restriction">
+  <main class="SearchMain"><section class="Captcha">模拟安全验证</section></main>
+</template>
+</html>
