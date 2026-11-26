@@ -2,7 +2,7 @@
 
 [PDT v1.2](PDT-V1.2.md) · [中文 README](../README_CN.md) · [English README](../README.md)
 
-PDT v1.2 是产品范围与验收基线。当前完成 **0 / 14 项实施任务**。从 M00-A 开始，按 M00-A、M00-B、M00-UI 的顺序取证。M01–M05 等待 Gate 01 通过。
+PDT v1.2 是产品范围与验收基线。当前完成 **1 / 14 项实施任务**。M00-A 源码审计与构建验证已通过，原版浏览器安装仍有阻断风险。M00-B 与 M00-UI 待授权，M01–M05 等待 Gate 01 通过。 [M00-A 验证记录](M00-VALIDATION.md) · [上游锁定](UPSTREAM-LOCK.md)
 
 ## 模块与版本
 
@@ -21,9 +21,9 @@ PDT v1.2 是产品范围与验收基线。当前完成 **0 / 14 项实施任务*
 
 | 任务 | 内容 | 交付或核对项 | 当前状态 |
 | --- | --- | --- | --- |
-| M00-A | 锁定上游源码，审计许可、权限、依赖、网络和构建 | `docs/M00-VALIDATION.md` 的底库与依赖记录 | 可启动 |
-| M00-B | 在 Chrome 和 Edge 验证知乎页面、登录状态、数据源及降级 | `docs/M00-VALIDATION.md` 的实机记录 | 待执行 |
-| M00-UI | 在个人测试文档测量排版、宽度和交互 | 三张参考截图、`docs/design/UI-SPEC.md`、`src/styles/tokens.css` | 待执行 |
+| M00-A | 锁定上游源码，审计许可、权限、依赖、网络和构建 | [M00-VALIDATION.md](M00-VALIDATION.md) · [UPSTREAM-LOCK.md](UPSTREAM-LOCK.md) | PASS（审计与构建） |
+| M00-B | 在 Chrome 和 Edge 验证知乎页面、登录状态、数据源及降级 | [待验证事项](M00-VALIDATION.md#m00-b-待验证事项) | 待授权 |
+| M00-UI | 在个人测试文档测量排版、宽度和交互 | 三张参考截图、`docs/design/UI-SPEC.md`、`src/styles/tokens.css` | 待授权 |
 | M01-A | 初始化工程、锁定依赖，剥离 AI、Wiki 和 Embedding | AT23、AT24、AT26 | LOCKED |
 | M01-B | 实现路由、生命周期、模式切换和原生页面恢复 | AT02、AT11、AT12、AT19 | LOCKED |
 | M02-A | 实现顶部栏、左侧导航、正文、右侧目录和响应式布局 | 冻结后的 UI-SPEC 视觉对照 | LOCKED |
