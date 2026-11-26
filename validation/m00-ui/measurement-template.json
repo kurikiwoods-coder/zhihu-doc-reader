@@ -1,0 +1,440 @@
+{
+  "schemaVersion": 1,
+  "session": {
+    "date": null,
+    "timeZone": null,
+    "operatingSystem": null,
+    "browser": null,
+    "browserVersion": null,
+    "interfaceLanguage": null,
+    "browserZoomPercent": null,
+    "systemDisplayScalePercent": null,
+    "appearance": null,
+    "viewportCssPx": {
+      "width": null,
+      "height": null
+    },
+    "devicePixelRatio": null
+  },
+  "captures": [],
+  "measurements": [
+    {
+      "id": "header-bar",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "rationale": "记录主顶栏盒子在阅读视口占用的高度，排除浮动编辑工具。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "left-navigation",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "rationale": "识别独立的应用导航再测宽度，缺席时记录观察和视口。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "outline-placement",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "rationale": "测目录容器的横向坐标与宽度并与正文比对，确认目录相对位置。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "right-auxiliary",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "rationale": "记录区域类型、开关状态与宽度，供正文可用空间比较。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "content-default",
+      "widthMode": "default",
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "rationale": "固定视口取标题与正文共享的容器，优先为阅读行长提供参照。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "content-wide",
+      "widthMode": "wide",
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "rationale": "同一视口与区域口径复测，衡量对长代码、宽图的帮助。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "content-full",
+      "widthMode": "full",
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "rationale": "同一视口与区域口径复测，记录左右保留空间和辅助区的变化。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "content-padding",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "rationale": "分别测正文外框和文字列，区分盒子宽度、横向留白与实际文字区域。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "responsive-layout",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "rationale": "逐步缩窄窗口，记录正文、导航与目录的实际变化和相应视口。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "document-title",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "rationale": "采集字号、字重、行高、字体族和间距，区分文档标题与章节标题。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "heading-1",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "rationale": "测一级章节标题并对照前后正文留白。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "heading-2",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "rationale": "测二级章节标题的字阶和上下间距。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "heading-3",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "rationale": "测三级章节标题是否有清楚的层级和可读字号。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "paragraph",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "rationale": "测中英混排段落，用同一层级核对字号、字重、行高和字间距。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "paragraph-gap",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "rationale": "采相邻段落、外层块及其父级 gap，结合两段的几何边缘确认实际间距。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "blockquote",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "rationale": "测引文缩进、分隔边框、背景和上下间距。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "ordered-list",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "rationale": "测列表项行高、编号位置、层级缩进和间距。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "unordered-list",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "rationale": "测列表项行高、项目符号位置、层级缩进和间距。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "inline-code",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "rationale": "采实际代码元素的字体族、盒子、颜色与圆角，检查它在正文行内的占位。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "code-block",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "rationale": "分别测容器和内部代码字体，观察长行如何呈现。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "image",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "rationale": "测可见图片和外框的宽度约束、对齐与留白，并查看宽图的显示。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "caption",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "rationale": "单独测图注字体、颜色、对齐及与图片的间隔。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "link",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "rationale": "记录正文链接的颜色、下划线和悬停反馈，比较与正文的区分度。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "surface-colors",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "rationale": "逐区取背景颜色，透明层同时记录实际承托背景。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "text-colors",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "rationale": "记录可见实例的 color，结合相邻背景确认层级。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "borders-radius-shadow",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "rationale": "测分隔线、容器和浮层的可见样式并记录具体区域。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "item-hover",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "rationale": "同一元素比较默认与悬停，分别记背景、文字、边框及触发方式。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "item-selected",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "rationale": "通过页面实际选中，记录当前项的背景、字重和标记并与 Hover 区分。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "keyboard-focus",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "rationale": "使用 Tab 观察焦点可见性，检查轮廓、偏移和阴影。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "navigation-collapse",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "rationale": "观察入口和展开／收起后的空间变化，记录仍可见容器的宽度。",
+      "verificationStatus": "UNVERIFIED"
+    },
+    {
+      "id": "outline-navigation",
+      "widthMode": null,
+      "referenceValue": null,
+      "targetValue": null,
+      "evidence": [],
+      "evidenceLevel": null,
+      "expectedEvidenceLevels": [
+        "A"
+      ],
+      "rationale": "观察点击定位、滚动时当前项反馈及复位行为，记录是否实际出现。",
+      "verificationStatus": "UNVERIFIED"
+    }
+  ]
+}
