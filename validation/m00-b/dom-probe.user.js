@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Zhihu Doc Reader M00-B DOM Probe
 // @namespace    https://github.com/kurikiwoods-coder/zhihu-doc-reader/validation
-// @version      0.0.1
+// @version      0.0.2
 // @description  Isolated M00-B read-only DOM and test-marker probe
 // @match        https://www.zhihu.com/
 // @match        https://www.zhihu.com/follow*
@@ -31,7 +31,10 @@
   };
   const sources = {
     home: { ...listFields, cards: '#TopstoryContent .TopstoryItem' },
-    follow: { ...listFields, cards: '.FollowFeed .ContentItem, .Moments .ContentItem' },
+    follow: {
+      ...listFields,
+      cards: '.FollowFeed .ContentItem, .Moments .ContentItem, .Topstory-follow .TopstoryItem-isFollow .ContentItem',
+    },
     hot: {
       cards: '.HotList .HotItem, .HotItem',
       title: '.HotItem-title',

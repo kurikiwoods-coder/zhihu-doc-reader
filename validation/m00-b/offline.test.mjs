@@ -110,6 +110,19 @@ for (const [name, count, heading, type, href] of positive) {
   });
 }
 
+test('follow reads Topstory activity cards and ignores other content in the follow section', () => {
+  const env = load('follow-topstory', route.follow);
+  const panel = env.document.querySelector(panelID);
+  assert.equal(panel.dataset.kind, 'follow');
+  assert.equal(panel.dataset.status, 'available');
+  assert.equal(panel.dataset.count, '1');
+  assert.match(panel.querySelector('pre').textContent, /候选容器 1/);
+  assert.match(panel.querySelector('pre').textContent, /类型 answer/);
+  assert.match(panel.querySelector('details pre').textContent, /模拟关注回答/);
+  assert.equal(panel.querySelector('a').getAttribute('href'), zhihu + '/question/990022/answer/990023');
+  assert.deepEqual(env.requests, []);
+});
+
 test('question reads full visible text, reports images, and switches answers without replacing native DOM', () => {
   const env = load('question', route.question);
   const panel = env.document.querySelector(panelID);
