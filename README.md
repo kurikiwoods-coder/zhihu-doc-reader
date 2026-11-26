@@ -1,10 +1,10 @@
 # Zhihu Doc Reader
 
-[简体中文](README_CN.md) · [Product Definition (PDT v1.2, Chinese)](docs/PDT-V1.2.md)
+[简体中文](README_CN.md) · [Product Definition (PDT v1.2, Chinese)](docs/PDT-V1.2.md) · [Roadmap (Chinese)](docs/ROADMAP.md)
 
 Zhihu Doc Reader is a Tampermonkey userscript planned for Chrome and Microsoft Edge. It presents Zhihu answers and articles in a document-style reading view. Readers discover content through Zhihu's own pages and can save bookmarks and reading history in their browser.
 
-**Project status**. PDT v1.2 is the development baseline. M00-A, M00-B, and M00-UI are ready to start. Implementation begins after all three pass and the project owner approves the results.
+**Project status.** Planning is complete. M00-A upstream verification is the first task. Implementation begins after M00 passes and the project owner approves the results.
 
 ## What readers can do
 
@@ -28,7 +28,7 @@ flowchart TD
     Reader --> Native
 ```
 
-The script reads content already loaded by Zhihu and respects the permissions of the current session. After M00 verification, question pages can use the upstream Answer Feed adapter to load more answers on demand. If that adapter is unavailable, the reader uses the answers already rendered on the page.
+The script reads content already loaded by Zhihu and respects the permissions of the current session. After M00 verification, question pages can use the upstream Answer Feed adapter to load more answers on demand. If that adapter is unavailable, the reader uses the answers already rendered on the page. The content adapter normalizes items and removes duplicates before adding them to the reading queue of up to 100 items.
 
 | Layer | Planned implementation |
 | --- | --- |
@@ -40,15 +40,17 @@ The script reads content already loaded by Zhihu and respects the permissions of
 
 Upstream builds with `node build.js` and produces `dist/bundle.user.js`. M00-A checks the build and reuse plan for this project. DOMPurify and Lucide are candidates for review during M00. [Upstream v5.1.6](https://github.com/connectedGraph/zhihu-immersive-reader/tree/v5.1.6) · [Upstream MIT license](https://github.com/connectedGraph/zhihu-immersive-reader/blob/v5.1.6/LICENSE)
 
-## Development sequence
+## Development roadmap
 
-| Stage | Work |
+| Stage | Planned outcome |
 | --- | --- |
-| M00-A | Verify the upstream source, license, permissions, and build |
-| M00-B | Verify Zhihu navigation, content sources, and fallback behavior in Chrome and Edge |
-| M00-UI | Record document editor layout and interaction references, then prepare screenshots, `docs/design/UI-SPEC.md`, and a CSS variable table |
-| M00 approval | Review the three verification results and obtain project owner approval |
-| M01–M03 | Set up the codebase, build the reading view, and implement the P0 discovery and navigation flow |
-| M04–M05 | Add P1 features including local collections, history, and settings. Verify P0 and P1 in both supported browsers before releasing V1.0. |
+| M00 | Verify the upstream code and build, live Zhihu pages, and document layout references. Gate 01 requires all three checks and project owner approval. |
+| M01 | Set up the codebase, remove upstream AI features, and make reader mode reversible. |
+| M02 | Build the document layout and render accessible answers and articles safely. |
+| M03 | Implement the hot list, recommendations, search, and continuous reading. Gate 02 produces the V0.1 internal build after P0 verification. |
+| M04 | Add bookmarks, reading history, preferences, keyboard shortcuts, and the following feed for the V0.2 feature-complete candidate. |
+| M05 | Verify the 28 acceptance cases, UI reference, Chrome and Edge compatibility, and CI. Gate 03 leads to the V1.0 release as a single `.user.js` file. |
+
+`main` holds reviewed documentation and validated milestones. Ongoing module work goes into `dev`. The roadmap tracks 14 implementation tasks and three acceptance gates. [Tasks, acceptance criteria, and M00-A checklist (Chinese)](docs/ROADMAP.md)
 
 M00-UI uses Feishu Docs as a reference for reading layout. Record computed styles, screenshots, and interaction observations alongside the browser, viewport, and date. Measure default, wide, and full-width layouts separately. The proposed 800 px reading width is pending verification.
