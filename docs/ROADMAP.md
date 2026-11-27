@@ -92,6 +92,6 @@ M00-UI-B 的飞书参考证据按原状态保存，正式飞书截图为 0 / 3�
 
 ## 2026-11-27 接手状态
 
-0.0.3 入口避让修复已完成，本地双浏览器合成回归通过，既有测试配置的安装源码指纹已核对。历史实站复测在 Edge 专栏 HTTP 403 和 Chrome 首页登录要求处暂停。M02-L-FINAL 待取得日常浏览器脚本停用后的原生访问对照，再补独立 Chrome、Edge 实机及产品视觉。访问异常原因待查。[实机收尾](M02-VALIDATION.md#m02-l-final-实机收尾) · [接手步骤](evidence/m02-l/HANDOFF.md)
+0.0.3 入口避让修复已完成，本地双浏览器合成回归通过，既有测试配置的安装源码指纹已核对。历史实站复测在 Edge 专栏 HTTP 403 和 Chrome 首页登录要求处暂停。日常 Chrome 首页的启停对照已完成，覆盖原生访问、唯一入口、推荐预览、退出和 Esc 焦点恢复。独立 Chrome 和 Edge 实机矩阵、富文本与窄窗口视觉证据待补。访问异常原因待查。[实机收尾](M02-VALIDATION.md#m02-l-final-实机收尾) · [接手步骤](evidence/m02-l/HANDOFF.md)
 
 M03-R 选型及隔离实验已获负责人批准。原始研究保存在 `research/m03-r`，归档保留复现脚本和结果。批准范围包括保留现有架构、局部复用 MIT 纯 DOM 选择器及独立实现会话状态保护。M03–M05 处于 LOCKED。[归档](research/M03-R/RESOURCE-INVENTORY.md) · [实施建议](research/M03-R/IMPLEMENTATION-RECOMMENDATIONS.md)
