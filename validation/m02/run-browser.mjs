@@ -103,12 +103,17 @@ for (const stream of [driver.stdout, driver.stderr]) {
 }
 
 async function request(method, endpoint, data) {
-  const response = await fetch('http://127.0.0.1:' + port + endpoint, {
-    method,
-    headers: { 'Content-Type': 'application/json' },
-    body: data === undefined ? undefined : JSON.stringify(data),
-    signal: AbortSignal.timeout(12000),
-  });
+  let response;
+  try {
+    response = await fetch('http://127.0.0.1:' + port + endpoint, {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      body: data === undefined ? undefined : JSON.stringify(data),
+      signal: AbortSignal.timeout(endpoint === '/session' ? 42000 : 15000),
+    });
+  } catch (error) {
+    throw new Error(method + ' ' + endpoint + ' ' + error.message, { cause: error });
+  }
   const reply = await response.json();
   if (!response.ok || reply.value?.error) {
     throw new Error(method + ' ' + endpoint + ' ' + (reply.value?.message ?? response.status));
@@ -173,6 +178,8 @@ function measure() {
     const article = reading.querySelector('.zdr-richtext');
     return {
       viewport: innerWidth,
+      workspaceWidth: root.querySelector('dialog').clientWidth,
+      nativeClientWidth: document.documentElement.clientWidth,
       topbar: target('topbar').getBoundingClientRect().height,
       nav: nav.width, outline: outline.width,
       bodyWidth: reading.getBoundingClientRect().width,
@@ -226,7 +233,13 @@ try {
     capabilities: {
       alwaysMatch: {
         browserName: profile.name,
-        [profile.options]: { args: ['--headless=new', '--no-first-run', '--no-default-browser-check', '--disable-background-networking', '--disable-extensions', '--no-sandbox'] },
+        pageLoadStrategy: 'eager',
+        [profile.options]: {
+          args: [
+            '--headless=new', '--no-first-run', '--no-default-browser-check', '--disable-background-networking',
+            '--disable-extensions', '--disable-dev-shm-usage', '--disable-gpu', '--no-proxy-server', '--no-sandbox',
+          ],
+        },
       },
     },
   });
@@ -252,7 +265,8 @@ try {
     within(geometry.topbar, 56, 'topbar height');
     within(geometry.nav, expectedNav, 'left navigation width');
     within(geometry.outline, expectedOutline, 'right outline width');
-    within(geometry.bodyWidth, width - expectedNav - expectedOutline, 'native grid width');
+    within(geometry.workspaceWidth, geometry.nativeClientWidth, 'workspace fits the native client area');
+    within(geometry.bodyWidth, geometry.workspaceWidth - expectedNav - expectedOutline, 'native grid width');
     within(geometry.column, Math.min(768, geometry.available), 'default reading width');
     assert.equal(geometry.titleSize, '32px');
     assert.equal(geometry.bodySize, '17px');

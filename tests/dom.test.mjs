@@ -91,6 +91,15 @@ function load(name, href, { modalError = false, navigation = true, frame = false
   document.createElement = (tag) => {
     const node = create(tag);
     if (tag === 'button' || /^h[1-6]$/.test(tag)) node.focus = options => { focused = { node, options }; };
+    if (tag === 'main') node.scrollTop = 0;
+    if (/^h[1-6]$/.test(tag)) {
+      Object.defineProperty(node, 'getBoundingClientRect', {
+        value() {
+          const ordinal = Number(node.id.split('-').at(-1));
+          return { top: 64 + ordinal * 100 - (node.closest('main')?.scrollTop || 0) };
+        },
+      });
+    }
     if (tag === 'canvas') {
       node.getContext = () => ({ drawImage(image) { drawnImages.push(image); } });
     }
