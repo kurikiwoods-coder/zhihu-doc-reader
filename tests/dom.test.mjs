@@ -59,8 +59,10 @@ function load(name, href, { modalError = false, navigation = true, frame = false
   window.location = { href };
   if (navigation) window.navigation = new EventTarget();
   let viewport = 1440;
-  window.getComputedStyle = () => ({
+  window.getComputedStyle = element => ({
     visibility: 'visible',
+    overflowY: element.style.overflowY,
+    webkitLineClamp: element.style.getPropertyValue('-webkit-line-clamp'),
     getPropertyValue(property) {
       if (property === '--zdr-nav-overlay') return viewport < 900 ? '1' : '0';
       if (property === '--zdr-outline-overlay') return viewport < 1200 ? '1' : '0';
@@ -364,6 +366,79 @@ test('M02 full question body does not reuse the 240-character list excerpt', () 
   list.press(launcherID);
   assert.equal(list.inShell(readerID, '.zdr-preview').textContent.length, 240);
   assert.equal(list.inShell(readerID, '.zdr-richtext'), null);
+});
+
+function loadWrappedQuestion(href = question) {
+  const page = load('question-unescapable', href);
+  const [collapsed, expanded] = page.native.querySelectorAll('.RichContent-inner');
+  Object.defineProperties(collapsed, {
+    clientHeight: { value: 297, configurable: true },
+    scrollHeight: { value: 298, configurable: true },
+  });
+  Object.defineProperties(expanded, {
+    clientHeight: { value: 3510, configurable: true },
+    scrollHeight: { value: 3510, configurable: true },
+  });
+  return { page, collapsed, expanded };
+}
+
+test('M02 skips the collapsed answer and renders the fully visible wrapped answer on a question page', () => {
+  const { page } = loadWrappedQuestion();
+  assert.equal(page.adapter().record.contentId, '990052');
+  page.press(launcherID);
+  const body = page.inShell(readerID, '.zdr-richtext');
+  assert.match(body.textContent, /第二条完整回答起始。.*第二条完整回答结束。/s);
+  assert.doesNotMatch(body.textContent, /折叠回答|隐藏片段/);
+  assert.equal(page.native.outerHTML, page.original);
+});
+
+test('M02 preserves the native question page when its only wrapped answer is collapsed', () => {
+  const { page, expanded } = loadWrappedQuestion();
+  expanded.closest('.AnswerItem').remove();
+  const original = page.native.outerHTML;
+  assert.equal(page.adapter().status, 'unavailable');
+  page.press(launcherID);
+  assert.equal(page.host(readerID), null);
+  assert.equal(page.native.outerHTML, original);
+});
+
+test('M02 applies the same boundary to the requested answer alone on direct links', () => {
+  const { page: collapsed } = loadWrappedQuestion(question + '/answer/990051');
+  assert.equal(collapsed.adapter().status, 'unavailable');
+  const { page: expanded } = loadWrappedQuestion(question + '/answer/990052');
+  assert.equal(expanded.adapter().record.contentId, '990052');
+});
+
+test('M02 requires proof of full layout for an otherwise unescapable answer', () => {
+  for (const failure of ['collapsed marker', 'clipped height', 'unmeasurable', 'other shape', 'expand control',
+    'inert content', 'clipping ancestor', 'line clamp']) {
+    const { page, expanded } = loadWrappedQuestion();
+    if (failure === 'collapsed marker') expanded.classList.add('RichContent-inner--collapsed');
+    if (failure === 'clipped height') Object.defineProperty(expanded, 'scrollHeight', { value: 3511 });
+    if (failure === 'unmeasurable') Object.defineProperty(expanded, 'clientHeight', { value: 0 });
+    if (failure === 'other shape') expanded.parentElement.classList.remove('RichContent');
+    if (failure === 'inert content') expanded.setAttribute('inert', '');
+    if (failure === 'clipping ancestor') {
+      expanded.parentElement.style.overflowY = 'hidden';
+      Object.defineProperties(expanded.parentElement, {
+        clientHeight: { value: 0 },
+        scrollHeight: { value: 3510 },
+      });
+    }
+    if (failure === 'line clamp') expanded.style.setProperty('-webkit-line-clamp', '3');
+    if (failure === 'expand control') {
+      const expand = page.document.createElement('button');
+      expand.className = 'ContentItem-expandButton';
+      expanded.parentElement.append(expand);
+    }
+    assert.equal(page.adapter().status, 'unavailable', failure);
+  }
+});
+
+test('M02 retains unescapable protection on other routes', () => {
+  const page = load('rich-article', article);
+  page.native.querySelector('.Post-RichText').classList.add('RichContent--unescapable');
+  assert.equal(page.adapter().status, 'unavailable');
 });
 
 test('M02 keeps numbering, lists, quote, code and uses hardening on safe links', () => {

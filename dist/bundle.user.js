@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Zhihu Doc Reader
 // @namespace    https://github.com/kurikiwoods-coder/zhihu-doc-reader
-// @version      0.0.3
+// @version      0.0.4
 // @description  DOM-only document reading for Zhihu
 // @match        https://www.zhihu.com/*
 // @match        https://zhuanlan.zhihu.com/p/*
@@ -170,14 +170,30 @@ function hasReadableContent(nodes) {
   });
 }
 
-function isUnclippedBody(element, card, view) {
-  if (element.closest('.RichContent--collapsed, .RichContent--unescapable, [data-collapsed="true"]')) return false;
+function isUnclippedBody(element, card, view, isQuestionAnswer) {
+  if (element.closest('.RichContent--collapsed, .RichContent-inner--collapsed, [data-collapsed="true"]')) return false;
   if (firstRendered(card, '.ContentItem-expandButton, .RichContent-expandButton', view)) return false;
+  const unescapable = element.closest('.RichContent--unescapable');
+  if (unescapable) {
+    const inner = element.closest('.RichContent-inner');
+    // Zhihu also uses this wrapper on fully rendered answers. Require a measurable inner container.
+    if (!isQuestionAnswer || !inner || inner.closest('.RichContent') !== unescapable ||
+        unescapable.closest('.AnswerItem') !== card ||
+        unescapable.parentElement?.closest('.RichContent--unescapable') || element.closest('[inert]') ||
+        view.getComputedStyle(inner).overflowY !== 'hidden' ||
+        !(inner.clientHeight > 0 && inner.clientHeight === inner.scrollHeight)) return false;
+  }
   for (let node = element; node && card.contains(node); node = node.parentElement) {
+    if (unescapable && !richElementVisible(node, view)) return false;
     const style = view.getComputedStyle(node);
-    const clips = style.overflowY === 'hidden' || style.overflowY === 'clip' ||
-      Number.parseInt(style.webkitLineClamp, 10) > 0;
-    if (clips && node.clientHeight > 0 && node.scrollHeight > node.clientHeight + 1) return false;
+    const lineClamped = Number.parseInt(style.webkitLineClamp, 10) > 0;
+    const clips = style.overflowY === 'hidden' || style.overflowY === 'clip' || lineClamped;
+    if (!clips) continue;
+    if (unescapable) {
+      if (lineClamped || !(node.clientHeight > 0 && node.clientHeight === node.scrollHeight)) return false;
+    } else if (node.clientHeight > 0 && node.scrollHeight > node.clientHeight + 1) {
+      return false;
+    }
   }
   return true;
 }
@@ -265,9 +281,9 @@ function publishedText(card, view) {
   return label?.startsWith('发布于') ? label.slice(3).trim() || null : null;
 }
 
-function readFullBody(card, selector, view, sourceUrl) {
+function readFullBody(card, selector, view, sourceUrl, isQuestionAnswer) {
   const element = firstRendered(card, selector, view);
-  if (!element || !isUnclippedBody(element, card, view)) return null;
+  if (!element || !isUnclippedBody(element, card, view, isQuestionAnswer)) return null;
   const content = captureRichChildren(element, view, sourceUrl);
   return hasReadableContent(content) ? content : null;
 }
@@ -285,7 +301,7 @@ function readNativePage(document, view, route) {
     const title = profile.body ? heading?.innerText?.trim() : boundedText(heading, 160);
     if (!title) continue;
     const source = answer || (route.contentId ? route : cardAddress(card, heading, view, route));
-    const content = profile.body ? readFullBody(card, profile.body, view, source.sourceUrl) : null;
+    const content = profile.body ? readFullBody(card, profile.body, view, source.sourceUrl, route.kind === 'question') : null;
     if (profile.body && !content) continue;
     return {
       status: 'ready',
