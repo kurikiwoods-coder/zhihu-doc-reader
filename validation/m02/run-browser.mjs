@@ -61,11 +61,28 @@ function prepareSyntheticView() {
   widget.type = 'button';
   widget.textContent = '原生浮窗';
   document.body.append(widget);
+
+  const sticky = document.createElement('div');
+  sticky.className = 'Sticky RichContent-actions';
+  const actions = document.createElement('div');
+  actions.className = 'ContentItem-actions';
+  const vote = document.createElement('button');
+  vote.className = 'Button VoteButton';
+  vote.type = 'button';
+  vote.textContent = '赞同';
+  actions.append(vote);
+  sticky.append(actions);
+  document.querySelector('.Post-Main').append(sticky);
+
   const view = {
     location: { href: 'https://zhuanlan.zhihu.com/p/990041' },
     navigation: new EventTarget(),
     MutationObserver: window.MutationObserver,
     getComputedStyle: window.getComputedStyle.bind(window),
+    requestAnimationFrame: window.requestAnimationFrame.bind(window),
+    cancelAnimationFrame: window.cancelAnimationFrame.bind(window),
+    get innerWidth() { return window.innerWidth; },
+    get innerHeight() { return window.innerHeight; },
     addEventListener: window.addEventListener.bind(window),
     removeEventListener: window.removeEventListener.bind(window),
   };
@@ -82,7 +99,31 @@ const page = [
   '<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">',
   "<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; img-src data:; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; base-uri 'none'; form-action 'none'\">",
   '<meta name="viewport" content="width=device-width,initial-scale=1"><title>M02 · 合成验证页</title>',
-  '<style>body{margin:0} .Post-Main{max-width:720px;margin:4em auto;padding:1em}.native-spacer{height:1100px} #native-floating-widget{position:fixed;right:28px;bottom:28px;width:64px;height:64px;z-index:100}</style></head><body>',
+  `<style>
+    body { margin: 0; }
+    .Post-Main { max-width: 720px; margin: 4em auto; padding: 1em; }
+    .native-spacer { height: 1100px; }
+    #native-floating-widget { position: fixed; right: 28px; bottom: 28px; width: 64px; height: 64px; z-index: 100; }
+    .Post-Main .Sticky.RichContent-actions { display: none; }
+    .Post-Main .Sticky.RichContent-actions.is-fixed.is-bottom {
+      display: block;
+      position: fixed;
+      left: max(16px, calc(50% - 437px));
+      bottom: 10px;
+      width: min(694px, calc(100% - 32px));
+      height: 44px;
+      z-index: 2;
+    }
+    .Post-Main .ContentItem-actions { height: 54px; }
+    .Post-Main .VoteButton {
+      position: absolute;
+      left: 16px;
+      top: 10px;
+      box-sizing: border-box;
+      width: 116px;
+      height: 34px;
+    }
+  </style></head><body>`,
   fixtureMarkup,
   '<script>',
   'const fixtureView = (' + prepareSyntheticView.toString() + ')();',
@@ -183,9 +224,7 @@ function measureLauncher() {
   });
 }
 
-async function verifyLauncherAndOpen() {
-  const { x, y, ...checks } = await measureLauncher();
-  assert.deepEqual(checks, { inViewport: true, separate: true, launcherHit: true, widgetHit: true });
+async function clickLauncher(x, y) {
   await commandFor('POST', '/actions', {
     actions: [{
       type: 'pointer', id: 'launcher-mouse', parameters: { pointerType: 'mouse' },
@@ -198,7 +237,87 @@ async function verifyLauncherAndOpen() {
   });
   await commandFor('DELETE', '/actions');
   await until(() => evaluate(() => Boolean(document.querySelector('#zdr-reader-root')?.shadowRoot.querySelector('dialog[open]'))),
-    'opening the reader with a pointer beside the native widget');
+    'opening the reader with a pointer');
+}
+
+async function verifyLauncherAndOpen() {
+  const { x, y, ...checks } = await measureLauncher();
+  assert.deepEqual(checks, { inViewport: true, separate: true, launcherHit: true, widgetHit: true });
+  await clickLauncher(x, y);
+}
+
+function setFixedArticleActions(fixed) {
+  return evaluate(value => {
+    const sticky = document.querySelector('.Post-Main .Sticky.RichContent-actions');
+    sticky.classList.toggle('is-fixed', value);
+    sticky.classList.toggle('is-bottom', value);
+  }, fixed);
+}
+
+function measureArticleActions() {
+  return evaluate(() => {
+    const host = document.querySelector('#zdr-launcher-root');
+    const button = host.shadowRoot.querySelector('button');
+    const sticky = document.querySelector('.Post-Main .Sticky.RichContent-actions');
+    const vote = sticky.querySelector('.VoteButton');
+    const launcher = button.getBoundingClientRect();
+    const actions = sticky.querySelector('.ContentItem-actions').getBoundingClientRect();
+    const voteRect = vote.getBoundingClientRect();
+    const center = rect => [Math.floor(rect.x + rect.width / 2), Math.floor(rect.y + rect.height / 2)];
+    const [x, y] = center(launcher);
+    const originalY = Math.floor(innerHeight - 16 - launcher.height / 2);
+    return {
+      x, y,
+      left: launcher.left,
+      bottomInset: innerHeight - launcher.bottom,
+      actionsLeft: actions.left,
+      actionsHeight: actions.height,
+      stickyHeight: sticky.getBoundingClientRect().height,
+      gap: actions.top - launcher.bottom,
+      launcherHit: document.elementFromPoint(x, y) === host && host.shadowRoot.elementFromPoint(x, y) === button,
+      voteHit: document.elementFromPoint(...center(voteRect)) === vote,
+      voteCoversOriginalCenter: document.elementFromPoint(x, originalY) === vote,
+    };
+  });
+}
+
+async function verifyFixedArticleActions() {
+  await setViewport(906);
+  await commandFor('POST', '/url', { url: pathToFileURL(fixturePath).href });
+  await until(() => evaluate(() => Boolean(document.querySelector('#zdr-launcher-root'))), 'article launcher mounting');
+  const initial = await measureArticleActions();
+  within(initial.left, 16, 'article launcher left inset');
+  within(initial.bottomInset, 16, 'article launcher default bottom inset');
+  assert.equal(initial.launcherHit, true);
+
+  await setFixedArticleActions(true);
+  await until(async () => (await measureArticleActions()).bottomInset > initial.bottomInset, 'fixed article actions lift the launcher');
+  const lifted = await measureArticleActions();
+  within(lifted.left, initial.left, 'lifted article launcher left inset');
+  within(lifted.bottomInset - initial.bottomInset, 54, 'article launcher lift');
+  within(lifted.actionsLeft, 16, 'native article actions left edge');
+  within(lifted.stickyHeight, 44, 'native sticky wrapper height');
+  within(lifted.actionsHeight, 54, 'native article actions height');
+  within(lifted.gap, 16, 'gap above native article actions');
+  assert.equal(lifted.launcherHit, true);
+  assert.equal(lifted.voteHit, true);
+  assert.equal(lifted.voteCoversOriginalCenter, true);
+
+  await setViewport(1200);
+  await until(async () => (await measureArticleActions()).bottomInset === initial.bottomInset, 'wide viewport restores the launcher inset');
+  const wide = await measureArticleActions();
+  assert.ok(wide.launcherHit && wide.voteHit);
+  await setViewport(906);
+  await until(async () => (await measureArticleActions()).bottomInset === lifted.bottomInset, 'narrow viewport lifts the launcher again');
+  const narrow = await measureArticleActions();
+  await clickLauncher(narrow.x, narrow.y);
+  await escapeReader();
+  await until(async () => (await measureArticleActions()).bottomInset === lifted.bottomInset, 'returning from the reader restores the lift');
+
+  await setFixedArticleActions(false);
+  await until(async () => (await measureArticleActions()).bottomInset === initial.bottomInset, 'removing fixed article actions restores the launcher');
+  assert.equal((await measureArticleActions()).launcherHit, true);
+  return { viewport: 906, lift: lifted.bottomInset - initial.bottomInset, gap: lifted.gap, pointer: 'PASS', restored: 'PASS' };
 }
 
 function pressAction(action) {
@@ -370,6 +489,7 @@ try {
     scenarios.push({ width, geometry, wide: wide.column, full: full.column, anchor: anchored.active, nativeScroll, restore: 'PASS' });
   }
 
+  const fixedArticleActions = await verifyFixedArticleActions();
   await setViewport(600);
   await verifyLauncherAndOpen();
   await escapeReader();
@@ -399,7 +519,7 @@ try {
   const report = {
     evidence: 'synthetic browser rendering, local file fixture and simulated route; no live Zhihu or Tampermonkey',
     browser: browserInfo, systemRelease: release(), bundleSha256: hash(bundle), scenarios, screenshots,
-    launcher: { pointerWithNativeWidget: 'PASS', widths: [600, 885, 900, 1200, 1440] },
+    launcher: { pointerWithNativeWidget: 'PASS', widths: [600, 885, 900, 1200, 1440], fixedArticleActions },
     lifecycle: { fiveCycles: 'PASS', escapeAndFocus: 'PASS', syntheticRouteAndBack: 'PASS', restrictedFallback: 'PASS' },
   };
   await writeFile(join(output, 'report.json'), JSON.stringify(report, null, 2) + '\n');
