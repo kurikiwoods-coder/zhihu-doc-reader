@@ -1,10 +1,10 @@
 # Zhihu Doc Reader
 
-[简体中文](README_CN.md) · [Product Definition (PDT v1.2, Chinese)](docs/PDT-V1.2.md) · [Roadmap (Chinese)](docs/ROADMAP.md)
+[简体中文](README_CN.md) · [Product Definition (PDT v1.3, Chinese)](docs/PDT-V1.3.md) · [Roadmap (Chinese)](docs/ROADMAP.md)
 
 Zhihu Doc Reader is a Tampermonkey userscript planned for Chrome and Microsoft Edge. It presents Zhihu answers and articles in a document-style reading view. Readers discover content through Zhihu's own pages and can save bookmarks and reading history in their browser.
 
-**Project status.** Planning is complete. M00-A upstream verification is the first task. Implementation begins after M00 passes and the project owner approves the results.
+**Project status.** Gate 01-T is cleared for the M01 foundation. Gate 01-V awaits visual acceptance of the reader itself. M02–M05 await separate authorization. [Validation (Chinese)](docs/M00-VALIDATION.md)
 
 ## What readers can do
 
@@ -44,7 +44,7 @@ Upstream builds with `node build.js` and produces `dist/bundle.user.js`. M00-A c
 
 | Stage | Planned outcome |
 | --- | --- |
-| M00 | Verify the upstream code and build, live Zhihu pages, and document layout references. Gate 01 requires all three checks and project owner approval. |
+| M00 | Gate 01-T requires the upstream and Zhihu verification plus owner approval. Gate 01-V follows validation of the reader's own interface. |
 | M01 | Set up the codebase, remove upstream AI features, and make reader mode reversible. |
 | M02 | Build the document layout and render accessible answers and articles safely. |
 | M03 | Implement the hot list, recommendations, search, and continuous reading. Gate 02 produces the V0.1 internal build after P0 verification. |

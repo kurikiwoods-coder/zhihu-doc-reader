@@ -1,14 +1,14 @@
-# Zhihu Doc Reader 视觉规范候选
+# Zhihu Doc Reader V1.0 初始视觉规范
 
-**状态为候选，待负责人确认。** 2026-11-27（UTC+08:00） · M00-UI-B-R · PDT V1.2 · DOM-only
+**负责人已确认初始视觉目标，Gate 01-V 待验收。** 2026-11-27（UTC+08:00） · PDT V1.3 · DOM-only
 
-适用于知乎文档式阅读体验。产品使用自有名称、系统字体与语义色，阅读数据沿用原生知乎 DOM。本文件确定待审阅的视觉目标。 [PDT](../PDT-V1.2.md) · [31 项视觉矩阵](UI-SPEC-DRAFT.md#视觉测量矩阵) · [脱敏证据](../../validation/m00-ui/evidence/editor-dom-precheck.json) · [候选 Tokens](../../src/styles/tokens.css)
+适用于知乎文档式阅读体验。产品使用自有名称、系统字体与语义色，阅读数据沿用原生知乎 DOM。本文件记录可调整的 V1.0 初始视觉目标。 [PDT](../PDT-V1.3.md) · [31 项视觉矩阵](UI-SPEC-DRAFT.md#视觉测量矩阵) · [脱敏证据](../../validation/m00-ui/evidence/editor-dom-precheck.json) · [初始 Tokens](../../src/styles/tokens.css)
 
-## 参考与候选目标
+## 参考与初始目标
 
-Reference Value 使用 UIB-DOM-01 至 UIB-DOM-07 已取得的读数。Target Value 是阅读器的设计提案。所有宽度、高度和字体像素均为 CSS px，百分比以正文可用区为基准。
+Reference Value 使用 UIB-DOM-01 至 UIB-DOM-07 已取得的读数。Target Value 是负责人确认的初始设计基线。所有宽度、高度和字体像素均为 CSS px，百分比以正文可用区为基准。
 
-| 参数 | Reference Value | Target Value（待确认） | Evidence |
+| 参数 | Reference Value | Target Value（初始基线） | Evidence |
 | --- | --- | --- | --- |
 | 顶部栏高度、上下内距和分隔线 | 64 px；上下内距 0；底线 1 px 实线 `#DEE0E3` | 56 px；上下内距 0、左右 20 px；1 px 分隔线 | `UIB-DOM-04`、`UIB-DOM-05` |
 | 左侧导航宽度 | 同一 885 px 视口分别观察到 300 px、268 px | 展开 224 px；收起 52 px；内距 12 px | `UIB-DOM-04`、`UIB-DOM-05` |
@@ -55,11 +55,11 @@ Reference Value 使用 UIB-DOM-01 至 UIB-DOM-07 已取得的读数。Target Val
 - 悬停和选中使用不同填充。目录当前项与产品导航当前项使用明确的可见标记与对应语义状态。选中状态跟随阅读章节。
 - Tab 焦点使用 2 px 可见轮廓，偏移 2 px。面板关闭后焦点归触发入口。定位锚点预留 56 px 顶栏与额外 12 px 留白。面板显隐保留当前阅读位置。
 
-## CSS Tokens 候选
+## CSS Tokens 初始基线
 
 默认浅色，深色通过阅读器自身主题状态覆盖语义色。尺寸与字阶在两主题共用。
 
-| Token | 通用或浅色候选 | 深色覆盖 |
+| Token | 通用或浅色 | 深色覆盖 |
 | --- | --- | --- |
 | `--zdr-header-height` | `56px` | 同左 |
 | `--zdr-header-padding-block` | `0px` | 同左 |
@@ -142,4 +142,8 @@ Reference Value 使用 UIB-DOM-01 至 UIB-DOM-07 已取得的读数。Target Val
 - 31 行参数均有候选目标，CSS 声明和值按上表核对。浅色／通用 75 个，深色覆盖 16 个。
 - 18 组候选色对的静态计算满足本草案门槛。文字对的最低比值为 5.72:1，焦点对的最低比值为 6.69:1。已核对 7 组视口的列宽预算。
 - 当前已接入的本机 Chrome 仅见已知带身份水印的测试文档。正式个人样本、环境完整记录、F12 实跑、剩余富文本与交互、三张可公开截图均待补。
-- **M00-UI 为 BLOCKED。** 补齐 PDT §21.4 的证据并取得负责人对目标值与冻结的确认后，再申请 Gate 01 放行。 [验收记录](../M00-VALIDATION.md#m00-ui-b-r-视觉证据复核与基线候选)
+- **M00-UI 原始取证为 BLOCKED，Gate 01-V 待验收。** 按 PDT V1.3 验证独立阅读器的渲染、可读性、响应式、富文本与交互。视觉变化经后续证据审阅后可调整。 [验收记录](../M00-VALIDATION.md#gate-01-t-技术准入与视觉边界)
+
+## 实施分层
+
+视觉数值由 `tokens.css` 提供。`layout.css` 负责布局，`typography.css` 负责排版，`components.css` 负责控件和状态样式。顶部栏、左侧导航、正文和右侧目录保有独立界面区域。渲染组件通过标准化记录接收 DOM 适配器数据，核心路由、状态、事件与恢复逻辑独立于视觉值。视觉更新后执行响应式和视觉回归。
