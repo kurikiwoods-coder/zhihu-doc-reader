@@ -1,35 +1,156 @@
-.zdr-reader.zdr-verification,
-.zdr-reader button,
-.zdr-reader.zdr-launcher [role="status"] {
+.zdr-workspace {
+  border: 0;
+  background: var(--zdr-background);
+}
+
+.zdr-workspace [data-zdr-region="topbar"],
+.zdr-workspace [data-zdr-region="document"] {
+  background: var(--zdr-surface);
+}
+
+.zdr-workspace [data-zdr-region="topbar"] {
+  border-block-end: var(--zdr-border-width) solid var(--zdr-border);
+}
+
+.zdr-workspace [data-zdr-region="left-navigation"] {
+  background: var(--zdr-navigation-background);
+  border-inline-end: var(--zdr-border-width) solid var(--zdr-border);
+  box-shadow: var(--zdr-nav-shadow);
+}
+
+.zdr-workspace [data-zdr-region="outline"] {
+  background: var(--zdr-outline-background);
+  border-inline-start: var(--zdr-border-width) solid var(--zdr-border);
+  box-shadow: var(--zdr-outline-shadow);
+}
+
+.zdr-mark {
+  display: grid;
+  place-items: center;
+  inline-size: var(--zdr-mark-size);
+  block-size: var(--zdr-mark-size);
+  border-radius: var(--zdr-radius);
+  background: var(--zdr-primary);
+  color: var(--zdr-surface);
+  font-weight: var(--zdr-heading-weight);
+}
+
+.zdr-action,
+.zdr-launcher button,
+.zdr-launcher [role="status"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: var(--zdr-nav-row-height);
+  box-sizing: border-box;
+  padding-inline: var(--zdr-sidebar-padding);
   color: var(--zdr-text);
   background: var(--zdr-surface);
   border: var(--zdr-border-width) solid var(--zdr-border);
   border-radius: var(--zdr-radius);
+  font: inherit;
+  font-size: var(--zdr-caption-font-size);
 }
 
-.zdr-reader button {
-  min-block-size: var(--zdr-nav-row-height);
-  padding-inline: var(--zdr-sidebar-padding);
+.zdr-reader a.zdr-action {
+  color: var(--zdr-primary);
+  text-decoration: none;
+}
+
+.zdr-action,
+.zdr-launcher button {
   cursor: pointer;
 }
 
-.zdr-reader.zdr-verification {
-  box-shadow: var(--zdr-shadow-overlay);
-}
-
-.zdr-reader button:hover {
+.zdr-action:hover,
+.zdr-launcher button:hover {
   background: var(--zdr-hover);
 }
 
-.zdr-reader button:focus-visible {
+.zdr-action[aria-pressed="true"] {
+  background: var(--zdr-selected);
+  color: var(--zdr-selected-text);
+}
+
+.zdr-reader :is(button, a, summary):focus-visible {
   outline: var(--zdr-focus-ring-width) solid var(--zdr-focus-color);
   outline-offset: var(--zdr-focus-ring-offset);
 }
 
-.zdr-reader.zdr-launcher [role="status"] {
-  padding: var(--zdr-list-item-gap);
+.zdr-launcher [role="status"] {
+  padding-block: var(--zdr-control-gap);
 }
 
-.zdr-reader.zdr-launcher [role="status"]:empty {
+.zdr-launcher [role="status"]:empty {
   display: none;
+}
+
+.zdr-nav-list {
+  display: grid;
+  gap: var(--zdr-list-item-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.zdr-nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--zdr-control-gap);
+  min-block-size: var(--zdr-nav-row-height);
+  border-radius: var(--zdr-radius);
+  color: var(--zdr-text-secondary);
+  font-size: var(--zdr-caption-font-size);
+}
+
+.zdr-nav-item[aria-current="page"] {
+  background: var(--zdr-selected);
+  color: var(--zdr-selected-text);
+}
+
+.zdr-nav-icon {
+  flex: 0 0 var(--zdr-nav-icon-size);
+  text-align: center;
+}
+
+.zdr-nav-status {
+  margin-inline-start: auto;
+  padding-inline-end: var(--zdr-control-gap);
+  white-space: nowrap;
+}
+
+.zdr-settings {
+  position: relative;
+}
+
+.zdr-settings summary::-webkit-details-marker {
+  display: none;
+}
+
+.zdr-settings-menu {
+  position: absolute;
+  inset-inline-end: 0;
+  inset-block-start: calc(100% + var(--zdr-control-gap));
+  min-inline-size: max-content;
+  display: grid;
+  gap: var(--zdr-control-gap);
+  padding: var(--zdr-sidebar-padding);
+  border: var(--zdr-border-width) solid var(--zdr-border);
+  border-radius: var(--zdr-radius);
+  background: var(--zdr-surface);
+  box-shadow: var(--zdr-shadow-overlay);
+}
+
+.zdr-settings-group {
+  display: flex;
+  align-items: center;
+  gap: var(--zdr-control-gap);
+  color: var(--zdr-text-secondary);
+  font-size: var(--zdr-caption-font-size);
+}
+
+.zdr-document-source {
+  margin-block-start: var(--zdr-content-padding-block);
+  padding-block-start: var(--zdr-paragraph-gap);
+  border-block-start: var(--zdr-border-width) solid var(--zdr-border);
 }

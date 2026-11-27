@@ -37,70 +37,75 @@ function createReaderLauncher(document, onEnter) {
   };
 }
 
-function createTopbar(document, exitButton) {
-  const topbar = document.createElement('header');
-  topbar.dataset.zdrRegion = 'topbar';
-  const label = document.createElement('span');
-  label.id = 'zdr-reader-label';
-  label.textContent = '文档阅读';
-  topbar.append(label, exitButton);
-  return topbar;
-}
-
-function createLeftNavigation(document) {
-  const navigation = document.createElement('nav');
-  navigation.dataset.zdrRegion = 'left-navigation';
-  navigation.hidden = true;
-  return navigation;
-}
-
-function createDocumentRegion(document, record) {
-  const region = document.createElement('main');
-  region.dataset.zdrRegion = 'document';
-  const heading = document.createElement('h2');
-  heading.textContent = record.title;
-  region.append(heading);
-  if (record.author) {
-    const author = document.createElement('p');
-    author.className = 'zdr-byline';
-    author.textContent = record.author;
-    region.append(author);
-  }
-  if (record.excerpt) {
-    const excerpt = document.createElement('p');
-    excerpt.textContent = record.excerpt;
-    region.append(excerpt);
-  }
-  return region;
-}
-
-function createRightOutline(document) {
-  const outline = document.createElement('aside');
-  outline.dataset.zdrRegion = 'outline';
-  outline.hidden = true;
-  return outline;
-}
-
-function createReadingPanel(document, record, onExit) {
+function createReadingPanel(document, view, route, record, onExit) {
   const { host, shadow } = createShell(document, 'zdr-reader-root');
   const dialog = document.createElement('dialog');
-  dialog.className = 'zdr-reader zdr-verification';
+  dialog.className = 'zdr-reader zdr-workspace';
+  dialog.dataset.zdrWidth = 'default';
+  dialog.dataset.zdrTheme = 'light';
   dialog.setAttribute('aria-labelledby', 'zdr-reader-label');
-  const exitButton = createButton(document, '退出阅读模式');
-  exitButton.setAttribute('autofocus', '');
-  dialog.append(
-    createTopbar(document, exitButton),
-    createLeftNavigation(document),
+
+  const { header, nav, outline } = createTopbar(document, route, record);
+  const layout = document.createElement('div');
+  layout.className = 'zdr-layout';
+  layout.append(
+    createLeftNavigation(document, route.kind),
     createDocumentRegion(document, record),
     createRightOutline(document),
   );
+  dialog.append(header, layout);
   shadow.append(dialog);
+
+  const choices = { nav: null, outline: null };
+  let preferredPanel = 'nav';
+
+  function syncPanels() {
+    const style = view.getComputedStyle(dialog);
+    const navOverlays = style.getPropertyValue?.('--zdr-nav-overlay').trim() === '1';
+    const outlineOverlays = style.getPropertyValue?.('--zdr-outline-overlay').trim() === '1';
+    let navOpen = choices.nav ?? !navOverlays;
+    let outlineOpen = choices.outline ?? !outlineOverlays;
+    if (navOverlays && navOpen && outlineOpen) {
+      navOpen = preferredPanel === 'nav';
+      outlineOpen = !navOpen;
+    }
+    dialog.dataset.zdrNavOpen = String(navOpen);
+    dialog.dataset.zdrOutlineOpen = String(outlineOpen);
+    nav.setAttribute('aria-expanded', String(navOpen));
+    outline.setAttribute('aria-expanded', String(outlineOpen));
+    return navOverlays;
+  }
+
+  function onClick(event) {
+    const button = event.target.closest?.('button[data-zdr-action]');
+    if (!button || !dialog.contains(button)) return;
+    const action = button.dataset.zdrAction;
+    if (action === 'exit') {
+      onExit();
+    } else if (action === 'nav' || action === 'outline') {
+      const compact = syncPanels();
+      const toggle = action === 'nav' ? nav : outline;
+      choices[action] = toggle.getAttribute('aria-expanded') !== 'true';
+      if (choices[action]) {
+        preferredPanel = action;
+        if (compact) choices[action === 'nav' ? 'outline' : 'nav'] = false;
+      }
+      syncPanels();
+    } else if (/^(width-(default|wide|full)|theme-(light|dark))$/.test(action)) {
+      const [group, value] = action.split('-');
+      if (group === 'width') dialog.dataset.zdrWidth = value;
+      else dialog.dataset.zdrTheme = value;
+      for (const item of dialog.querySelectorAll('button[data-zdr-action^="' + group + '-"]')) {
+        item.setAttribute('aria-pressed', String(item === button));
+      }
+    }
+  }
 
   function onCancel(event) {
     event.preventDefault();
     onExit();
   }
-  exitButton.addEventListener('click', onExit);
+  dialog.addEventListener('click', onClick);
   dialog.addEventListener('cancel', onCancel);
   dialog.addEventListener('close', onExit);
   return {
@@ -108,9 +113,12 @@ function createReadingPanel(document, record, onExit) {
     show(body) {
       body.append(host);
       dialog.showModal();
+      syncPanels();
+      view.addEventListener('resize', syncPanels);
     },
     dispose() {
-      exitButton.removeEventListener('click', onExit);
+      view.removeEventListener('resize', syncPanels);
+      dialog.removeEventListener('click', onClick);
       dialog.removeEventListener('cancel', onCancel);
       dialog.removeEventListener('close', onExit);
       try {

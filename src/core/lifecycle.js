@@ -52,7 +52,7 @@ function installReader(view, document) {
         return;
       }
       if (!state.enter()) return;
-      panel = createReadingPanel(document, record, exit);
+      panel = createReadingPanel(document, view, state.route, record, exit);
       panel.show(document.body);
       removeLauncher();
     } catch {

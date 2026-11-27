@@ -88,7 +88,7 @@ function load(name, href, { modalError = false, navigation = true, frame = false
   const host = selector => document.querySelector(selector);
   const inShell = (selector, child) => host(selector)?.shadowRoot.querySelector(child);
   const press = selector => {
-    const button = inShell(selector, 'button');
+    const button = inShell(selector, selector === readerID ? '[data-zdr-action="exit"]' : 'button');
     assert.ok(button, selector);
     button.dispatchEvent(new Event('click', { bubbles: true }));
   };
@@ -125,11 +125,11 @@ for (const [name, href, title, type, sourceUrl] of positive) {
     assert.equal(page.host(readerID), null);
     page.press(launcherID);
     assert.equal(page.host(launcherID), null);
-    assert.equal(page.inShell(readerID, '[data-zdr-region="document"] h2').textContent, title);
+    assert.equal(page.inShell(readerID, '[data-zdr-region="document"] .zdr-document-title').textContent, title);
     const regions = [...page.host(readerID).shadowRoot.querySelectorAll('[data-zdr-region]')];
     assert.deepEqual(regions.map(region => region.dataset.zdrRegion), ['topbar', 'left-navigation', 'document', 'outline']);
-    assert.equal(regions[1].hidden, true);
-    assert.equal(regions[3].hidden, true);
+    assert.equal(regions[1].querySelectorAll('[aria-disabled="true"]').length, 6);
+    assert.equal(regions[3].getAttribute('aria-label'), '本文目录');
     assert.equal(page.host(readerID).shadowRoot.querySelector('img, template, script, b'), null);
     assert.equal(page.native.outerHTML, page.original);
     assert.deepEqual(page.forbidden, []);
@@ -162,7 +162,7 @@ test('duplicate injection and five enter/exit cycles keep one root and restore n
     page.mutations();
     assert.equal(page.document.querySelectorAll(readerID).length, 1);
     assert.equal(page.host(launcherID), null);
-    const detachedButton = page.inShell(readerID, 'button');
+    const detachedButton = page.inShell(readerID, '[data-zdr-action="exit"]');
     page.press(readerID);
     assert.equal(page.host(readerID), null);
     assert.equal(page.document.querySelectorAll(launcherID).length, 1);

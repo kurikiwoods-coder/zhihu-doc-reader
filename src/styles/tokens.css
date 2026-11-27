@@ -95,3 +95,49 @@
   --zdr-code-background: #202B3D;
   --zdr-shadow-overlay: 0 8px 24px rgba(0, 0, 0, 0.38);
 }
+
+
+.zdr-reader {
+  --zdr-control-gap: 8px;
+  --zdr-brand-gap: 10px;
+  --zdr-mark-size: 30px;
+  --zdr-nav-icon-size: 20px;
+  --zdr-status-max-width: 320px;
+  --zdr-panel-min-gutter: 32px;
+  --zdr-nav-overlay: 0;
+  --zdr-outline-overlay: 0;
+  --zdr-nav-track-open: var(--zdr-sidebar-width);
+  --zdr-nav-track-closed: var(--zdr-sidebar-collapsed-width);
+  --zdr-outline-track-open: var(--zdr-outline-width);
+  --zdr-nav-position: relative;
+  --zdr-outline-position: relative;
+  --zdr-nav-panel-size: auto;
+  --zdr-outline-panel-size: auto;
+  --zdr-nav-closed-display: block;
+  --zdr-nav-shadow: none;
+  --zdr-outline-shadow: none;
+  --zdr-reading-gutter: var(--zdr-content-padding-inline);
+}
+
+@media (width < 1200px) {
+  .zdr-reader {
+    --zdr-outline-overlay: 1;
+    --zdr-outline-track-open: 0px;
+    --zdr-outline-position: absolute;
+    --zdr-outline-panel-size: min(var(--zdr-outline-width), calc(100vw - var(--zdr-panel-min-gutter)));
+    --zdr-outline-shadow: var(--zdr-shadow-overlay);
+  }
+}
+
+@media (width < 900px) {
+  .zdr-reader {
+    --zdr-nav-overlay: 1;
+    --zdr-nav-track-open: 0px;
+    --zdr-nav-track-closed: 0px;
+    --zdr-nav-position: absolute;
+    --zdr-nav-panel-size: min(var(--zdr-sidebar-width), calc(100vw - var(--zdr-panel-min-gutter)));
+    --zdr-nav-closed-display: none;
+    --zdr-nav-shadow: var(--zdr-shadow-overlay);
+    --zdr-reading-gutter: var(--zdr-content-padding-inline-compact);
+  }
+}
