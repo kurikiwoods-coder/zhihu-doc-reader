@@ -274,7 +274,15 @@ try {
     assert.equal(geometry.canvasWidth, 600);
     assert.ok(geometry.bodyFits && geometry.codeOverflowsLocally && geometry.titleFits && geometry.fullBody);
     assert.equal(geometry.unsupportedMarkup, false);
-    if (width === 1440) await saveScreenshot('reader-layout.png', 'default light');
+    if (width === 1440) {
+      await saveScreenshot('reader-layout.png', 'default light');
+      await pressAction('nav');
+      within((await measure()).nav, 52, 'collapsed left navigation width');
+      await pressAction('width-wide');
+      within((await measure()).column, 960, 'wide cap with extra reading space');
+      await pressAction('width-default');
+      await pressAction('nav');
+    }
 
     await pressAction('width-wide');
     const wide = await measure();
