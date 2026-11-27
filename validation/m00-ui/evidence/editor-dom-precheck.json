@@ -312,6 +312,127 @@
         }
       ],
       "adjacentTextBlockGapCssPx": 8
+    },
+    {
+      "id": "UIB-DOM-05",
+      "mode": null,
+      "viewportCssPx": {
+        "height": 731,
+        "width": 885
+      },
+      "devicePixelRatio": 2,
+      "note": "Read-only capture in the owner-designated test editor. The visible collapsed or expanded state and width mode were not toggled during this capture. The sidebar was 268 CSS px wide in this observation.",
+      "measurements": [
+        {
+          "role": "document-top-bar",
+          "rectCssPx": {
+            "height": 64,
+            "width": 617,
+            "x": 268,
+            "y": 0
+          },
+          "computedStyle": {
+            "background-color": "rgb(255, 255, 255)",
+            "border-bottom-color": "rgb(222, 224, 227)",
+            "border-bottom-width": "1px",
+            "border-right-color": "rgb(31, 35, 41)",
+            "border-right-width": "0px",
+            "color": "rgb(31, 35, 41)",
+            "font-size": "16px",
+            "font-weight": "400",
+            "line-height": "64px",
+            "padding-left": "16px",
+            "padding-right": "0px"
+          }
+        },
+        {
+          "role": "left-document-navigation",
+          "rectCssPx": {
+            "height": 731,
+            "width": 268,
+            "x": 0,
+            "y": 0
+          },
+          "computedStyle": {
+            "background-color": "rgb(245, 246, 247)",
+            "border-bottom-color": "rgb(31, 35, 41)",
+            "border-bottom-width": "0px",
+            "border-right-color": "rgba(31, 35, 41, 0.04)",
+            "border-right-width": "1px",
+            "color": "rgb(31, 35, 41)",
+            "font-size": "16px",
+            "font-weight": "400",
+            "line-height": "normal",
+            "padding-left": "0px",
+            "padding-right": "0px"
+          }
+        },
+        {
+          "role": "left-navigation-brand-row",
+          "rectCssPx": {
+            "height": 22,
+            "width": 196,
+            "x": 54,
+            "y": 21
+          }
+        },
+        {
+          "role": "brand-icon-box",
+          "rectCssPx": {
+            "height": 20,
+            "width": 20,
+            "x": 54,
+            "y": 22
+          }
+        },
+        {
+          "role": "brand-wordmark-box",
+          "rectCssPx": {
+            "height": 22,
+            "width": 76,
+            "x": 74,
+            "y": 21
+          }
+        },
+        {
+          "role": "title-and-body-container",
+          "rectCssPx": {
+            "x": 334,
+            "y": 64,
+            "width": 470,
+            "height": 549.25
+          },
+          "computedStyle": {
+            "padding-left": "0px",
+            "padding-right": "0px"
+          }
+        },
+        {
+          "role": "document-title",
+          "rectCssPx": {
+            "height": 55.25,
+            "width": 470,
+            "x": 334,
+            "y": 112
+          },
+          "computedStyle": {
+            "color": "rgb(31, 35, 41)",
+            "font-size": "34px",
+            "font-weight": "600",
+            "line-height": "55.25px",
+            "margin-bottom": "0px",
+            "margin-top": "0px"
+          }
+        }
+      ],
+      "missingSamples": [
+        "body-h1",
+        "body-h2",
+        "body-h3",
+        "rich-text",
+        "document-outline"
+      ],
+      "screenshotStatus": "No releasable screenshot of these regions. The account watermark overlaps the interface and the content."
     }
   ],
   "openItems": [
