@@ -56,6 +56,11 @@ function prepareSyntheticView() {
   const spacer = document.createElement('div');
   spacer.className = 'native-spacer';
   document.body.append(spacer);
+  const widget = document.createElement('button');
+  widget.id = 'native-floating-widget';
+  widget.type = 'button';
+  widget.textContent = '原生浮窗';
+  document.body.append(widget);
   const view = {
     location: { href: 'https://zhuanlan.zhihu.com/p/990041' },
     navigation: new EventTarget(),
@@ -77,7 +82,7 @@ const page = [
   '<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">',
   "<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; img-src data:; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; base-uri 'none'; form-action 'none'\">",
   '<meta name="viewport" content="width=device-width,initial-scale=1"><title>M02 · 合成验证页</title>',
-  '<style>body{margin:0} .Post-Main{max-width:720px;margin:4em auto;padding:1em}.native-spacer{height:1100px}</style></head><body>',
+  '<style>body{margin:0} .Post-Main{max-width:720px;margin:4em auto;padding:1em}.native-spacer{height:1100px} #native-floating-widget{position:fixed;right:28px;bottom:28px;width:64px;height:64px;z-index:100}</style></head><body>',
   fixtureMarkup,
   '<script>',
   'const fixtureView = (' + prepareSyntheticView.toString() + ')();',
@@ -155,6 +160,45 @@ async function openReader() {
   await evaluate(() => document.querySelector('#zdr-launcher-root').shadowRoot.querySelector('button').click());
   await until(() => evaluate(() => Boolean(document.querySelector('#zdr-reader-root')?.shadowRoot.querySelector('dialog[open]'))),
     'opening the rendered reader');
+}
+
+function measureLauncher() {
+  return evaluate(() => {
+    const host = document.querySelector('#zdr-launcher-root');
+    const button = host.shadowRoot.querySelector('button');
+    const widget = document.querySelector('#native-floating-widget');
+    const launcherRect = button.getBoundingClientRect();
+    const widgetRect = widget.getBoundingClientRect();
+    const center = rect => [Math.floor(rect.x + rect.width / 2), Math.floor(rect.y + rect.height / 2)];
+    const [x, y] = center(launcherRect);
+    return {
+      x, y,
+      inViewport: launcherRect.left >= 0 && launcherRect.top >= 0 &&
+        launcherRect.right <= document.documentElement.clientWidth && launcherRect.bottom <= innerHeight,
+      separate: launcherRect.right <= widgetRect.left || widgetRect.right <= launcherRect.left ||
+        launcherRect.bottom <= widgetRect.top || widgetRect.bottom <= launcherRect.top,
+      launcherHit: document.elementFromPoint(x, y) === host && host.shadowRoot.elementFromPoint(x, y) === button,
+      widgetHit: document.elementFromPoint(...center(widgetRect)) === widget,
+    };
+  });
+}
+
+async function verifyLauncherAndOpen() {
+  const { x, y, ...checks } = await measureLauncher();
+  assert.deepEqual(checks, { inViewport: true, separate: true, launcherHit: true, widgetHit: true });
+  await commandFor('POST', '/actions', {
+    actions: [{
+      type: 'pointer', id: 'launcher-mouse', parameters: { pointerType: 'mouse' },
+      actions: [
+        { type: 'pointerMove', origin: 'viewport', duration: 0, x, y },
+        { type: 'pointerDown', button: 0 },
+        { type: 'pointerUp', button: 0 },
+      ],
+    }],
+  });
+  await commandFor('DELETE', '/actions');
+  await until(() => evaluate(() => Boolean(document.querySelector('#zdr-reader-root')?.shadowRoot.querySelector('dialog[open]'))),
+    'opening the reader with a pointer beside the native widget');
 }
 
 function pressAction(action) {
@@ -258,7 +302,7 @@ try {
     }, width === 885);
     assert.ok(nativeScroll > 0);
     assert.equal(await evaluate(() => document.querySelectorAll('#zdr-launcher-root').length), 1);
-    await openReader();
+    await verifyLauncherAndOpen();
 
     const geometry = await measure();
     assert.equal(geometry.viewport, width);
@@ -326,6 +370,10 @@ try {
     scenarios.push({ width, geometry, wide: wide.column, full: full.column, anchor: anchored.active, nativeScroll, restore: 'PASS' });
   }
 
+  await setViewport(600);
+  await verifyLauncherAndOpen();
+  await escapeReader();
+
   for (let cycle = 0; cycle < 5; cycle += 1) {
     await openReader();
     await evaluate(() => window.runSyntheticReader());
@@ -351,6 +399,7 @@ try {
   const report = {
     evidence: 'synthetic browser rendering, local file fixture and simulated route; no live Zhihu or Tampermonkey',
     browser: browserInfo, systemRelease: release(), bundleSha256: hash(bundle), scenarios, screenshots,
+    launcher: { pointerWithNativeWidget: 'PASS', widths: [600, 885, 900, 1200, 1440] },
     lifecycle: { fiveCycles: 'PASS', escapeAndFocus: 'PASS', syntheticRouteAndBack: 'PASS', restrictedFallback: 'PASS' },
   };
   await writeFile(join(output, 'report.json'), JSON.stringify(report, null, 2) + '\n');

@@ -65,7 +65,7 @@ test('build is deterministic, self-contained, syntactically valid, and matches t
   assert.equal(script, prior);
   assert.equal((script.match(/^\/\/ ==UserScript==$/gm) ?? []).length, 1);
   assert.equal((script.match(/^\/\/ ==\/UserScript==$/gm) ?? []).length, 1);
-  assert.ok(script.includes(read('LICENSE').trimEnd()));
+  assert.ok(script.includes(read('LICENSE').replace(/\r\n/g, '\n').trimEnd()));
   for (const css of ['tokens', 'layout', 'typography', 'components']) {
     assert.ok(script.includes(JSON.stringify(read('src/styles/' + css + '.css').trimEnd()).slice(1, -1)), css);
   }
