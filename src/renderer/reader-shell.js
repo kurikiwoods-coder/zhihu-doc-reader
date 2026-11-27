@@ -15,7 +15,7 @@ function createButton(document, text) {
   return button;
 }
 
-function createReaderLauncher(document, onEnter) {
+function createReaderLauncher(document, view, route, onEnter) {
   const { host, shadow } = createShell(document, 'zdr-launcher-root');
   const launcher = document.createElement('div');
   launcher.className = 'zdr-reader zdr-launcher';
@@ -26,11 +26,70 @@ function createReaderLauncher(document, onEnter) {
   launcher.append(button, status);
   shadow.append(launcher);
   button.addEventListener('click', onEnter);
+
+  const actionsObserver = route.kind === 'article' ? new view.MutationObserver(schedulePlacement) : null;
+  let actions = null;
+  let frame = null;
+  let lift = 0;
+
+  function placeLauncher() {
+    frame = null;
+    const current = document.querySelector('.Post-Main .Sticky.RichContent-actions');
+    if (current !== actions) {
+      actionsObserver.disconnect();
+      actions = current;
+      if (actions) actionsObserver.observe(actions, { attributes: true, attributeFilter: ['class', 'style'] });
+    }
+
+    let nextLift = 0;
+    if (actions?.matches('.is-fixed.is-bottom')) {
+      const style = view.getComputedStyle(actions);
+      if (style.position === 'fixed' && style.visibility === 'visible') {
+        const fixed = actions.getBoundingClientRect();
+        const inner = actions.querySelector('.ContentItem-actions')?.getBoundingClientRect() ?? fixed;
+        const rect = launcher.getBoundingClientRect();
+        // Measure against the original position so lifting cannot repeatedly reset the offset.
+        const top = rect.top + lift;
+        const bottom = rect.bottom + lift;
+        const barTop = Math.min(fixed.top, inner.top);
+        const barBottom = Math.max(fixed.bottom, inner.bottom);
+        const barLeft = Math.min(fixed.left, inner.left);
+        const barRight = Math.max(fixed.right, inner.right);
+        if (rect.left < barRight && rect.right > barLeft && top < barBottom && bottom > barTop) {
+          const clearance = Math.ceil(document.documentElement.clientHeight - barTop);
+          nextLift = Math.max(0, Math.min(Math.floor(top), clearance));
+        }
+      }
+    }
+    if (nextLift === lift) return;
+    lift = nextLift;
+    launcher.style.setProperty('--zdr-launcher-avoidance', lift + 'px');
+  }
+
+  function schedulePlacement() {
+    if (actionsObserver && frame === null) frame = view.requestAnimationFrame(placeLauncher);
+  }
+
+  if (actionsObserver) {
+    view.addEventListener('resize', schedulePlacement);
+    view.addEventListener('scroll', schedulePlacement, { capture: true, passive: true });
+  }
+
   return {
     host,
-    report(message) { status.textContent = message; },
+    schedulePlacement,
+    report(message) {
+      status.textContent = message;
+      schedulePlacement();
+    },
     focus() { button.focus({ preventScroll: true }); },
     dispose() {
+      if (actionsObserver) {
+        actionsObserver.disconnect();
+        view.removeEventListener('resize', schedulePlacement);
+        view.removeEventListener('scroll', schedulePlacement, { capture: true });
+        if (frame !== null) view.cancelAnimationFrame(frame);
+      }
       button.removeEventListener('click', onEnter);
       host.remove();
     },

@@ -35,10 +35,14 @@ function installReader(view, document) {
       if (panel.host.parentNode === document.body && !accessLimited(document, view)) return;
       removePanel();
     }
-    if (launcher?.host.parentNode === document.body) return;
+    if (launcher?.host.parentNode === document.body) {
+      launcher.schedulePlacement();
+      return;
+    }
     removeLauncher();
-    launcher = createReaderLauncher(document, enter);
+    launcher = createReaderLauncher(document, view, state.route, enter);
     document.body.append(launcher.host);
+    launcher.schedulePlacement();
   }
 
   function enter() {

@@ -59,8 +59,16 @@ function load(name, href, { modalError = false, navigation = true, frame = false
   window.location = { href };
   if (navigation) window.navigation = new EventTarget();
   let viewport = 1440;
+  const frames = new Map();
+  let frameId = 0;
+  window.requestAnimationFrame = callback => {
+    frames.set(++frameId, callback);
+    return frameId;
+  };
+  window.cancelAnimationFrame = id => frames.delete(id);
   window.getComputedStyle = element => ({
     visibility: 'visible',
+    position: element.style.position,
     overflowY: element.style.overflowY,
     webkitLineClamp: element.style.getPropertyValue('-webkit-line-clamp'),
     getPropertyValue(property) {
@@ -83,7 +91,7 @@ function load(name, href, { modalError = false, navigation = true, frame = false
       this.callback = callback;
       observers.push(this);
     }
-    observe(target) { this.target = target; }
+    observe(target, options) { this.target = target; this.options = options; }
     disconnect() { this.target = null; }
   };
   const mutations = () => observers.filter(observer => observer.target).forEach(observer => observer.callback());
@@ -132,6 +140,12 @@ function load(name, href, { modalError = false, navigation = true, frame = false
   return {
     adapter: () => adapter.runInContext(context, { timeout: 1000 }),
     document, window, native, original, forbidden, observers, mutations, run, host, inShell, press, drawnImages,
+    frames,
+    paint() {
+      const scheduled = [...frames.values()];
+      frames.clear();
+      for (const callback of scheduled) callback();
+    },
     resize(width) {
       viewport = width;
       window.dispatchEvent(new globalThis.Event('resize'));
@@ -193,7 +207,7 @@ test('duplicate injection and five enter/exit cycles keep one root and restore n
   let nativeClick = 0;
   source.addEventListener('click', () => { nativeClick += 1; });
   page.run();
-  assert.equal(page.observers.length, 1);
+  assert.equal(page.observers.filter(observer => observer.target === page.document.documentElement).length, 1);
   assert.equal(page.document.querySelectorAll(launcherID).length, 1);
 
   for (let cycle = 0; cycle < 5; cycle += 1) {
@@ -216,6 +230,74 @@ test('duplicate injection and five enter/exit cycles keep one root and restore n
   }
   assert.equal(nativeClick, 5);
   assert.deepEqual(page.forbidden, []);
+});
+
+test('article launcher clears a fixed bottom action bar and returns to its corner', () => {
+  const page = load('article', article);
+  const launcher = page.inShell(launcherID, '.zdr-launcher');
+  const offset = () => launcher.style.getPropertyValue('--zdr-launcher-avoidance');
+  Object.defineProperty(page.document.documentElement, 'clientHeight', { value: 913 });
+  Object.defineProperty(launcher, 'getBoundingClientRect', {
+    value() {
+      const lift = Number.parseInt(offset(), 10) || 0;
+      return { left: 16, right: 120, top: 861 - lift, bottom: 897 - lift };
+    },
+  });
+  const actions = page.document.createElement('div');
+  actions.className = 'Sticky RichContent-actions';
+  actions.style.position = 'fixed';
+  const inner = page.document.createElement('div');
+  inner.className = 'ContentItem-actions';
+  actions.append(inner);
+  let left = 16;
+  Object.defineProperty(actions, 'getBoundingClientRect', {
+    value: () => ({ left, right: 710, top: 859, bottom: 903 }),
+  });
+  Object.defineProperty(inner, 'getBoundingClientRect', {
+    value: () => ({ left, right: 710, top: 859, bottom: 913 }),
+  });
+  page.document.querySelector('.Post-Main').append(actions);
+  page.mutations();
+  page.paint();
+  assert.equal(offset(), undefined);
+
+  actions.classList.add('is-fixed', 'is-bottom');
+  const observer = page.observers.find(candidate => candidate.target === actions);
+  assert.deepEqual([...observer.options.attributeFilter], ['class', 'style']);
+  observer.callback();
+  page.mutations();
+  page.window.dispatchEvent(new globalThis.Event('scroll'));
+  assert.equal(page.frames.size, 1);
+  page.paint();
+  assert.equal(offset(), '54px');
+
+  page.resize(906);
+  page.paint();
+  assert.equal(offset(), '54px');
+  left = 130;
+  page.resize(900);
+  page.paint();
+  assert.equal(offset(), '0px');
+  left = 16;
+  page.resize(906);
+  page.paint();
+  assert.equal(offset(), '54px');
+
+  actions.classList.remove('is-bottom');
+  observer.callback();
+  page.paint();
+  assert.equal(offset(), '0px');
+  actions.remove();
+  page.mutations();
+  page.paint();
+  assert.equal(observer.target, null);
+
+  page.mutations();
+  assert.equal(page.frames.size, 1);
+  page.press(launcherID);
+  assert.equal(page.frames.size, 0);
+  assert.equal(getEventListeners(page.window, 'scroll').length, 0);
+  assert.ok(page.host(readerID));
 });
 
 test('modal cancel and close each clear the reader', () => {
@@ -526,7 +608,7 @@ test('M02 panels on narrow viewports are exclusive and view settings are scoped 
   assert.equal(dialog.dataset.zdrWidth, 'wide');
   assert.equal(dialog.dataset.zdrTheme, 'dark');
   page.press(readerID);
-  assert.equal(getEventListeners(page.window, 'resize').length, 0);
+  assert.equal(getEventListeners(page.window, 'resize').length, 1);
   page.press(launcherID);
   assert.equal(page.inShell(readerID, 'dialog').dataset.zdrWidth, 'default');
   assert.equal(page.inShell(readerID, 'dialog').dataset.zdrTheme, 'light');

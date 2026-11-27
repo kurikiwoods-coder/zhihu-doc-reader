@@ -1,8 +1,7 @@
 .zdr-reader.zdr-launcher {
   position: fixed;
-  /* The native floating widget occupies the opposite corner. */
   inset-inline-start: var(--zdr-content-padding-inline-compact);
-  inset-block-end: var(--zdr-content-padding-inline-compact);
+  inset-block-end: calc(var(--zdr-content-padding-inline-compact) + var(--zdr-launcher-avoidance, 0px));
   z-index: 1;
   display: flex;
   flex-direction: column;
