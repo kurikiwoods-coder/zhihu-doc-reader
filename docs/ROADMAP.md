@@ -2,7 +2,7 @@
 
 [PDT v1.3](PDT-V1.3.md) · [历史 PDT v1.2](PDT-V1.2.md) · [中文 README](../README_CN.md) · [English README](../README.md)
 
-PDT V1.3 是产品与验收基线。M00-A 与 M00-B 已验收，Gate 01-T 已通过。M01-A／B 已完成基础工程及离线核验。M01-L 受阻于独立 Chrome／Edge 测试配置接入，M02 等待 M01-L 实机通过。真实 Feed 请求为 0。M00-UI 原始取证为 BLOCKED，Gate 01-V 待验收，M03–M05 保持锁定。 [M00 验证](M00-VALIDATION.md) · [M01-L 验证](M01-VALIDATION.md#m01-l-双浏览器实机补证)
+PDT V1.3 是产品与验收基线。M00-A、M00-B 与 Gate 01-T 已通过。M01-A／B 已完成基础工程及离线核验。M01-L 分层验收，安装与合成回归待复核，实站及整体为 BLOCKED。安装、合成两层通过且无阻断性工程安全问题后，可按授权实施 M02。真实 Feed 请求为 0。M00-UI 原始取证为 BLOCKED，Gate 01-V 待验收，M03–M05 保持锁定。 [M00 验证](M00-VALIDATION.md) · [M01-L 验证](M01-VALIDATION.md#m01-l-双浏览器实机补证)
 
 ## 模块与版本
 
@@ -25,9 +25,9 @@ PDT V1.3 是产品与验收基线。M00-A 与 M00-B 已验收，Gate 01-T 已通
 | M00-B | 在 Chrome 和 Edge 验证知乎页面、登录状态、数据源及降级 | [执行记录](M00-VALIDATION.md#m00-b-真实页面与数据源验证) · [分层取证与验收例外](M00-VALIDATION.md#m00-b-r-分层取证与验收例外) | PASS（已结项） |
 | M00-UI | 飞书历史参考与独立产品初始设计基线 | [31 项测量矩阵](design/UI-SPEC-DRAFT.md) · [初始规范](design/UI-SPEC.md) · [初始 Tokens](../src/styles/tokens.css) | 历史取证 BLOCKED；初始设计目标已确认 |
 | M01-A | 初始化工程、锁定依赖，剥离 AI、Wiki 和 Embedding | AT23、AT24、AT26 | PASS（基础工程与构建） |
-| M01-B | 实现路由、生命周期、模式切换和原生页面恢复 | AT02、AT11、AT12、AT19 | PASS（离线），Chrome／Edge 实机 NOT RUN |
-| M01-L | 在独立 Chrome 和 Edge 配置核验正式脚本、六类路由及恢复 | 固定产物指纹和双浏览器各 14 项实机用例 | BLOCKED（环境），实机 NOT RUN |
-| M02-A | 实现顶部栏、左侧导航、正文、右侧目录和响应式布局 | UI-SPEC 初始基线及独立产品的实际渲染 | LOCKED（M01-L 通过且无阻断问题后开始） |
+| M01-B | 实现路由、生命周期、模式切换和原生页面恢复 | AT02、AT11、AT12、AT19 | PASS（离线），浏览器证据见 M01-L |
+| M01-L | 分层核验正式脚本安装、合成回归、六类原生路径及恢复 | 固定产物 SHA-256、双浏览器安装记录、各 14 项合成回归、6 张合成截图及实站缺口 | 整体 BLOCKED／I、S 待复核／R BLOCKED |
+| M02-A | 实现顶部栏、左侧导航、正文、右侧目录和响应式布局 | UI-SPEC 初始基线及独立产品的实际渲染 | 待 M01-L-I／S 复核通过且无阻断性工程安全问题 |
 | M02-B | 提取问答与专栏内容，清洗并渲染富文本 | AT07、AT09、AT10、AT25 | LOCKED（M02-A 完成后开始） |
 | M03-A | 接入原生推荐和热榜 | AT03、AT04 | LOCKED |
 | M03-B | 提交关键词并展示搜索结果或空状态 | AT05、AT06，复测知乎原生空结果和搜索降级 | LOCKED |
