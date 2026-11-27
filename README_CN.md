@@ -4,7 +4,7 @@
 
 面向 Chrome 和 Edge 的知乎沉浸阅读用户脚本。用户照常在知乎看推荐、热榜或搜索，打开问题、回答或专栏后，可以进入文档式阅读视图，并把感兴趣的条目保存在当前浏览器。
 
-**项目状态**　Gate 01-T 已通过。M01 已实现六类路由的最小阅读视图和手动进出，离线检查通过，正式脚本的 Chrome／Edge 安装待验证。Gate 01-V 待验收，M02–M05 等待单独授权。 [M01 验收记录](docs/M01-VALIDATION.md)
+**项目状态**　M02 已实现文档式界面、正文目录和问答／专栏的安全富文本。原生列表提供明确标注的预览。M01／M02 真实知乎联合验收为 BLOCKED，Gate 01-V 待负责人确认，M03–M05 保持锁定。 [M02 验收记录](docs/M02-VALIDATION.md)
 
 ## 首版使用场景
 
@@ -44,7 +44,7 @@ flowchart TD
 | 开发与交付 | Node.js 构建单文件 userscript，Playwright 用于浏览器验收 |
 | 视觉参考 | 飞书文档的排版与阅读交互，Semi Design 的组件规范 |
 
-## 构建 M01 开发产物
+## 构建开发产物
 
 使用 Node.js 22 或以上版本执行 `node build.js`，生成 [dist/bundle.user.js](dist/bundle.user.js)。执行 `npm test` 运行单元与静态安全检查。产物附带上游 MIT 许可证。 [许可证](LICENSE) · [上游锁定](docs/UPSTREAM-LOCK.md)
 

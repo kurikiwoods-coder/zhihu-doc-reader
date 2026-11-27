@@ -4,7 +4,7 @@
 
 Zhihu Doc Reader is a Tampermonkey userscript planned for Chrome and Microsoft Edge. It presents Zhihu answers and articles in a document-style reading view. Readers discover content through Zhihu's own pages and can save bookmarks and reading history in their browser.
 
-**Project status.** Gate 01-T passed. M01 provides a minimal reader with manual entry and exit on six supported route types. Offline checks passed. Chrome and Edge installation tests remain pending. Gate 01-V and M02–M05 await review. [M01 validation (Chinese)](docs/M01-VALIDATION.md)
+**Project status.** M02 implements the document layout, safe rich text, and section outline for already rendered Zhihu answers and articles. Native list routes offer a labelled preview. Joint M01/M02 acceptance on live Zhihu remains blocked. Gate 01-V awaits owner confirmation and M03–M05 remain locked. [M02 validation (Chinese)](docs/M02-VALIDATION.md)
 
 ## What readers can do
 
@@ -38,9 +38,9 @@ The script reads content that Zhihu has already rendered for the current session
 | Storage | Tampermonkey GM Storage for bookmarks, history, and preferences |
 | Build and verification | Node.js bundles a single `.user.js` file. Playwright supports browser verification. |
 
-## Build the M01 development snapshot
+## Build the development snapshot
 
-Run `node build.js` with Node.js 22 or newer to generate [dist/bundle.user.js](dist/bundle.user.js). Run `npm test` for the unit and static safety checks. The M01 snapshot includes the upstream MIT notice. [License](LICENSE) · [Upstream lock (Chinese)](docs/UPSTREAM-LOCK.md)
+Run `node build.js` with Node.js 22 or newer to generate [dist/bundle.user.js](dist/bundle.user.js). Run `npm test` for the unit and static safety checks. The bundled userscript includes the upstream MIT notice. [License](LICENSE) · [Upstream lock (Chinese)](docs/UPSTREAM-LOCK.md)
 
 ## Development roadmap
 

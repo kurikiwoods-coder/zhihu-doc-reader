@@ -46,18 +46,21 @@ function createReadingPanel(document, view, route, record, onExit) {
   dialog.setAttribute('aria-labelledby', 'zdr-reader-label');
 
   const { header, nav, outline } = createTopbar(document, route, record);
+  const reading = createDocumentRegion(document, record);
+  const contents = createRightOutline(document, reading);
   const layout = document.createElement('div');
   layout.className = 'zdr-layout';
   layout.append(
     createLeftNavigation(document, route.kind),
-    createDocumentRegion(document, record),
-    createRightOutline(document),
+    reading,
+    contents.outline,
   );
   dialog.append(header, layout);
   shadow.append(dialog);
 
   const choices = { nav: null, outline: null };
   let preferredPanel = 'nav';
+  let currentSection = null;
 
   function syncPanels() {
     const style = view.getComputedStyle(dialog);
@@ -76,12 +79,46 @@ function createReadingPanel(document, view, route, record, onExit) {
     return navOverlays;
   }
 
+  function setCurrentSection(section) {
+    if (section === currentSection) return;
+    currentSection?.button.removeAttribute('aria-current');
+    currentSection = section;
+    section?.button.setAttribute('aria-current', 'location');
+  }
+
+  function sectionOffset(heading) {
+    const margin = Number.parseFloat(view.getComputedStyle(heading).scrollMarginTop) || 0;
+    return heading.getBoundingClientRect().top - reading.getBoundingClientRect().top - margin;
+  }
+
+  function onReadingScroll() {
+    const { sections } = contents;
+    if (!sections.length) return;
+    const nearest = sections.findLast(section => sectionOffset(section.heading) <= 1);
+    setCurrentSection(nearest || sections[0]);
+  }
+
+  function jumpToSection(button) {
+    const section = contents.sections[Number(button.dataset.zdrSection)];
+    if (!section) return;
+    const overlay = view.getComputedStyle(dialog).getPropertyValue?.('--zdr-outline-overlay').trim() === '1';
+    if (overlay) {
+      choices.outline = false;
+      syncPanels();
+    }
+    reading.scrollTop += sectionOffset(section.heading);
+    section.heading.focus({ preventScroll: true });
+    setCurrentSection(section);
+  }
+
   function onClick(event) {
     const button = event.target.closest?.('button[data-zdr-action]');
     if (!button || !dialog.contains(button)) return;
     const action = button.dataset.zdrAction;
     if (action === 'exit') {
       onExit();
+    } else if (action === 'section') {
+      jumpToSection(button);
     } else if (action === 'nav' || action === 'outline') {
       const compact = syncPanels();
       const toggle = action === 'nav' ? nav : outline;
@@ -114,9 +151,12 @@ function createReadingPanel(document, view, route, record, onExit) {
       body.append(host);
       dialog.showModal();
       syncPanels();
+      onReadingScroll();
+      reading.addEventListener('scroll', onReadingScroll, { passive: true });
       view.addEventListener('resize', syncPanels);
     },
     dispose() {
+      reading.removeEventListener('scroll', onReadingScroll);
       view.removeEventListener('resize', syncPanels);
       dialog.removeEventListener('click', onClick);
       dialog.removeEventListener('cancel', onCancel);

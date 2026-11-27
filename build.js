@@ -5,8 +5,10 @@ const { Script } = require('node:vm');
 
 const scripts = [
   'src/adapters/route.js',
+  'src/adapters/rich-content.js',
   'src/adapters/dom.js',
   'src/core/state.js',
+  'src/renderer/rich-content.js',
   'src/renderer/reader-regions.js',
   'src/renderer/reader-shell.js',
   'src/core/lifecycle.js',

@@ -17,6 +17,7 @@ const fixtures = parseHTML(await read('validation/m00-b/fixtures/native-shapes.h
 const bundle = new Script(await read('dist/bundle.user.js'), { filename: 'bundle.user.js' });
 const adapter = new Script([
   await read('src/adapters/route.js'),
+  await read('src/adapters/rich-content.js'),
   await read('src/adapters/dom.js'),
   'readNativePage(document, window, identifyRoute(window.location.href));',
 ].join('\n'));
@@ -28,7 +29,8 @@ const zhihu = 'https://www.zhihu.com';
 const question = zhihu + '/question/990050';
 const article = 'https://zhuanlan.zhihu.com/p/990041';
 const search = zhihu + '/search?type=content&q=fixture';
-const sample = name => fixtures.getElementById(name).innerHTML;
+const richFixture = await read('validation/m02/fixtures/rich-article.html');
+const sample = name => name === 'rich-article' ? richFixture : fixtures.getElementById(name).innerHTML;
 
 function load(name, href, { modalError = false, navigation = true, frame = false } = {}) {
   const { document, Event, Element } = parseHTML(
@@ -38,14 +40,33 @@ function load(name, href, { modalError = false, navigation = true, frame = false
   if (!Element.prototype.getClientRects) {
     Object.defineProperty(Element.prototype, 'getClientRects', { value() { return [{}]; } });
   }
+  if (!Element.prototype.getBoundingClientRect) {
+    Object.defineProperty(Element.prototype, 'getBoundingClientRect', { value() { return { top: 0 }; } });
+  }
   const native = document.getElementById('native');
+  const loadedImage = native.querySelector('[data-fixture-image="loaded"]');
+  if (loadedImage) {
+    Object.defineProperties(loadedImage, {
+      complete: { value: true },
+      naturalWidth: { value: 360 },
+      naturalHeight: { value: 120 },
+    });
+  }
   const original = native.outerHTML;
   const forbidden = [];
   const window = new EventTarget();
   window.top = frame ? new EventTarget() : window;
   window.location = { href };
   if (navigation) window.navigation = new EventTarget();
-  window.getComputedStyle = () => ({ visibility: 'visible' });
+  let viewport = 1440;
+  window.getComputedStyle = () => ({
+    visibility: 'visible',
+    getPropertyValue(property) {
+      if (property === '--zdr-nav-overlay') return viewport < 900 ? '1' : '0';
+      if (property === '--zdr-outline-overlay') return viewport < 1200 ? '1' : '0';
+      return '';
+    },
+  });
   for (const key of ['fetch', 'XMLHttpRequest', 'WebSocket', 'localStorage']) {
     Object.defineProperty(window, key, {
       get() { forbidden.push(key); throw new Error('Production fixture accessed ' + key); },
@@ -65,10 +86,14 @@ function load(name, href, { modalError = false, navigation = true, frame = false
   };
   const mutations = () => observers.filter(observer => observer.target).forEach(observer => observer.callback());
   let focused;
+  const drawnImages = [];
   const create = document.createElement.bind(document);
   document.createElement = (tag) => {
     const node = create(tag);
-    if (tag === 'button') node.focus = options => { focused = { node, options }; };
+    if (tag === 'button' || /^h[1-6]$/.test(tag)) node.focus = options => { focused = { node, options }; };
+    if (tag === 'canvas') {
+      node.getContext = () => ({ drawImage(image) { drawnImages.push(image); } });
+    }
     if (tag === 'dialog') {
       node.showModal = () => {
         if (modalError) throw new Error('Synthetic modal fault');
@@ -95,7 +120,11 @@ function load(name, href, { modalError = false, navigation = true, frame = false
   run();
   return {
     adapter: () => adapter.runInContext(context, { timeout: 1000 }),
-    document, window, native, original, forbidden, observers, mutations, run, host, inShell, press,
+    document, window, native, original, forbidden, observers, mutations, run, host, inShell, press, drawnImages,
+    resize(width) {
+      viewport = width;
+      window.dispatchEvent(new globalThis.Event('resize'));
+    },
     focus: () => focused,
     goto(next, event = 'currententrychange') {
       window.location.href = next;
@@ -293,4 +322,128 @@ test('unsupported routes and framed documents are left untouched', () => {
     assert.equal(page.native.outerHTML, page.original);
   }
   assert.equal(frame.observers.length, 0);
+});
+
+test('M02 shows the complete loaded article, byline, published date and original link', () => {
+  const page = load('rich-article', article);
+  const { record } = page.adapter();
+  assert.equal(record.excerpt, null);
+  assert.equal(record.contentHtml, null);
+  assert.equal(record.publishedAt, '2026-11-27');
+  page.press(launcherID);
+  const reading = page.inShell(readerID, '.zdr-richtext');
+  assert.ok(reading.textContent.length > 240);
+  assert.match(reading.textContent, /SYNTHETIC_ARTICLE_END/);
+  assert.equal(reading.querySelector('strong').textContent, '需要记住的结论');
+  assert.equal(reading.querySelector('em').textContent, '值得慢慢读的细节');
+  assert.equal(page.inShell(readerID, 'time').textContent, '发布于 2026-11-27');
+  assert.equal(page.inShell(readerID, '.zdr-source-button').getAttribute('href'), article);
+  assert.equal(page.native.outerHTML, page.original);
+});
+
+test('M02 full question body does not reuse the 240-character list excerpt', () => {
+  const page = load('question', question);
+  const content = page.native.querySelector('.RichText');
+  const tail = page.document.createElement('p');
+  tail.textContent = '合成问答正文内容。'.repeat(80) + 'QUESTION_END_MARKER';
+  content.append(tail);
+  page.press(launcherID);
+  assert.match(page.inShell(readerID, '.zdr-richtext').textContent, /QUESTION_END_MARKER/);
+  assert.equal(page.adapter().record.excerpt, null);
+  const list = load('home', zhihu + '/');
+  list.native.querySelector('.RichContent-inner').textContent = '预览内容。'.repeat(80);
+  list.press(launcherID);
+  assert.equal(list.inShell(readerID, '.zdr-preview').textContent.length, 240);
+  assert.equal(list.inShell(readerID, '.zdr-richtext'), null);
+});
+
+test('M02 keeps numbering, lists, quote, code and uses hardening on safe links', () => {
+  const page = load('rich-article', article);
+  page.press(launcherID);
+  const body = page.inShell(readerID, '.zdr-richtext');
+  assert.equal(body.querySelector('ol').getAttribute('start'), '3');
+  assert.equal(body.querySelector('li[value]').getAttribute('value'), '7');
+  assert.ok(body.querySelector('ol li ul li'));
+  assert.match(body.querySelector('blockquote p').textContent, /顺着作者/);
+  assert.match(body.querySelector('pre code').textContent, /\nconst source/);
+  const links = [...body.querySelectorAll('a')];
+  assert.deepEqual(links.map(link => link.getAttribute('href')), [
+    'https://example.invalid/reading-source', 'https://example.invalid/second',
+    'https://zhuanlan.zhihu.com/p/990045',
+  ]);
+  assert.ok(links.every(link => link.getAttribute('rel') === 'noopener noreferrer' && link.getAttribute('target') === '_blank'));
+  assert.match(body.textContent, /受限链接标签/);
+});
+
+test('M02 discards active markup, unsafe attributes and hidden source content', () => {
+  const page = load('rich-article', article);
+  page.press(launcherID);
+  const body = page.inShell(readerID, '.zdr-richtext');
+  assert.equal(body.querySelector('script, iframe, embed, form, input, [onfocus], [hidden]'), null);
+  assert.doesNotMatch(body.textContent, /DISCARDED_|HIDDEN_FIXTURE_MARKER/);
+  assert.deepEqual(page.forbidden, []);
+});
+
+test('M02 draws only an already decoded image and preserves its caption', () => {
+  const page = load('rich-article', article);
+  page.press(launcherID);
+  const body = page.inShell(readerID, '.zdr-richtext');
+  assert.equal(body.querySelector('img'), null);
+  assert.equal(body.querySelector('canvas').getAttribute('aria-label'), '合成图示：远山和湖面');
+  assert.equal(page.drawnImages.length, 1);
+  assert.equal(page.drawnImages[0], page.native.querySelector('[data-fixture-image="loaded"]'));
+  assert.match(body.querySelector('figcaption').textContent, /仅用于阅读器测试/);
+  assert.match(body.querySelector('.zdr-image-fallback').textContent, /未加载样图/);
+});
+
+test('M02 avoids presenting clipped, empty and restricted bodies as full text', () => {
+  for (const failure of ['clipped', 'empty', 'restricted']) {
+    const page = load('rich-article', article);
+    const body = page.native.querySelector('.Post-RichText');
+    if (failure === 'clipped') body.setAttribute('data-collapsed', 'true');
+    if (failure === 'empty') body.textContent = ' ';
+    if (failure === 'restricted') page.document.title = '请求参数异常';
+    page.press(launcherID);
+    assert.equal(page.host(readerID), null, failure);
+    assert.match(page.inShell(launcherID, '[role="status"]').textContent, /暂无可读取|访问限制/);
+  }
+});
+
+test('M02 outline uses real headings and focuses the selected section', () => {
+  const page = load('rich-article', article);
+  page.press(launcherID);
+  const outline = page.inShell(readerID, '.zdr-outline-list');
+  const buttons = [...outline.querySelectorAll('button')];
+  assert.deepEqual(buttons.map(button => button.textContent),
+    ['从一页长文开始', '排版与阅读节奏', '图像与图注', '链接与访问边界', '回到原文']);
+  assert.equal(buttons[0].getAttribute('aria-current'), 'location');
+  buttons[2].click();
+  assert.equal(buttons[2].getAttribute('aria-current'), 'location');
+  assert.equal(page.focus().node, page.inShell(readerID, '#zdr-section-3'));
+  page.press(readerID);
+  assert.equal(page.native.outerHTML, page.original);
+});
+
+test('M02 panels on narrow viewports are exclusive and view settings are scoped to the modal', () => {
+  const page = load('rich-article', article);
+  page.resize(885);
+  page.press(launcherID);
+  const dialog = page.inShell(readerID, 'dialog');
+  const nav = page.inShell(readerID, '[data-zdr-action="nav"]');
+  const outline = page.inShell(readerID, '[data-zdr-action="outline"]');
+  assert.equal(nav.getAttribute('aria-expanded'), 'false');
+  nav.click();
+  assert.equal(nav.getAttribute('aria-expanded'), 'true');
+  outline.click();
+  assert.equal(nav.getAttribute('aria-expanded'), 'false');
+  assert.equal(outline.getAttribute('aria-expanded'), 'true');
+  page.inShell(readerID, '[data-zdr-action="width-wide"]').click();
+  page.inShell(readerID, '[data-zdr-action="theme-dark"]').click();
+  assert.equal(dialog.dataset.zdrWidth, 'wide');
+  assert.equal(dialog.dataset.zdrTheme, 'dark');
+  page.press(readerID);
+  assert.equal(getEventListeners(page.window, 'resize').length, 0);
+  page.press(launcherID);
+  assert.equal(page.inShell(readerID, 'dialog').dataset.zdrWidth, 'default');
+  assert.equal(page.inShell(readerID, 'dialog').dataset.zdrTheme, 'light');
 });

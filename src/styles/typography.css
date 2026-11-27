@@ -46,3 +46,105 @@
   text-decoration: underline;
   text-underline-offset: var(--zdr-link-underline-offset);
 }
+
+
+.zdr-byline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--zdr-brand-gap);
+}
+
+.zdr-richtext {
+  margin-block-start: var(--zdr-content-padding-block);
+}
+
+.zdr-richtext :is(p, ul, ol, pre, blockquote, figure) {
+  margin-block: var(--zdr-paragraph-gap);
+}
+
+.zdr-richtext :is(h1, h2, h3, h4, h5, h6) {
+  margin-block: var(--zdr-heading-gap-before) var(--zdr-heading-gap-after);
+  font-weight: var(--zdr-heading-weight);
+  letter-spacing: var(--zdr-heading-letter-spacing);
+  scroll-margin-block-start: calc(var(--zdr-anchor-offset) - var(--zdr-header-height));
+}
+
+.zdr-richtext h1 {
+  font-size: var(--zdr-h1-size);
+  line-height: var(--zdr-h1-line-height);
+}
+
+.zdr-richtext h2 {
+  font-size: var(--zdr-h2-size);
+  line-height: var(--zdr-h2-line-height);
+}
+
+.zdr-richtext :is(h3, h4, h5, h6) {
+  font-size: var(--zdr-h3-size);
+  line-height: var(--zdr-h3-line-height);
+}
+
+.zdr-richtext :is(ul, ol) {
+  padding-inline-start: var(--zdr-list-indent);
+}
+
+.zdr-richtext li + li {
+  margin-block-start: var(--zdr-list-item-gap);
+}
+
+.zdr-richtext blockquote {
+  margin-inline: 0;
+  padding: var(--zdr-quote-padding-block) var(--zdr-quote-padding-inline);
+  border-inline-start: var(--zdr-quote-rule-width) solid var(--zdr-quote-rule-color);
+  background: var(--zdr-quote-background);
+}
+
+.zdr-richtext :is(code, pre, kbd) {
+  font-family: var(--zdr-code-font-family);
+  font-size: var(--zdr-code-font-size);
+  line-height: var(--zdr-code-line-height);
+}
+
+.zdr-richtext :not(pre) > code {
+  padding: var(--zdr-inline-code-padding-block) var(--zdr-inline-code-padding-inline);
+  border-radius: var(--zdr-inline-code-radius);
+  background: var(--zdr-code-background);
+}
+
+.zdr-richtext pre {
+  max-inline-size: 100%;
+  overflow: auto;
+  padding: var(--zdr-code-block-padding);
+  border-radius: var(--zdr-radius);
+  background: var(--zdr-code-background);
+  white-space: pre;
+  overflow-wrap: normal;
+}
+
+.zdr-richtext figure {
+  margin-inline: 0;
+}
+
+.zdr-richtext canvas {
+  display: block;
+  max-inline-size: var(--zdr-image-max-width);
+  block-size: auto;
+  border-radius: var(--zdr-image-radius);
+}
+
+.zdr-richtext figcaption {
+  margin-block-start: var(--zdr-caption-gap);
+}
+
+.zdr-richtext figcaption,
+.zdr-image-fallback {
+  color: var(--zdr-text-secondary);
+  font-size: var(--zdr-caption-font-size);
+  line-height: var(--zdr-caption-line-height);
+}
+
+.zdr-richtext hr {
+  margin-block: var(--zdr-block-gap);
+  border: 0;
+  border-block-start: var(--zdr-border-width) solid var(--zdr-border);
+}

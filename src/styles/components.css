@@ -154,3 +154,37 @@
   padding-block-start: var(--zdr-paragraph-gap);
   border-block-start: var(--zdr-border-width) solid var(--zdr-border);
 }
+
+
+.zdr-outline-list {
+  display: grid;
+  gap: var(--zdr-list-item-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.zdr-outline-list [data-zdr-level="2"] { padding-inline-start: var(--zdr-outline-indent); }
+.zdr-outline-list [data-zdr-level="3"] { padding-inline-start: calc(var(--zdr-outline-indent) * 2); }
+.zdr-outline-list [data-zdr-level="4"] { padding-inline-start: calc(var(--zdr-outline-indent) * 3); }
+.zdr-outline-list [data-zdr-level="5"] { padding-inline-start: calc(var(--zdr-outline-indent) * 4); }
+.zdr-outline-list [data-zdr-level="6"] { padding-inline-start: calc(var(--zdr-outline-indent) * 5); }
+
+.zdr-outline-list .zdr-action {
+  inline-size: 100%;
+  justify-content: flex-start;
+  overflow-wrap: anywhere;
+  text-align: start;
+  background: transparent;
+  border-color: transparent;
+}
+
+.zdr-outline-list .zdr-action:hover {
+  background: var(--zdr-hover);
+}
+
+.zdr-outline-list .zdr-action[aria-current="location"] {
+  border-inline-start: var(--zdr-selected-marker-width) solid var(--zdr-primary);
+  color: var(--zdr-selected-text);
+  background: var(--zdr-selected);
+}

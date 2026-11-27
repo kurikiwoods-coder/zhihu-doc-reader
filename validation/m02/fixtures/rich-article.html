@@ -1,0 +1,38 @@
+<!-- Synthetic article. All copy, images and data are for M02 validation. -->
+<article class="Post-Main">
+  <header>
+    <h1 class="Post-Title">把阅读还给正文</h1>
+    <span class="AuthorInfo-name">阅读器测试样本</span>
+    <time itemprop="datePublished" datetime="2026-11-27">2026-11-27</time>
+  </header>
+  <div class="Post-RichText" onfocus="">
+    <p>打开一页长文，我想先看到作者论述的来龙去脉。这个合成样本用来检查阅读器的排版、章节定位和返回原网页时的位置。</p>
+    <h1>从一页长文开始</h1>
+    <p>一段正文通常有<strong>需要记住的结论</strong>，也有<em>值得慢慢读的细节</em>。标题把内容分成几段，但不替作者添加章节。这里的<a href="https://example.invalid/reading-source">参考链接</a>用于核对原文链接行为。</p>
+    <blockquote><p>阅读时，先顺着作者的论证走，再回到需要核对的位置。</p></blockquote>
+    <h2>排版与阅读节奏</h2>
+    <p>长段落要有稳定的行距，列表要保留原来的层级。段落、标题、引用和代码各有自己的位置。</p>
+    <ol start="3">
+      <li>从标题看段落的关系。</li>
+      <li value="7">核对例子，再回到论点。<ul><li>子项保留原来缩进。</li></ul></li>
+    </ol>
+    <p>行内代码 <code>reading.currentSection</code> 与正文一起换行。</p>
+    <pre><code>const chapter = "排版与阅读节奏";
+const source = "知乎原文";</code></pre>
+    <h3>图像与图注</h3>
+    <figure>
+      <picture><img data-fixture-image="loaded" alt="合成图示：远山和湖面"></picture>
+      <figcaption>图一　合成图示，仅用于阅读器测试。</figcaption>
+    </figure>
+    <p><img data-fixture-image="failed" alt="未加载样图"></p>
+    <h4>链接与访问边界</h4>
+    <p><a href="https://link.zhihu.com/?target=https%3A%2F%2Fexample.invalid%2Fsecond">包装后的参考链接</a> · <a href="/p/990045">同站链接</a> · <a href="javascript:">受限链接标签</a></p>
+    <p hidden>HIDDEN_FIXTURE_MARKER</p>
+    <script type="application/fixture">DISCARDED_SCRIPT_MARKER</script>
+    <iframe title="合成嵌入"></iframe>
+    <form><label>DISCARDED_FORM_MARKER<input type="text"></label></form>
+    <h2>回到原文</h2>
+    <p>需要上下文时，直接打开知乎原文。退出阅读后，浏览器应该回到之前的滚动位置，键盘焦点也应回到阅读入口。</p>
+    <p>完整正文结束标记 · SYNTHETIC_ARTICLE_END</p>
+  </div>
+</article>

@@ -15,9 +15,9 @@ const profiles = {
   question: {
     cards: '.QuestionAnswers-answers .AnswerItem, .QuestionAnswer-content .AnswerItem, .AnswerItem',
     title: '.QuestionHeader-title',
-    excerpt: '.RichContent-inner .RichText, .RichContent-inner.RichText',
+    body: '.RichContent-inner .RichText, .RichContent-inner.RichText',
   },
-  article: { cards: '.Post-Main', title: '.Post-Title', excerpt: '.Post-RichText' },
+  article: { cards: '.Post-Main', title: '.Post-Title', body: '.Post-RichText' },
 };
 
 function isRendered(element, view) {
@@ -32,7 +32,7 @@ function firstRendered(root, selector, view) {
 }
 
 function accessLimited(document, view) {
-  return /安全验证|人机验证/.test(document.title) ||
+  return /安全验证|人机验证|请求参数异常/.test(document.title) ||
     Boolean(firstRendered(document, '#captcha, .Captcha, .SignFlowModal, .Paywall', view));
 }
 
@@ -72,7 +72,22 @@ function cardAddress(card, heading, view, route) {
   return contentAddress(link.getAttribute('href'), route.sourceUrl);
 }
 
-// Deliberately bounded preview records. M02 owns full and sanitized rich-text rendering.
+function publishedText(card, view) {
+  const published = card.querySelector('[itemprop="datePublished"]');
+  const value = published?.getAttribute('datetime') ?? published?.getAttribute('content');
+  if (value && /^\d{4}-\d{2}-\d{2}(?:T[\d:.+Z-]+)?$/.test(value) && Number.isFinite(Date.parse(value))) return value;
+  const label = boundedText(firstRendered(card, '.Post-Time, .ContentItem-time', view), 80);
+  return label?.startsWith('发布于') ? label.slice(3).trim() || null : null;
+}
+
+function readFullBody(card, selector, view, sourceUrl) {
+  const element = firstRendered(card, selector, view);
+  if (!element || !isUnclippedBody(element, card, view)) return null;
+  const content = captureRichChildren(element, view, sourceUrl);
+  return hasReadableContent(content) ? content : null;
+}
+
+// List routes return a bounded preview. Detail routes require a loaded, readable body.
 function readNativePage(document, view, route) {
   if (!route) return { status: 'unsupported', record: null };
   if (accessLimited(document, view)) return { status: 'restricted', record: null };
@@ -82,11 +97,11 @@ function readNativePage(document, view, route) {
     const answer = route.kind === 'question' ? answerAddress(card, route) : null;
     if (route.contentType === 'answer' && answer?.sourceUrl !== route.sourceUrl) continue;
     const heading = firstRendered(route.kind === 'question' ? document : card, profile.title, view);
-    const title = boundedText(heading, 160);
-    const excerpt = boundedText(firstRendered(card, profile.excerpt, view), 240);
-    if (!title || (route.contentId && !excerpt)) continue;
-
+    const title = profile.body ? heading?.innerText?.trim() : boundedText(heading, 160);
+    if (!title) continue;
     const source = answer || (route.contentId ? route : cardAddress(card, heading, view, route));
+    const content = profile.body ? readFullBody(card, profile.body, view, source.sourceUrl) : null;
+    if (profile.body && !content) continue;
     return {
       status: 'ready',
       record: {
@@ -95,9 +110,10 @@ function readNativePage(document, view, route) {
         title,
         author: boundedText(firstRendered(card, '.AuthorInfo-name, .ContentItem-author', view), 80),
         sourceUrl: source?.sourceUrl ?? null,
-        excerpt,
+        excerpt: profile.excerpt ? boundedText(firstRendered(card, profile.excerpt, view), 240) : null,
+        content,
         contentHtml: null,
-        publishedAt: null,
+        publishedAt: profile.body ? publishedText(card, view) : null,
         fetchedAt: new Date().toISOString(),
       },
     };

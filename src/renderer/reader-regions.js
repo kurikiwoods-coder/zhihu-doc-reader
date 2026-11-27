@@ -134,23 +134,41 @@ function createDocumentRegion(document, record) {
   heading.className = 'zdr-document-title';
   heading.textContent = record.title;
   column.append(heading);
-  if (record.author) {
-    const author = document.createElement('p');
-    author.className = 'zdr-byline';
-    author.textContent = record.author;
-    column.append(author);
+
+  if (record.author || record.publishedAt) {
+    const byline = document.createElement('p');
+    byline.className = 'zdr-byline';
+    if (record.author) {
+      const author = document.createElement('span');
+      author.textContent = record.author;
+      byline.append(author);
+    }
+    if (record.publishedAt) {
+      const published = document.createElement('time');
+      published.textContent = '发布于 ' + record.publishedAt;
+      byline.append(published);
+    }
+    column.append(byline);
   }
 
-  const notice = document.createElement('p');
-  notice.className = 'zdr-reading-note';
-  notice.textContent = '当前页面预览';
-  column.append(notice);
-  if (record.excerpt) {
-    const preview = document.createElement('p');
-    preview.className = 'zdr-preview';
-    preview.textContent = record.excerpt;
-    column.append(preview);
+  if (record.content) {
+    const content = document.createElement('div');
+    content.className = 'zdr-richtext';
+    appendRichContent(document, content, record.content);
+    column.append(content);
+  } else {
+    const notice = document.createElement('p');
+    notice.className = 'zdr-reading-note';
+    notice.textContent = '当前原生列表预览';
+    column.append(notice);
+    if (record.excerpt) {
+      const preview = document.createElement('p');
+      preview.className = 'zdr-preview';
+      preview.textContent = record.excerpt;
+      column.append(preview);
+    }
   }
+
   if (record.sourceUrl) {
     const footer = document.createElement('footer');
     footer.className = 'zdr-document-source';
@@ -161,17 +179,42 @@ function createDocumentRegion(document, record) {
   return region;
 }
 
-function createRightOutline(document) {
+function createRightOutline(document, region) {
   const outline = document.createElement('aside');
   outline.dataset.zdrRegion = 'outline';
   outline.id = 'zdr-outline';
   outline.setAttribute('aria-label', '本文目录');
-  const heading = document.createElement('h2');
-  heading.className = 'zdr-outline-title';
-  heading.textContent = '本文目录';
-  const empty = document.createElement('p');
-  empty.className = 'zdr-reading-note';
-  empty.textContent = '此处没有可用的章节目录。';
-  outline.append(heading, empty);
-  return outline;
+  const title = document.createElement('h2');
+  title.className = 'zdr-outline-title';
+  title.textContent = '本文目录';
+  outline.append(title);
+  const content = region.querySelector('.zdr-richtext');
+  const sections = [];
+  const list = document.createElement('ol');
+  list.className = 'zdr-outline-list';
+
+  for (const heading of content?.querySelectorAll('h1, h2, h3, h4, h5, h6') ?? []) {
+    const label = heading.textContent.replace(/\s+/g, ' ').trim();
+    if (!label) continue;
+    const index = sections.length;
+    heading.id = 'zdr-section-' + (index + 1);
+    heading.setAttribute('tabindex', '-1');
+    const item = document.createElement('li');
+    item.dataset.zdrLevel = heading.localName.slice(1);
+    const button = createReaderAction(document, label, 'section');
+    button.dataset.zdrSection = String(index);
+    item.append(button);
+    list.append(item);
+    sections.push({ heading, button });
+  }
+
+  if (sections.length) {
+    outline.append(list);
+  } else {
+    const empty = document.createElement('p');
+    empty.className = 'zdr-reading-note';
+    empty.textContent = '此处没有可用的章节目录。';
+    outline.append(empty);
+  }
+  return { outline, sections };
 }
