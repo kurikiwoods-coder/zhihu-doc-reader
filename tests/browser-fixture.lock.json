@@ -1,0 +1,7 @@
+{
+  "name": "LinkeDOM worker",
+  "version": "0.18.12",
+  "license": "ISC",
+  "source": "https://raw.githubusercontent.com/WebReflection/linkedom/dfc2fa88969b2d63014e3f6afd49a4e4449996e5/worker.js",
+  "sha256": "196efeb17c260e001979dbc54a3c30e701a881c6e8a3eedaddc5ad83c99ee5ff"
+}

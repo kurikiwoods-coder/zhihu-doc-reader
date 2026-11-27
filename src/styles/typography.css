@@ -1,0 +1,23 @@
+.zdr-reader {
+  font-family: var(--zdr-font-family);
+  font-size: var(--zdr-font-size);
+  font-weight: var(--zdr-text-weight);
+  line-height: var(--zdr-line-height);
+  color: var(--zdr-text);
+}
+
+.zdr-reader h2 {
+  font-size: var(--zdr-h2-size);
+  font-weight: var(--zdr-heading-weight);
+  line-height: var(--zdr-h2-line-height);
+}
+
+.zdr-reader button {
+  font: inherit;
+}
+
+.zdr-reader [role="status"] {
+  color: var(--zdr-text-secondary);
+  font-size: var(--zdr-caption-font-size);
+  line-height: var(--zdr-caption-line-height);
+}

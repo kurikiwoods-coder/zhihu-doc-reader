@@ -1,0 +1,31 @@
+.zdr-reader.zdr-verification,
+.zdr-reader button,
+.zdr-reader.zdr-launcher [role="status"] {
+  color: var(--zdr-text);
+  background: var(--zdr-surface);
+  border: var(--zdr-border-width) solid var(--zdr-border);
+  border-radius: var(--zdr-radius);
+}
+
+.zdr-reader button {
+  min-block-size: var(--zdr-nav-row-height);
+  padding-inline: var(--zdr-sidebar-padding);
+  cursor: pointer;
+}
+
+.zdr-reader button:hover {
+  background: var(--zdr-hover);
+}
+
+.zdr-reader button:focus-visible {
+  outline: var(--zdr-focus-ring-width) solid var(--zdr-focus-color);
+  outline-offset: var(--zdr-focus-ring-offset);
+}
+
+.zdr-reader.zdr-launcher [role="status"] {
+  padding: var(--zdr-list-item-gap);
+}
+
+.zdr-reader.zdr-launcher [role="status"]:empty {
+  display: none;
+}

@@ -1,0 +1,31 @@
+.zdr-reader.zdr-launcher {
+  position: fixed;
+  inset-inline-end: var(--zdr-content-padding-inline-compact);
+  inset-block-end: var(--zdr-content-padding-inline-compact);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--zdr-list-item-gap);
+}
+
+.zdr-reader.zdr-verification {
+  box-sizing: border-box;
+  inline-size: min(var(--zdr-content-width), calc(100% - 2 * var(--zdr-content-padding-inline-compact)));
+  max-block-size: calc(100dvh - 2 * var(--zdr-content-padding-inline-compact));
+  padding: var(--zdr-content-padding-inline-compact);
+  overflow: auto;
+}
+
+.zdr-reader [data-zdr-region="topbar"] {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--zdr-sidebar-padding);
+}
+
+.zdr-reader [data-zdr-region="document"] {
+  padding-block-start: var(--zdr-block-gap);
+  overflow-wrap: anywhere;
+}
