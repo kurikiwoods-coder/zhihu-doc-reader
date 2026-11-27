@@ -433,11 +433,196 @@
         "document-outline"
       ],
       "screenshotStatus": "No releasable screenshot of these regions. The account watermark overlaps the interface and the content."
+    },
+    {
+      "id": "UIB-DOM-06",
+      "purpose": "Rendered synthetic body heading typography",
+      "date": "2026-11-27",
+      "viewportCssPx": {
+        "height": 731,
+        "width": 885
+      },
+      "devicePixelRatio": 2,
+      "method": "Three synthetic headings appended with owner approval in the rendered editor. Heading block types and getComputedStyle results verified after reload.",
+      "originalEditableBodyBlocks": 4,
+      "appendedBodyHeadingCount": 3,
+      "autoSaveVerifiedAfterReload": true,
+      "headings": [
+        {
+          "level": 1,
+          "blockType": "heading1",
+          "textRectCssPx": {
+            "height": 36.3984375,
+            "left": 322,
+            "top": 581.25,
+            "width": 497
+          },
+          "blockRectCssPx": {
+            "height": 36.3984375,
+            "left": 332,
+            "top": 581.25,
+            "width": 489
+          },
+          "computedTextStyle": {
+            "color": "rgb(31, 35, 41)",
+            "font-family": "LarkHackSafariFont, LarkEmojiFont, LarkChineseQuote, -apple-system, BlinkMacSystemFont, \"Helvetica Neue\", Tahoma, \"PingFang SC\", \"Microsoft Yahei\", Arial, \"Hiragino Sans GB\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+            "font-size": "26px",
+            "font-weight": "600",
+            "letter-spacing": "-0.52px",
+            "line-height": "36.4px",
+            "margin-bottom": "0px",
+            "margin-top": "0px",
+            "padding-bottom": "0px",
+            "padding-top": "0px"
+          },
+          "computedBlockStyle": {
+            "color": "rgb(31, 35, 41)",
+            "font-family": "LarkHackSafariFont, LarkEmojiFont, LarkChineseQuote, -apple-system, BlinkMacSystemFont, \"Helvetica Neue\", Tahoma, \"PingFang SC\", \"Microsoft Yahei\", Arial, \"Hiragino Sans GB\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+            "font-size": "26px",
+            "font-weight": "400",
+            "letter-spacing": "0.28px",
+            "line-height": "46.8px",
+            "margin-bottom": "10px",
+            "margin-top": "26px",
+            "padding-bottom": "0px",
+            "padding-top": "0px"
+          }
+        },
+        {
+          "level": 2,
+          "blockType": "heading2",
+          "textRectCssPx": {
+            "height": 30.796875,
+            "left": 322,
+            "top": 639.6484375,
+            "width": 497
+          },
+          "blockRectCssPx": {
+            "height": 30.796875,
+            "left": 332,
+            "top": 639.6484375,
+            "width": 489
+          },
+          "computedTextStyle": {
+            "color": "rgb(31, 35, 41)",
+            "font-family": "LarkHackSafariFont, LarkEmojiFont, LarkChineseQuote, -apple-system, BlinkMacSystemFont, \"Helvetica Neue\", Tahoma, \"PingFang SC\", \"Microsoft Yahei\", Arial, \"Hiragino Sans GB\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+            "font-size": "22px",
+            "font-weight": "600",
+            "letter-spacing": "-0.44px",
+            "line-height": "30.8px",
+            "margin-bottom": "0px",
+            "margin-top": "0px",
+            "padding-bottom": "0px",
+            "padding-top": "0px"
+          },
+          "computedBlockStyle": {
+            "color": "rgb(31, 35, 41)",
+            "font-family": "LarkHackSafariFont, LarkEmojiFont, LarkChineseQuote, -apple-system, BlinkMacSystemFont, \"Helvetica Neue\", Tahoma, \"PingFang SC\", \"Microsoft Yahei\", Arial, \"Hiragino Sans GB\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+            "font-size": "22px",
+            "font-weight": "400",
+            "letter-spacing": "0.28px",
+            "line-height": "39.6px",
+            "margin-bottom": "8px",
+            "margin-top": "22px",
+            "padding-bottom": "0px",
+            "padding-top": "0px"
+          }
+        },
+        {
+          "level": 3,
+          "blockType": "heading3",
+          "textRectCssPx": {
+            "height": 28,
+            "left": 322,
+            "top": 690.4453125,
+            "width": 497
+          },
+          "blockRectCssPx": {
+            "height": 28,
+            "left": 332,
+            "top": 690.4453125,
+            "width": 489
+          },
+          "computedTextStyle": {
+            "color": "rgb(31, 35, 41)",
+            "font-family": "LarkHackSafariFont, LarkEmojiFont, LarkChineseQuote, -apple-system, BlinkMacSystemFont, \"Helvetica Neue\", Tahoma, \"PingFang SC\", \"Microsoft Yahei\", Arial, \"Hiragino Sans GB\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+            "font-size": "20px",
+            "font-weight": "600",
+            "letter-spacing": "-0.4px",
+            "line-height": "28px",
+            "margin-bottom": "0px",
+            "margin-top": "0px",
+            "padding-bottom": "0px",
+            "padding-top": "0px"
+          },
+          "computedBlockStyle": {
+            "color": "rgb(31, 35, 41)",
+            "font-family": "LarkHackSafariFont, LarkEmojiFont, LarkChineseQuote, -apple-system, BlinkMacSystemFont, \"Helvetica Neue\", Tahoma, \"PingFang SC\", \"Microsoft Yahei\", Arial, \"Hiragino Sans GB\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+            "font-size": "20px",
+            "font-weight": "400",
+            "letter-spacing": "0.28px",
+            "line-height": "36px",
+            "margin-bottom": "8px",
+            "margin-top": "20px",
+            "padding-bottom": "0px",
+            "padding-top": "0px"
+          }
+        }
+      ],
+      "metadata": "Font sizing, font weight, and line height in the text style are sampled on the editable text element."
+    },
+    {
+      "id": "UIB-DOM-07",
+      "purpose": "Rendered document outline and anchor navigation",
+      "date": "2026-11-27",
+      "viewportCssPx": {
+        "height": 731,
+        "width": 885
+      },
+      "evidenceMethod": "Observed an actual hover and click in the editor, with geometry captured immediately before and after.",
+      "outline": {
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "widthBeforeHoverCssPx": 4,
+        "widthAfterHoverCssPx": 210.078125,
+        "entryBoxes": [
+          {
+            "level": 1,
+            "leftCssPx": 272,
+            "topCssPx": 142,
+            "itemWidthCssPx": 191.078125,
+            "itemHeightCssPx": 22
+          },
+          {
+            "level": 2,
+            "leftCssPx": 286,
+            "topCssPx": 172,
+            "itemWidthCssPx": 177.078125,
+            "itemHeightCssPx": 22
+          },
+          {
+            "level": 3,
+            "leftCssPx": 300,
+            "topCssPx": 202,
+            "itemWidthCssPx": 163.078125,
+            "itemHeightCssPx": 22
+          }
+        ]
+      },
+      "anchorNavigation": {
+        "testedLevel": 3,
+        "topBeforeClickCssPx": 748.4453125,
+        "topAfterClickCssPx": 302.9453125,
+        "visibleAfterClick": true
+      }
     }
   ],
   "openItems": [
     "Verify the pinned measure-style.js in F12 and complete the environment fields.",
-    "Supply distinct H1–H3, rich-text examples and usable outline and interaction samples.",
+    "Supply remaining rich-text examples and verify the remaining navigation, hover, selection, keyboard focus, and outline interaction cases.",
     "Provide three reviewed, redacted screenshots.",
     "Review and approve reader target values before freezing UI-SPEC.md or tokens.css."
   ],
