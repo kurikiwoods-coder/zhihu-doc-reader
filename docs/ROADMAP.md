@@ -2,7 +2,7 @@
 
 [PDT v1.3](PDT-V1.3.md) · [历史 PDT v1.2](PDT-V1.2.md) · [中文 README](../README_CN.md) · [English README](../README.md)
 
-PDT V1.3 是产品与验收基线。M00-A 与 M00-B 已验收，Gate 01-T 已通过。M01-A／B 已完成基础工程及离线核验，正式产物的 Chrome／Edge 实机测试待执行。真实 Feed 请求为 0。M00-UI 原始取证为 BLOCKED，Gate 01-V 待验收，M02–M05 保持锁定。 [M00 验证](M00-VALIDATION.md) · [M01 验证](M01-VALIDATION.md)
+PDT V1.3 是产品与验收基线。M00-A 与 M00-B 已验收，Gate 01-T 已通过。M01-A／B 已完成基础工程及离线核验。M01-L 受阻于独立 Chrome／Edge 测试配置接入，M02 等待 M01-L 实机通过。真实 Feed 请求为 0。M00-UI 原始取证为 BLOCKED，Gate 01-V 待验收，M03–M05 保持锁定。 [M00 验证](M00-VALIDATION.md) · [M01-L 验证](M01-VALIDATION.md#m01-l-双浏览器实机补证)
 
 ## 模块与版本
 
@@ -26,8 +26,9 @@ PDT V1.3 是产品与验收基线。M00-A 与 M00-B 已验收，Gate 01-T 已通
 | M00-UI | 飞书历史参考与独立产品初始设计基线 | [31 项测量矩阵](design/UI-SPEC-DRAFT.md) · [初始规范](design/UI-SPEC.md) · [初始 Tokens](../src/styles/tokens.css) | 历史取证 BLOCKED；初始设计目标已确认 |
 | M01-A | 初始化工程、锁定依赖，剥离 AI、Wiki 和 Embedding | AT23、AT24、AT26 | PASS（基础工程与构建） |
 | M01-B | 实现路由、生命周期、模式切换和原生页面恢复 | AT02、AT11、AT12、AT19 | PASS（离线），Chrome／Edge 实机 NOT RUN |
-| M02-A | 实现顶部栏、左侧导航、正文、右侧目录和响应式布局 | UI-SPEC 初始基线及独立产品的实际渲染 | LOCKED |
-| M02-B | 提取问答与专栏内容，清洗并渲染富文本 | AT07、AT09、AT10、AT25 | LOCKED |
+| M01-L | 在独立 Chrome 和 Edge 配置核验正式脚本、六类路由及恢复 | 固定产物指纹和双浏览器各 14 项实机用例 | BLOCKED（环境），实机 NOT RUN |
+| M02-A | 实现顶部栏、左侧导航、正文、右侧目录和响应式布局 | UI-SPEC 初始基线及独立产品的实际渲染 | LOCKED（M01-L 通过且无阻断问题后开始） |
+| M02-B | 提取问答与专栏内容，清洗并渲染富文本 | AT07、AT09、AT10、AT25 | LOCKED（M02-A 完成后开始） |
 | M03-A | 接入原生推荐和热榜 | AT03、AT04 | LOCKED |
 | M03-B | 提交关键词并展示搜索结果或空状态 | AT05、AT06，复测知乎原生空结果和搜索降级 | LOCKED |
 | M03-C | 构建 DOM-only 阅读队列，支持上一篇、下一篇和回答切换 | AT08、AT20–AT22，覆盖正文缺失、图片失败、网络异常、动态页面重载、登录及访问限制。按 DOM-only 启用路径记录 Feed 用例适用性 | LOCKED |
@@ -51,8 +52,8 @@ PDT V1.3 是产品与验收基线。M00-A 与 M00-B 已验收，Gate 01-T 已通
 
 | 节点 | 放行条件 | 结果 |
 | --- | --- | --- |
-| Gate 01-T · 技术准入 | 核对锁定上游、MIT、M00-A／B 的证据和负责人授权。 | PASS，允许 M01-A／M01-B |
-| Gate 01-V · 视觉准入 | 按初始规范核对独立阅读器的实际渲染、富文本、响应式和交互。 | 待验收，M02–M05 等待负责人授权 |
+| Gate 01-T · 技术准入 | 核对锁定上游、MIT、M00-A／B 的证据和负责人授权。 | PASS，M01-L 已获授权 |
+| Gate 01-V · 视觉准入 | M02 完成后，按初始规范核对产品实际渲染、富文本、响应式、交互及产品截图。 | 待负责人确认，M03–M05 等待单独授权 |
 | Gate 02 · P0 核心功能 | 核对 M01–M03 对应的 PDT 用例，验证 Chrome 和 Edge 安装及阅读流程，覆盖原生恢复和降级。 | V0.1 内测交付 |
 | Gate 03 · 正式发布 | P0、P1 与 PDT 全部 28 项验收用例完成复测，记录用例适用性和结果。通过 Chrome 和 Edge 实机、视觉对照、安全回归与 GitHub CI。 | V1.0 GitHub Release |
 

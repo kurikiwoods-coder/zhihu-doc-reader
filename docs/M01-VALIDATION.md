@@ -31,8 +31,40 @@
 | M01-A 构建、安全与状态 | PASS | 正式产物语法、构建重复性、六类路由、Metadata、权限及 AI、外部网络、动态代码和凭证入口检查。单元测试 10/10。覆盖 AT23、AT24、AT26 的工程核验。 |
 | M01-B 生命周期与降级 | PASS（离线） | 正式产物测试 16/16。覆盖六路手动打开、指定回答、重复注入、五轮模式切换、退出、焦点恢复调用、SPA 导航、页面卸载、合成访问限制、缺失内容及模态框故障。覆盖 AT02、AT11、AT12、AT19 的离线工程核验。 |
 | M00-B 历史探针 | PASS（离线复跑） | 原 `0.0.2` 探针 21/21，保留 Chrome／Edge 实机及替代验收。[M00-B 证据](M00-VALIDATION.md#m00-b-r-分层取证与验收例外) |
-| 正式产物 Chrome／Edge、Tampermonkey | NOT RUN | Chrome 已连接，独立测试配置未确认，浏览器策略拦截合成页面加载。Edge 本机未连接。仍须在独立配置执行安装、真实页面、滚动和键盘焦点的核验。 |
-| Gate 01-V | 待验收 | 初始目标值已获确认。阅读器自己的响应式、富文本及交互实测待后续授权。原 M00-UI 的取证状态与 0 / 3 张飞书正式截图记录沿用。 |
+| M01-L 正式产物 Chrome／Edge、Tampermonkey | BLOCKED | 已验证候选文件。独立 Chrome 配置无法确认且扩展管理标签不可访问，Edge 未接入。实机用例见下表。 |
+| Gate 01-V | 待验收 | 初始目标值已获确认。M02 完成后以阅读器自身的响应式、富文本及交互取证，提交负责人确认。历史 M00-UI 取证状态与 0 / 3 张飞书正式截图记录沿用。 |
+
+## M01-L 双浏览器实机补证
+
+2026-11-27（UTC+08:00）。验收基线为 `d249bf0d4f03c5d2c91009bfcf3ad00ab9e75f6a`，正式用户脚本版本为 `0.0.1`。从固定提交取得的 GitHub 原始文件与本地重建文件逐字节一致，大小为 20,552 字节，SHA-256 为 `f6172eb5167cdd89db2056e2a9f53549baef4ed7fcbca0041b42744c672e6dee`。重新核验构建、语法、最小权限与网络边界。正式脚本单元及静态检查 10/10，正式脚本 DOM 离线用例 16/16，历史 M00-B 探针离线回归 21/21。 [固定产物](https://github.com/kurikiwoods-coder/zhihu-doc-reader/blob/d249bf0d4f03c5d2c91009bfcf3ad00ab9e75f6a/dist/bundle.user.js) · [基线 CI](https://github.com/kurikiwoods-coder/zhihu-doc-reader/actions/runs/45949184291)
+
+| 环境 | 接入结果 | 完整浏览器版本、Tampermonkey 版本、安装及冲突脚本状态 |
+| --- | --- | --- |
+| 个人独立 Chrome | 检测到 Chrome 连接，未返回配置名称。现有 `chrome://extensions` 标签无法通过连接读取。 | 未核实 |
+| 个人独立 Edge | 无 Edge 连接。 | 未核实 |
+
+当前连接无法确认两套个人独立配置，M01-L 为 **BLOCKED**，当前实机执行数为 **0/14（Chrome）与 0/14（Edge）**。本轮实机 OS、浏览器及 Tampermonkey 版本、登录状态、已安装脚本指纹、生命周期和原生恢复证据待取得。M00-B 探针证据按原用途保留。
+
+| ID | 验收事项 | 核对方式 | Chrome | Edge |
+| --- | --- | --- | --- | --- |
+| L01 | 默认关闭 | 首次打开受支持的原生页面，确认仅有单个阅读入口。 | NOT RUN | NOT RUN |
+| L02 | 首页推荐 | 手动进入，对照已加载推荐内容，退出后核对原页。 | NOT RUN | NOT RUN |
+| L03 | 关注动态 | 手动进入，对照当前会话可访问的动态，退出后核对原页。 | NOT RUN | NOT RUN |
+| L04 | 热榜 | 手动进入，对照已加载热榜内容，退出后核对原页。 | NOT RUN | NOT RUN |
+| L05 | 搜索 | 打开 PDT 搜索样本，有可见结果时手动进出。 | NOT RUN | NOT RUN |
+| L06 | 问答 | 手动进入已加载的问答页，对照预览后退出。 | NOT RUN | NOT RUN |
+| L07 | 专栏 | 手动进入可访问的专栏，对照预览后退出。 | NOT RUN | NOT RUN |
+| L08 | Escape | 阅读页按 Escape 后，确认阅读根节点已移除。 | NOT RUN | NOT RUN |
+| L09 | 键盘焦点恢复 | 通过键盘进入和退出，确认焦点回到阅读入口，可继续导航。 | NOT RUN | NOT RUN |
+| L10 | 原生滚动恢复 | 滚动后打开并退出，记录同页前后的滚动位置及原生锚点。 | NOT RUN | NOT RUN |
+| L11 | 五轮进入与退出 | 连续五轮确认打开时单阅读根节点，关闭后恢复单入口。 | NOT RUN | NOT RUN |
+| L12 | SPA 前进和后退 | 同标签原生切换路由，再前进和后退，核对挂载和原页。 | NOT RUN | NOT RUN |
+| L13 | 刷新及生命周期 | 刷新及往返后核对根节点不重复，核对路由监听及 MutationObserver 的卸载和恢复。 | NOT RUN | NOT RUN |
+| L14 | 原生限制及降级 | 记录登录限制、正文缺失及异常样本，检查原生界面可用。 | NOT RUN | NOT RUN |
+
+恢复测试时使用 PDT §13 六个样本。先在各自独立配置记录操作系统、浏览器与 Tampermonkey 完整版本，校验并安装固定文件，停用历史探针及冲突脚本。按环境分别记录登录状态、实际 URL、输出、根节点及证据。无相应可访问样本的用例保留实测缺口。 [实机样本](PDT-V1.3.md#13-实机测试环境) · [固定文件下载](https://raw.githubusercontent.com/kurikiwoods-coder/zhihu-doc-reader/d249bf0d4f03c5d2c91009bfcf3ad00ab9e75f6a/dist/bundle.user.js)
+
+M01-L 两端通过且无阻断性安全或生命周期问题后，按已授权顺序实施 M02-A 和 M02-B。Gate 01-V 在 M02 完成后提交负责人确认。M03–M05 保持锁定。
 
 ## 复现
 
