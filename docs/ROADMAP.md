@@ -2,7 +2,7 @@
 
 [PDT v1.2](PDT-V1.2.md) · [中文 README](../README_CN.md) · [English README](../README.md)
 
-PDT v1.2 是产品范围与验收基线。当前 **2 / 14 项实施任务**达到验收条件。M00-A 通过，M00-B 的 B01–B14 通过且已正式结项。M00-B-R 补齐 B01 浏览器环境及 B14 分层异常降级证据。负责人已正式确认 V1.0 采用 DOM-only，主动真实 Feed 请求为 0。保留原版探针 20/20 与修订版 21/21 的离线证据。M00-UI-A 已完成公开研究与测量准备，M00-UI-B 待授权和实测。M01–M05 等待 Gate 01 通过。 [M00 验证记录](M00-VALIDATION.md) · [上游锁定](UPSTREAM-LOCK.md)
+PDT v1.2 是产品范围与验收基线。当前 **2 / 14 项实施任务**达到验收条件。M00-A 通过，M00-B 的 B01–B14 通过且已正式结项。M00-B-R 补齐 B01 浏览器环境及 B14 分层异常降级证据。负责人已正式确认 V1.0 采用 DOM-only，主动真实 Feed 请求为 0。保留原版探针 20/20 与修订版 21/21 的离线证据。M00-UI-A 已完成公开研究与测量准备，M00-UI-B 已授权并取得真实编辑器 DOM 读数，正式实测待补证。M01–M05 等待 Gate 01 通过。 [M00 验证记录](M00-VALIDATION.md) · [上游锁定](UPSTREAM-LOCK.md)
 
 ## 模块与版本
 
@@ -23,7 +23,7 @@ PDT v1.2 是产品范围与验收基线。当前 **2 / 14 项实施任务**达�
 | --- | --- | --- | --- |
 | M00-A | 锁定上游源码，审计许可、权限、依赖、网络和构建 | [M00-VALIDATION.md](M00-VALIDATION.md) · [UPSTREAM-LOCK.md](UPSTREAM-LOCK.md) | PASS（审计与构建） |
 | M00-B | 在 Chrome 和 Edge 验证知乎页面、登录状态、数据源及降级 | [执行记录](M00-VALIDATION.md#m00-b-真实页面与数据源验证) · [分层取证与验收例外](M00-VALIDATION.md#m00-b-r-分层取证与验收例外) | PASS（已结项） |
-| M00-UI | A 阶段准备公开参考与测量工具，B 阶段在个人测试文档实测和确认 | [视觉规范草案](design/UI-SPEC-DRAFT.md) · [采集工具及模板](../validation/m00-ui/README.md)。B 阶段提交三张真实截图、`docs/design/UI-SPEC.md` 与 `src/styles/tokens.css` | A 已完成，B 待授权和实测 |
+| M00-UI | A 阶段准备公开参考与测量工具，B 阶段在个人测试文档实测和确认 | [视觉规范草案](design/UI-SPEC-DRAFT.md) · [采集工具及模板](../validation/m00-ui/README.md)。B 阶段提交三张真实截图、`docs/design/UI-SPEC.md` 与 `src/styles/tokens.css` | A 已完成，B 已取得 DOM 读数，待 F12 取证和目标值确认 |
 | M01-A | 初始化工程、锁定依赖，剥离 AI、Wiki 和 Embedding | AT23、AT24、AT26 | LOCKED |
 | M01-B | 实现路由、生命周期、模式切换和原生页面恢复 | AT02、AT11、AT12、AT19 | LOCKED |
 | M02-A | 实现顶部栏、左侧导航、正文、右侧目录和响应式布局 | 冻结后的 UI-SPEC 视觉对照 | LOCKED |
@@ -75,7 +75,7 @@ PDT v1.2 是产品范围与验收基线。当前 **2 / 14 项实施任务**达�
 3. 查明上游构建入口和 Node.js 要求，审阅构建文件后在隔离目录运行 `node build.js`，记录环境、结果和 `dist/bundle.user.js` 的生成情况。
 4. 在 `docs/M00-VALIDATION.md` 登记可复用模块、依赖审计结果、证据和未解决项。审计 DOMPurify 与 Playwright，Lucide 按需评估，Semi Design 仅作为视觉参考。
 
-M00-UI-B 使用仅含合成内容的个人测试文档。三张真实截图分别记录文档布局、排版和交互，测量覆盖默认、较宽和全宽。以真实编辑器的计算样式、截图和交互观察确认产品视觉参数。 [采集步骤](../validation/m00-ui/README.md)
+M00-UI-B 使用仅含合成内容的个人测试文档。三张真实截图分别记录文档布局、排版和交互，测量覆盖默认、较宽和全宽。以真实编辑器的计算样式、截图和交互观察确认产品视觉参数。 [采集步骤](../validation/m00-ui/README.md) · [M00-UI-B 实测记录](M00-VALIDATION.md#m00-ui-b-真实编辑器样式初测)
 
 ## 分支与提交
 

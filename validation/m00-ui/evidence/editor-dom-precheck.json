@@ -1,0 +1,324 @@
+{
+  "schemaVersion": 1,
+  "project": "Zhihu Doc Reader",
+  "milestone": "M00-UI-B",
+  "status": "DOM_PRECHECK",
+  "date": "2026-11-27",
+  "timeZone": "UTC+08:00",
+  "method": "Connected local Google Chrome. Read-only getComputedStyle and getBoundingClientRect against the authorized editor page. No F12 script run in this session.",
+  "editorLocale": "zh",
+  "environment": {
+    "browser": "Google Chrome",
+    "browserFullVersion": null,
+    "operatingSystemAndVersion": null,
+    "browserZoomPercent": null,
+    "systemDisplayScalePercent": null,
+    "appearance": "Light page surfaces observed"
+  },
+  "captures": [
+    {
+      "id": "UIB-DOM-01",
+      "mode": "default",
+      "viewportCssPx": {
+        "height": 731,
+        "width": 1440
+      },
+      "devicePixelRatio": 2,
+      "titleAndBodyContainerRectCssPx": {
+        "height": 429.25,
+        "left": 460,
+        "top": 64,
+        "width": 820
+      },
+      "documentTitleRectCssPx": {
+        "height": 55.25,
+        "left": 460,
+        "top": 112,
+        "width": 820
+      },
+      "firstEditableTextBlockRectCssPx": {
+        "height": 104,
+        "left": 448,
+        "top": 235.25,
+        "width": 832
+      },
+      "titleStyle": {
+        "fontSize": "34px",
+        "fontWeight": "600",
+        "lineHeight": "55.25px"
+      },
+      "bodyStyle": {
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "lineHeight": "26px"
+      }
+    },
+    {
+      "id": "UIB-DOM-02",
+      "mode": "wide",
+      "viewportCssPx": {
+        "height": 731,
+        "width": 1440
+      },
+      "devicePixelRatio": 2,
+      "titleAndBodyContainerRectCssPx": {
+        "height": 351.25,
+        "left": 366,
+        "top": 64,
+        "width": 1008
+      },
+      "documentTitleRectCssPx": {
+        "height": 55.25,
+        "left": 366,
+        "top": 112,
+        "width": 1008
+      },
+      "firstEditableTextBlockRectCssPx": {
+        "height": 78,
+        "left": 354,
+        "top": 235.25,
+        "width": 1020
+      },
+      "titleStyle": {
+        "fontSize": "34px",
+        "fontWeight": "600",
+        "lineHeight": "55.25px"
+      },
+      "bodyStyle": {
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "lineHeight": "26px"
+      }
+    },
+    {
+      "id": "UIB-DOM-03",
+      "mode": "full",
+      "viewportCssPx": {
+        "height": 731,
+        "width": 1440
+      },
+      "devicePixelRatio": 2,
+      "titleAndBodyContainerRectCssPx": {
+        "height": 351.25,
+        "left": 366,
+        "top": 64,
+        "width": 1008
+      },
+      "documentTitleRectCssPx": {
+        "height": 55.25,
+        "left": 366,
+        "top": 112,
+        "width": 1008
+      },
+      "firstEditableTextBlockRectCssPx": {
+        "height": 78,
+        "left": 354,
+        "top": 235.25,
+        "width": 1020
+      },
+      "titleStyle": {
+        "fontSize": "34px",
+        "fontWeight": "600",
+        "lineHeight": "55.25px"
+      },
+      "bodyStyle": {
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "lineHeight": "26px"
+      }
+    },
+    {
+      "id": "UIB-DOM-04",
+      "mode": null,
+      "note": "Second observed viewport. Width mode was not independently rechecked for this viewport.",
+      "viewportCssPx": {
+        "height": 731,
+        "width": 885
+      },
+      "devicePixelRatio": 2,
+      "measurements": [
+        {
+          "role": "title-and-body-container",
+          "rectCssPx": {
+            "height": 533.25,
+            "left": 366,
+            "top": 64,
+            "width": 438
+          },
+          "computedStyle": {
+            "display": "block",
+            "position": "static",
+            "box-sizing": "border-box",
+            "width": "438px",
+            "max-width": "none",
+            "padding-top": "0px",
+            "padding-left": "0px",
+            "padding-right": "0px",
+            "padding-bottom": "0px",
+            "margin-top": "0px",
+            "margin-bottom": "0px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "color": "rgb(31, 35, 41)"
+          }
+        },
+        {
+          "role": "document-title",
+          "rectCssPx": {
+            "height": 55.25,
+            "left": 366,
+            "top": 112,
+            "width": 438
+          },
+          "computedStyle": {
+            "font-family": "LarkHackSafariFont, LarkEmojiFont, LarkChineseQuote, -apple-system, BlinkMacSystemFont, \"Helvetica Neue\", Tahoma, \"PingFang SC\", \"Microsoft Yahei\", Arial, \"Hiragino Sans GB\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+            "font-size": "34px",
+            "font-weight": "600",
+            "line-height": "55.25px",
+            "letter-spacing": "0.28px",
+            "color": "rgb(31, 35, 41)"
+          }
+        },
+        {
+          "role": "editable-text-block-1",
+          "rectCssPx": {
+            "height": 156,
+            "left": 354,
+            "top": 235.25,
+            "width": 450
+          },
+          "computedStyle": {
+            "font-family": "LarkHackSafariFont, LarkEmojiFont, LarkChineseQuote, -apple-system, BlinkMacSystemFont, \"Helvetica Neue\", Tahoma, \"PingFang SC\", \"Microsoft Yahei\", Arial, \"Hiragino Sans GB\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+            "font-size": "16px",
+            "font-weight": "400",
+            "line-height": "26px",
+            "letter-spacing": "0.28px",
+            "color": "rgb(31, 35, 41)"
+          }
+        },
+        {
+          "role": "editable-text-block-2",
+          "rectCssPx": {
+            "height": 78,
+            "left": 354,
+            "top": 399.25,
+            "width": 450
+          },
+          "computedStyle": {
+            "font-family": "LarkHackSafariFont, LarkEmojiFont, LarkChineseQuote, -apple-system, BlinkMacSystemFont, \"Helvetica Neue\", Tahoma, \"PingFang SC\", \"Microsoft Yahei\", Arial, \"Hiragino Sans GB\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+            "font-size": "16px",
+            "font-weight": "400",
+            "line-height": "26px",
+            "letter-spacing": "0.28px",
+            "color": "rgb(31, 35, 41)"
+          }
+        },
+        {
+          "role": "editable-text-block-3",
+          "rectCssPx": {
+            "height": 26,
+            "left": 354,
+            "top": 485.25,
+            "width": 450
+          },
+          "computedStyle": {
+            "font-family": "LarkHackSafariFont, LarkEmojiFont, LarkChineseQuote, -apple-system, BlinkMacSystemFont, \"Helvetica Neue\", Tahoma, \"PingFang SC\", \"Microsoft Yahei\", Arial, \"Hiragino Sans GB\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+            "font-size": "16px",
+            "font-weight": "400",
+            "line-height": "26px",
+            "letter-spacing": "0.28px",
+            "color": "rgb(31, 35, 41)"
+          }
+        },
+        {
+          "role": "editable-text-block-4",
+          "rectCssPx": {
+            "height": 78,
+            "left": 354,
+            "top": 519.25,
+            "width": 450
+          },
+          "computedStyle": {
+            "font-family": "LarkHackSafariFont, LarkEmojiFont, LarkChineseQuote, -apple-system, BlinkMacSystemFont, \"Helvetica Neue\", Tahoma, \"PingFang SC\", \"Microsoft Yahei\", Arial, \"Hiragino Sans GB\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+            "font-size": "16px",
+            "font-weight": "400",
+            "line-height": "26px",
+            "letter-spacing": "0.28px",
+            "color": "rgb(31, 35, 41)"
+          }
+        },
+        {
+          "role": "page-surface",
+          "rectCssPx": {
+            "height": 731,
+            "left": 0,
+            "top": 0,
+            "width": 885
+          },
+          "computedStyle": {
+            "background-color": "rgb(255, 255, 255)",
+            "color": "rgb(31, 35, 41)"
+          }
+        },
+        {
+          "role": "document-top-bar",
+          "rectCssPx": {
+            "height": 64,
+            "left": 300,
+            "top": 0,
+            "width": 585
+          },
+          "computedStyle": {
+            "background-color": "rgb(255, 255, 255)",
+            "border-bottom-color": "rgb(222, 224, 227)",
+            "border-bottom-style": "solid",
+            "border-bottom-width": "1px",
+            "border-right-color": "rgb(31, 35, 41)",
+            "border-right-width": "0px",
+            "border-top-left-radius": "0px",
+            "box-shadow": "none",
+            "color": "rgb(31, 35, 41)",
+            "padding-bottom": "0px",
+            "padding-left": "16px",
+            "padding-right": "0px",
+            "padding-top": "0px"
+          }
+        },
+        {
+          "role": "left-wiki-navigation-outer",
+          "rectCssPx": {
+            "height": 731,
+            "left": 0,
+            "top": 0,
+            "width": 300
+          },
+          "computedStyle": {
+            "background-color": "rgb(245, 246, 247)",
+            "border-bottom-color": "rgb(31, 35, 41)",
+            "border-bottom-style": "none",
+            "border-bottom-width": "0px",
+            "border-right-color": "rgba(31, 35, 41, 0.04)",
+            "border-right-width": "1px",
+            "border-top-left-radius": "0px",
+            "box-shadow": "none",
+            "color": "rgb(31, 35, 41)",
+            "gap": "normal",
+            "margin-bottom": "0px",
+            "margin-top": "0px",
+            "padding-bottom": "0px",
+            "padding-left": "0px",
+            "padding-right": "0px",
+            "padding-top": "0px"
+          }
+        }
+      ],
+      "adjacentTextBlockGapCssPx": 8
+    }
+  ],
+  "openItems": [
+    "Verify the pinned measure-style.js in F12 and complete the environment fields.",
+    "Supply distinct H1–H3, rich-text examples and usable outline and interaction samples.",
+    "Provide three reviewed, redacted screenshots.",
+    "Review and approve reader target values before freezing UI-SPEC.md or tokens.css."
+  ],
+  "approvedTargetValues": null
+}
