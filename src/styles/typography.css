@@ -10,13 +10,19 @@
   font-size: var(--zdr-h2-size);
   font-weight: var(--zdr-heading-weight);
   line-height: var(--zdr-h2-line-height);
+  margin-block: var(--zdr-heading-gap-after);
+}
+
+.zdr-reader p {
+  margin-block: var(--zdr-paragraph-gap);
 }
 
 .zdr-reader button {
   font: inherit;
 }
 
-.zdr-reader [role="status"] {
+.zdr-reader [role="status"],
+.zdr-reader .zdr-byline {
   color: var(--zdr-text-secondary);
   font-size: var(--zdr-caption-font-size);
   line-height: var(--zdr-caption-line-height);

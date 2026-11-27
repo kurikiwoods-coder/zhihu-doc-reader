@@ -7,6 +7,9 @@ const scripts = [
   'src/adapters/route.js',
   'src/adapters/dom.js',
   'src/core/state.js',
+  'src/renderer/reader-shell.js',
+  'src/core/lifecycle.js',
+  'src/core/start.js',
 ];
 
 const stylesheets = [

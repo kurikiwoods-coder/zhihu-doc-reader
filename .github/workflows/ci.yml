@@ -1,0 +1,34 @@
+name: Userscript CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.22.3'
+      - name: Build and check the checked-in userscript
+        run: |
+          node build.js
+          node --check dist/bundle.user.js
+          git diff --exit-code -- dist/bundle.user.js
+          sha256sum dist/bundle.user.js
+      - name: Run routes, state and safety checks
+        run: npm test
+      - name: Test the product and the historical M00-B probe offline
+        shell: bash
+        run: |
+          worker="$RUNNER_TEMP/linkedom-worker.mjs"
+          source_url="$(node -p 'require("./tests/browser-fixture.lock.json").source')"
+          curl --fail --silent --show-error --location --retry 2 "$source_url" --output "$worker"
+          node tests/dom.test.mjs "$worker"
+          node validation/m00-b/offline.test.mjs "$worker"

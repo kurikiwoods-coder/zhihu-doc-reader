@@ -2,7 +2,7 @@
 
 [PDT v1.3](PDT-V1.3.md) · [历史 PDT v1.2](PDT-V1.2.md) · [中文 README](../README_CN.md) · [English README](../README.md)
 
-PDT V1.3 是产品与验收基线。当前 **2 / 14 项实施任务**达到验收条件。M00-A 与 M00-B 已通过；现有探针与实机证据沿用，真实 Feed 请求为 0。Gate 01-T 已通过，负责人授权 M01-A／M01-B。独立阅读器的视觉目标值已确认作为初始基线。M00-UI 原始取证为 BLOCKED，Gate 01-V 待验收，M02–M05 保持锁定。 [M00 验证记录](M00-VALIDATION.md) · [上游锁定](UPSTREAM-LOCK.md)
+PDT V1.3 是产品与验收基线。M00-A 与 M00-B 已验收，Gate 01-T 已通过。M01-A／B 已完成基础工程及离线核验，正式产物的 Chrome／Edge 实机测试待执行。真实 Feed 请求为 0。M00-UI 原始取证为 BLOCKED，Gate 01-V 待验收，M02–M05 保持锁定。 [M00 验证](M00-VALIDATION.md) · [M01 验证](M01-VALIDATION.md)
 
 ## 模块与版本
 
@@ -24,8 +24,8 @@ PDT V1.3 是产品与验收基线。当前 **2 / 14 项实施任务**达到验�
 | M00-A | 锁定上游源码，审计许可、权限、依赖、网络和构建 | [M00-VALIDATION.md](M00-VALIDATION.md) · [UPSTREAM-LOCK.md](UPSTREAM-LOCK.md) | PASS（审计与构建） |
 | M00-B | 在 Chrome 和 Edge 验证知乎页面、登录状态、数据源及降级 | [执行记录](M00-VALIDATION.md#m00-b-真实页面与数据源验证) · [分层取证与验收例外](M00-VALIDATION.md#m00-b-r-分层取证与验收例外) | PASS（已结项） |
 | M00-UI | 飞书历史参考与独立产品初始设计基线 | [31 项测量矩阵](design/UI-SPEC-DRAFT.md) · [初始规范](design/UI-SPEC.md) · [初始 Tokens](../src/styles/tokens.css) | 历史取证 BLOCKED；初始设计目标已确认 |
-| M01-A | 初始化工程、锁定依赖，剥离 AI、Wiki 和 Embedding | AT23、AT24、AT26 | READY（已授权） |
-| M01-B | 实现路由、生命周期、模式切换和原生页面恢复 | AT02、AT11、AT12、AT19 | READY（已授权） |
+| M01-A | 初始化工程、锁定依赖，剥离 AI、Wiki 和 Embedding | AT23、AT24、AT26 | PASS（基础工程与构建） |
+| M01-B | 实现路由、生命周期、模式切换和原生页面恢复 | AT02、AT11、AT12、AT19 | PASS（离线），Chrome／Edge 实机 NOT RUN |
 | M02-A | 实现顶部栏、左侧导航、正文、右侧目录和响应式布局 | UI-SPEC 初始基线及独立产品的实际渲染 | LOCKED |
 | M02-B | 提取问答与专栏内容，清洗并渲染富文本 | AT07、AT09、AT10、AT25 | LOCKED |
 | M03-A | 接入原生推荐和热榜 | AT03、AT04 | LOCKED |
@@ -41,7 +41,7 @@ PDT V1.3 是产品与验收基线。当前 **2 / 14 项实施任务**达到验�
 | 模块 | 主要路径 |
 | --- | --- |
 | M00 | `docs/M00-VALIDATION.md`、`docs/design/UI-SPEC.md`、`docs/design/references/`、`src/styles/tokens.css` |
-| M01 | `src/core/` 的控制器、路由和异常处理，以及 `src/adapters/content-adapter.js` |
+| M01 | `src/core/` 的状态与生命周期，`src/adapters/` 的路由与 DOM，`src/renderer/reader-shell.js` 的验证界面，`src/styles/` 的视觉分层 |
 | M02 | `src/renderer/` 的文档、侧栏、目录和工具栏，以及问答、专栏适配器和 `src/styles/` |
 | M03 | `src/adapters/` 的热榜、推荐和搜索适配器，以及 `src/navigation/reading-queue.js`、`src/navigation/navigation-manager.js` |
 | M04 | `src/storage/`、`src/settings/`、`src/adapters/follow-adapter.js` |

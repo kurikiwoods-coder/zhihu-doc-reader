@@ -4,7 +4,7 @@
 
 Zhihu Doc Reader is a Tampermonkey userscript planned for Chrome and Microsoft Edge. It presents Zhihu answers and articles in a document-style reading view. Readers discover content through Zhihu's own pages and can save bookmarks and reading history in their browser.
 
-**Project status.** Gate 01-T is cleared for the M01 foundation. Gate 01-V awaits visual acceptance of the reader itself. M02–M05 await separate authorization. [Validation (Chinese)](docs/M00-VALIDATION.md)
+**Project status.** Gate 01-T passed. M01 provides a minimal reader with manual entry and exit on six supported route types. Offline checks passed. Chrome and Edge installation tests remain pending. Gate 01-V and M02–M05 await review. [M01 validation (Chinese)](docs/M01-VALIDATION.md)
 
 ## What readers can do
 
@@ -28,7 +28,7 @@ flowchart TD
     Reader --> Native
 ```
 
-The script reads content already loaded by Zhihu and respects the permissions of the current session. After M00 verification, question pages can use the upstream Answer Feed adapter to load more answers on demand. If that adapter is unavailable, the reader uses the answers already rendered on the page. The content adapter normalizes items and removes duplicates before adding them to the reading queue of up to 100 items.
+The script reads content that Zhihu has already rendered for the current session. Readers use Zhihu's native controls to load more answers. The planned reading queue normalizes and deduplicates up to 100 items from that rendered content.
 
 | Layer | Planned implementation |
 | --- | --- |
@@ -38,7 +38,9 @@ The script reads content already loaded by Zhihu and respects the permissions of
 | Storage | Tampermonkey GM Storage for bookmarks, history, and preferences |
 | Build and verification | Node.js bundles a single `.user.js` file. Playwright supports browser verification. |
 
-Upstream builds with `node build.js` and produces `dist/bundle.user.js`. M00-A checks the build and reuse plan for this project. DOMPurify and Lucide are candidates for review during M00. [Upstream v5.1.6](https://github.com/connectedGraph/zhihu-immersive-reader/tree/v5.1.6) · [Upstream MIT license](https://github.com/connectedGraph/zhihu-immersive-reader/blob/v5.1.6/LICENSE)
+## Build the M01 development snapshot
+
+Run `node build.js` with Node.js 22 or newer to generate [dist/bundle.user.js](dist/bundle.user.js). Run `npm test` for the unit and static safety checks. The M01 snapshot includes the upstream MIT notice. [License](LICENSE) · [Upstream lock (Chinese)](docs/UPSTREAM-LOCK.md)
 
 ## Development roadmap
 
@@ -51,6 +53,6 @@ Upstream builds with `node build.js` and produces `dist/bundle.user.js`. M00-A c
 | M04 | Add bookmarks, reading history, preferences, keyboard shortcuts, and the following feed for the V0.2 feature-complete candidate. |
 | M05 | Verify the 28 acceptance cases, UI reference, Chrome and Edge compatibility, and CI. Gate 03 leads to the V1.0 release as a single `.user.js` file. |
 
-`main` holds reviewed documentation and validated milestones. Ongoing module work goes into `dev`. The roadmap tracks 14 implementation tasks and three acceptance gates. [Tasks, acceptance criteria, and M00-A checklist (Chinese)](docs/ROADMAP.md)
+`main` holds reviewed documentation and validated milestones. Ongoing module work goes into `dev`. [Tasks and acceptance criteria (Chinese)](docs/ROADMAP.md)
 
-M00-UI uses Feishu Docs as a reference for reading layout. Record computed styles, screenshots, and interaction observations alongside the browser, viewport, and date. Measure default, wide, and full-width layouts separately. The proposed 800 px reading width is pending verification.
+The owner-approved design starts with a 768 px default reading width. Design tokens supply values to separate layout, typography, and component stylesheets. The reader's own rendering and interaction provide evidence for Gate 01-V. [Initial visual specification (Chinese)](docs/design/UI-SPEC.md)

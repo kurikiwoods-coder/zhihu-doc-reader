@@ -13,6 +13,10 @@
   cursor: pointer;
 }
 
+.zdr-reader.zdr-verification {
+  box-shadow: var(--zdr-shadow-overlay);
+}
+
 .zdr-reader button:hover {
   background: var(--zdr-hover);
 }
