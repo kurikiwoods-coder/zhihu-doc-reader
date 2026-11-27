@@ -114,3 +114,7 @@ node validation/m00-b/offline.test.mjs /path/to/linkedom-worker.mjs
 ```
 
 两个离线测试先校验本地 LinkeDOM worker 的 SHA-256，再加载它。源地址与哈希见 [测试依赖锁](../tests/browser-fixture.lock.json)。CI 单独下载该固定开发依赖，依次执行构建、语法检查、正式产物测试和历史探针回归。 [Userscript CI](../.github/workflows/ci.yml)
+
+## 2026-11-27 交接更新
+
+Chrome 和 Edge 的独立测试配置均已启用 0.0.3，已核对 Tampermonkey 编辑器源码 SHA-256。每端只有一个启用的知乎匹配脚本，Edge 旧条目已停用。Chrome 首页主文档为 HTTP 200，页面要求登录。Edge 专栏主文档为 HTTP 403。两端在首项访问限制处停止。此前已接受的 Edge 0.0.2 人工用例继续有效。[安装核验](evidence/m02-l/0.0.3-installation.json) · [实站首轮记录](evidence/m02-l/0.0.3-live-first-pass.json)

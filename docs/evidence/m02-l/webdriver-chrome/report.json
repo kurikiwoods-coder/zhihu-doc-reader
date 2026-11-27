@@ -1,0 +1,188 @@
+{
+  "evidence": "synthetic browser rendering, local file fixture and simulated route; no live Zhihu or Tampermonkey",
+  "browser": {
+    "name": "chrome",
+    "version": "157.0.8103.52",
+    "platform": "windows"
+  },
+  "systemRelease": "10.0.26200",
+  "bundleSha256": "dabe299440412d6591c0a5555775711f985139fd4d034e33a1b9fa362a382693",
+  "scenarios": [
+    {
+      "width": 1440,
+      "geometry": {
+        "available": 938,
+        "bodyFits": true,
+        "bodyLineHeight": "28.9px",
+        "bodySize": "17px",
+        "bodyWidth": 1001,
+        "canvasWidth": 600,
+        "codeOverflowsLocally": true,
+        "column": 768,
+        "fontColor": "rgb(31, 41, 55)",
+        "fullBody": true,
+        "nativeClientWidth": 1425,
+        "nav": 224,
+        "outline": 200,
+        "titleFits": true,
+        "titleSize": "32px",
+        "topbar": 56,
+        "unsupportedMarkup": false,
+        "viewport": 1440,
+        "workspaceWidth": 1425
+      },
+      "wide": 938,
+      "full": 938,
+      "anchor": "1",
+      "nativeScroll": 400,
+      "restore": "PASS"
+    },
+    {
+      "width": 1200,
+      "geometry": {
+        "available": 698,
+        "bodyFits": true,
+        "bodyLineHeight": "28.9px",
+        "bodySize": "17px",
+        "bodyWidth": 761,
+        "canvasWidth": 600,
+        "codeOverflowsLocally": true,
+        "column": 698,
+        "fontColor": "rgb(31, 41, 55)",
+        "fullBody": true,
+        "nativeClientWidth": 1185,
+        "nav": 224,
+        "outline": 200,
+        "titleFits": true,
+        "titleSize": "32px",
+        "topbar": 56,
+        "unsupportedMarkup": false,
+        "viewport": 1200,
+        "workspaceWidth": 1185
+      },
+      "wide": 698,
+      "full": 698,
+      "anchor": "1",
+      "nativeScroll": 400,
+      "restore": "PASS"
+    },
+    {
+      "width": 900,
+      "geometry": {
+        "available": 598,
+        "bodyFits": true,
+        "bodyLineHeight": "28.9px",
+        "bodySize": "17px",
+        "bodyWidth": 661,
+        "canvasWidth": 600,
+        "codeOverflowsLocally": true,
+        "column": 598,
+        "fontColor": "rgb(31, 41, 55)",
+        "fullBody": true,
+        "nativeClientWidth": 885,
+        "nav": 224,
+        "outline": 0,
+        "titleFits": true,
+        "titleSize": "32px",
+        "topbar": 56,
+        "unsupportedMarkup": false,
+        "viewport": 900,
+        "workspaceWidth": 885
+      },
+      "wide": 598,
+      "full": 598,
+      "anchor": "1",
+      "nativeScroll": 400,
+      "restore": "PASS"
+    },
+    {
+      "width": 885,
+      "geometry": {
+        "available": 823,
+        "bodyFits": true,
+        "bodyLineHeight": "28.9px",
+        "bodySize": "17px",
+        "bodyWidth": 870,
+        "canvasWidth": 600,
+        "codeOverflowsLocally": true,
+        "column": 768,
+        "fontColor": "rgb(31, 41, 55)",
+        "fullBody": true,
+        "nativeClientWidth": 870,
+        "nav": 0,
+        "outline": 0,
+        "titleFits": true,
+        "titleSize": "32px",
+        "topbar": 56,
+        "unsupportedMarkup": false,
+        "viewport": 885,
+        "workspaceWidth": 870
+      },
+      "wide": 823,
+      "full": 823,
+      "anchor": "1",
+      "nativeScroll": 400,
+      "restore": "PASS"
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "reader-layout.png",
+      "viewport": [
+        1440,
+        764
+      ],
+      "dimensions": [
+        1440,
+        764
+      ],
+      "mode": "default light",
+      "bytes": 96521,
+      "sha256": "71d5e00dfb7fc78915fdf254238d1ddfc4dda1089e9b0afb759843a8fa4cc810"
+    },
+    {
+      "file": "reader-typography.png",
+      "viewport": [
+        1200,
+        764
+      ],
+      "dimensions": [
+        1200,
+        764
+      ],
+      "mode": "light, section anchor",
+      "bytes": 70813,
+      "sha256": "877dfe2c88f6572c7a806b8d09dd107cda4c359fd98a4a92b8e4e9fbb3b22454"
+    },
+    {
+      "file": "reader-interaction.png",
+      "viewport": [
+        900,
+        764
+      ],
+      "dimensions": [
+        900,
+        764
+      ],
+      "mode": "dark, active section and outline overlay",
+      "bytes": 66690,
+      "sha256": "3e94fe43f24f47e3c9e7cfa8fdba70bf04a5719e382b90fdeca40e81e8ffe6d7"
+    }
+  ],
+  "launcher": {
+    "pointerWithNativeWidget": "PASS",
+    "widths": [
+      600,
+      885,
+      900,
+      1200,
+      1440
+    ]
+  },
+  "lifecycle": {
+    "fiveCycles": "PASS",
+    "escapeAndFocus": "PASS",
+    "syntheticRouteAndBack": "PASS",
+    "restrictedFallback": "PASS"
+  }
+}

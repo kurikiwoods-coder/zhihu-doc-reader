@@ -1,0 +1,16 @@
+{
+  "name": "edge",
+  "version": "157.0.4341.60",
+  "buildSha256": "dabe299440412d6591c0a5555775711f985139fd4d034e33a1b9fa362a382693",
+  "baselineOverlap": true,
+  "launcherAndNativeWidget": "PASS",
+  "focus": "PASS",
+  "synthetic": true,
+  "widths": [
+    420,
+    885,
+    900,
+    1200,
+    1440
+  ]
+}

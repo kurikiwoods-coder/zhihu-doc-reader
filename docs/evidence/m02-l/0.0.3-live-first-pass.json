@@ -1,0 +1,24 @@
+[
+  {
+    "name": "edge",
+    "version": "157.0.4341.60",
+    "cases": [
+      {
+        "kind": "article",
+        "http": 403,
+        "block": "访问限制"
+      }
+    ]
+  },
+  {
+    "name": "chrome",
+    "version": "157.0.8103.52",
+    "cases": [
+      {
+        "kind": "home",
+        "http": 200,
+        "block": "登录"
+      }
+    ]
+  }
+]

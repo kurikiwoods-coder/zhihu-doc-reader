@@ -1,0 +1,18 @@
+[
+  {
+    "browser": "chrome",
+    "browserVersion": "157.0.8103.52",
+    "productVersion": "0.0.3",
+    "sha256": "dabe299440412d6591c0a5555775711f985139fd4d034e33a1b9fa362a382693",
+    "enabledMatchingScripts": 1,
+    "oldVersionDisabled": 0
+  },
+  {
+    "browser": "edge",
+    "browserVersion": "157.0.4341.60",
+    "productVersion": "0.0.3",
+    "sha256": "dabe299440412d6591c0a5555775711f985139fd4d034e33a1b9fa362a382693",
+    "enabledMatchingScripts": 1,
+    "oldVersionDisabled": 1
+  }
+]

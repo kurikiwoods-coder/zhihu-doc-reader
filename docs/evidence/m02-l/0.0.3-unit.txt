@@ -1,0 +1,18 @@
+✔ route recognizes home (1.299ms)
+✔ route recognizes follow (0.2869ms)
+✔ route recognizes hot (0.1692ms)
+✔ route recognizes search (0.1945ms)
+✔ route recognizes question (0.2549ms)
+✔ route recognizes article (0.2055ms)
+✔ exact origins, HTTPS, canonical question and article paths, and route keys (0.626ms)
+✔ reader state starts closed, prevents double entry and resets across routes (0.3153ms)
+✔ build is deterministic, self-contained, syntactically valid, and matches the checked-in bundle (649.393ms)
+✔ production metadata and static security boundaries (11.3347ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1291.9983

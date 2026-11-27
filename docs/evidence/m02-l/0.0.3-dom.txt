@@ -1,0 +1,32 @@
+✔ home reads a rendered record and enters only on demand (18.8839ms)
+✔ follow reads a rendered record and enters only on demand (5.5517ms)
+✔ hot reads a rendered record and enters only on demand (7.8586ms)
+✔ search reads a rendered record and enters only on demand (3.9853ms)
+✔ question reads a rendered record and enters only on demand (9.4868ms)
+✔ article reads a rendered record and enters only on demand (5.1887ms)
+✔ a direct-answer route uses exactly the rendered answer named in its URL (7.8913ms)
+✔ duplicate injection and five enter/exit cycles keep one root and restore native DOM and focus (18.2239ms)
+✔ modal cancel and close each clear the reader (5.6822ms)
+✔ navigation to a new route closes the panel, skips unsupported pages and re-enters closed (5.5224ms)
+✔ observer fallback catches DOM-driven SPA updates and body replacement (8.8498ms)
+✔ pagehide clears observers, listeners and roots; a restored page starts closed (4.5605ms)
+✔ no content, missing body, changed selectors, and access limits preserve the native document (10.4732ms)
+✔ a newly visible native access restriction closes the reader (4.6795ms)
+✔ modal failure cleans up and leaves native controls usable (2.832ms)
+✔ unsupported routes and framed documents are left untouched (4.3309ms)
+✔ M02 shows the complete loaded article, byline, published date and original link (16.1388ms)
+✔ M02 full question body does not reuse the 240-character list excerpt (9.2343ms)
+✔ M02 keeps numbering, lists, quote, code and uses hardening on safe links (5.6008ms)
+✔ M02 discards active markup, unsafe attributes and hidden source content (8.5151ms)
+✔ M02 draws only an already decoded image and preserves its caption (4.3892ms)
+✔ M02 avoids presenting clipped, empty and restricted bodies as full text (8.9573ms)
+✔ M02 outline uses real headings and focuses the selected section (7.7438ms)
+✔ M02 panels on narrow viewports are exclusive and view settings are scoped to the modal (13.6697ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 225.0799

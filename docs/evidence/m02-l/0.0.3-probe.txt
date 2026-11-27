@@ -1,0 +1,29 @@
+✔ scope, storage-only grants, and zero network or body-markup execution paths (2.1394ms)
+✔ home synthetic DOM, title, type and canonical URL (10.7508ms)
+✔ follow synthetic DOM, title, type and canonical URL (4.0908ms)
+✔ hot synthetic DOM, title, type and canonical URL (3.9389ms)
+✔ search synthetic DOM, title, type and canonical URL (4.6815ms)
+✔ question synthetic DOM, title, type and canonical URL (4.7702ms)
+✔ article synthetic DOM, title, type and canonical URL (3.6154ms)
+✔ follow reads Topstory activity cards and ignores other content in the follow section (5.6968ms)
+✔ question reads full visible text, reports images, and switches answers without replacing native DOM (7.1955ms)
+✔ login uses the expected fallback and leaves the native DOM intact (2.5869ms)
+✔ empty uses the expected fallback and leaves the native DOM intact (2.7505ms)
+✔ missing uses the expected fallback and leaves the native DOM intact (2.6524ms)
+✔ dom-changed uses the expected fallback and leaves the native DOM intact (2.2344ms)
+✔ restriction uses the expected fallback and leaves the native DOM intact (2.3072ms)
+✔ a visible sign-in dialog suppresses a populated fixture on the same route (5.3519ms)
+✔ duplicate installation, dynamic route and re-mount retain a single panel (6.156ms)
+✔ a newly rendered answer appears after a manual rescan (4.869ms)
+✔ bounded queue contains unique visible records up to the PDT limit (13.1895ms)
+✔ GM stub round trip stores only the synthetic marker and permits deleting it (4.5866ms)
+✔ absent or failing GM does not change account state or the original page (5.5007ms)
+✔ unsupported login, security and non-content paths mount no validation panel (6.4195ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 115.6202
