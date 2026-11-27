@@ -1,0 +1,1597 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M00-UI-B-R",
+  "baselineCommit": "a1edfd4161923c05578e8fce7f24732799975152",
+  "date": "2026-11-27",
+  "timeZone": "UTC+08:00",
+  "evidenceFile": "editor-dom-precheck.json",
+  "acceptedEvidenceIds": [
+    "UIB-DOM-01",
+    "UIB-DOM-02",
+    "UIB-DOM-03",
+    "UIB-DOM-04",
+    "UIB-DOM-05",
+    "UIB-DOM-06",
+    "UIB-DOM-07"
+  ],
+  "freezeStatus": "CANDIDATE",
+  "ownerTargetValuesApproved": false,
+  "m00UiStatus": "BLOCKED",
+  "gate01Recommendation": "HOLD",
+  "summary": {
+    "DOM_CAPTURED": 12,
+    "PARTIAL": 7,
+    "UNVERIFIED": 12
+  },
+  "environment": {
+    "browserFamily": "Chrome",
+    "browserFullVersion": null,
+    "osAndVersion": null,
+    "browserZoomPercent": null,
+    "systemDisplayScalePercent": null,
+    "connectedContext": "本机 Chrome 网页控制",
+    "observedViewportAndRatio": [
+      {
+        "evidence": "UIB-DOM-01",
+        "viewportCssPx": {
+          "height": 731,
+          "width": 1440
+        },
+        "devicePixelRatio": 2,
+        "widthMode": "default"
+      },
+      {
+        "evidence": "UIB-DOM-02",
+        "viewportCssPx": {
+          "height": 731,
+          "width": 1440
+        },
+        "devicePixelRatio": 2,
+        "widthMode": "wide"
+      },
+      {
+        "evidence": "UIB-DOM-03",
+        "viewportCssPx": {
+          "height": 731,
+          "width": 1440
+        },
+        "devicePixelRatio": 2,
+        "widthMode": "full"
+      },
+      {
+        "evidence": "UIB-DOM-04",
+        "viewportCssPx": {
+          "height": 731,
+          "width": 885
+        },
+        "devicePixelRatio": 2,
+        "widthMode": null
+      },
+      {
+        "evidence": "UIB-DOM-05",
+        "viewportCssPx": {
+          "height": 731,
+          "width": 885
+        },
+        "devicePixelRatio": 2,
+        "widthMode": null
+      },
+      {
+        "evidence": "UIB-DOM-06",
+        "viewportCssPx": {
+          "height": 731,
+          "width": 885
+        },
+        "devicePixelRatio": 2,
+        "widthMode": null
+      },
+      {
+        "evidence": "UIB-DOM-07",
+        "viewportCssPx": {
+          "height": 731,
+          "width": 885
+        },
+        "devicePixelRatio": null,
+        "widthMode": null
+      }
+    ],
+    "connectedLocalBrowserFamilies": [
+      "chrome"
+    ],
+    "versionPageAuthority": "BLOCKED",
+    "personalFixtureCandidates": 0
+  },
+  "remainingEvidence": [
+    {
+      "check": "完整环境",
+      "status": "BLOCKED",
+      "finding": "已验证浏览器为本机 Chrome。连接权限未开放只读版本页。浏览器完整版本、OS 版本、页面缩放和显示缩放待独立记录。"
+    },
+    {
+      "check": "F12 工具实跑",
+      "status": "NOT_RUN",
+      "finding": "当前无已确认的个人飞书测试文档。页面控制范围未达原生 DevTools 控件。"
+    },
+    {
+      "check": "八类富文本",
+      "status": "NOT_RUN",
+      "finding": "引用、有序列表、无序列表、行内代码、代码块、图片、图注和超链接待在个人测试文档实测。"
+    },
+    {
+      "check": "目录与导航状态",
+      "status": "PARTIAL",
+      "finding": "已有目录悬停展开和 H3 跳转。固定、折叠与恢复、单项 Hover、持久选中和滚动联动待补。",
+      "evidence": [
+        "UIB-DOM-07"
+      ]
+    },
+    {
+      "check": "键盘焦点",
+      "status": "NOT_RUN",
+      "finding": "待在个人测试文档通过真实 Tab 操作采样。"
+    },
+    {
+      "check": "响应式实测",
+      "status": "PARTIAL",
+      "finding": "已有 1440 px 和 885 px 视口记录，待固定相同页宽档与面板状态做跨宽度实测。",
+      "evidence": [
+        "UIB-DOM-01",
+        "UIB-DOM-04",
+        "UIB-DOM-05"
+      ]
+    },
+    {
+      "check": "可公开参考截图",
+      "status": "BLOCKED",
+      "finding": "三张正式截图仍待来自授权个人测试文档的可公开证据。"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "docs/design/references/01-document-layout.png",
+      "expectedEvidence": "默认档整体布局与区域分配",
+      "status": "BLOCKED",
+      "reason": "当前已连接本机浏览器中只有已知带身份水印的测试文档，未找到另一份可确认的个人测试文档。"
+    },
+    {
+      "path": "docs/design/references/02-typography.png",
+      "expectedEvidence": "标题、正文及富文本排版",
+      "status": "BLOCKED",
+      "reason": "当前已连接本机浏览器中只有已知带身份水印的测试文档，未找到另一份可确认的个人测试文档。"
+    },
+    {
+      "path": "docs/design/references/03-interaction.png",
+      "expectedEvidence": "导航／目录状态和操作",
+      "status": "BLOCKED",
+      "reason": "当前已连接本机浏览器中只有已知带身份水印的测试文档，未找到另一份可确认的个人测试文档。"
+    }
+  ],
+  "candidateLayout": {
+    "desktopMinWidth": 1200,
+    "compactMinWidth": 900,
+    "desktop": "左导航与右辅助区可常驻，正文在剩余空间内居中。",
+    "compact": "左导航可收起，右辅助区由显式入口打开为覆盖面板。",
+    "narrow": "左导航与右辅助区使用可关闭面板。打开一个面板时收起另一个，正文保留当前阅读位置。",
+    "contentWidthsUseAvailableSpace": true,
+    "defaultWidthMode": "default"
+  },
+  "checks": {
+    "contrastType": "候选色值 sRGB 对比计算",
+    "contrast": [
+      {
+        "theme": "light",
+        "foreground": "--zdr-text",
+        "background": "--zdr-surface",
+        "ratio": 14.679,
+        "requiredRatio": 4.5
+      },
+      {
+        "theme": "light",
+        "foreground": "--zdr-text-secondary",
+        "background": "--zdr-surface",
+        "ratio": 6.421,
+        "requiredRatio": 4.5
+      },
+      {
+        "theme": "light",
+        "foreground": "--zdr-text-secondary",
+        "background": "--zdr-navigation-background",
+        "ratio": 5.719,
+        "requiredRatio": 4.5
+      },
+      {
+        "theme": "light",
+        "foreground": "--zdr-text",
+        "background": "--zdr-hover",
+        "ratio": 12.576,
+        "requiredRatio": 4.5
+      },
+      {
+        "theme": "light",
+        "foreground": "--zdr-primary",
+        "background": "--zdr-surface",
+        "ratio": 8.256,
+        "requiredRatio": 4.5
+      },
+      {
+        "theme": "light",
+        "foreground": "--zdr-selected-text",
+        "background": "--zdr-selected",
+        "ratio": 8.343,
+        "requiredRatio": 4.5
+      },
+      {
+        "theme": "light",
+        "foreground": "--zdr-focus-color",
+        "background": "--zdr-surface",
+        "ratio": 8.256,
+        "requiredRatio": 3
+      },
+      {
+        "theme": "light",
+        "foreground": "--zdr-focus-color",
+        "background": "--zdr-navigation-background",
+        "ratio": 7.353,
+        "requiredRatio": 3
+      },
+      {
+        "theme": "light",
+        "foreground": "--zdr-focus-color",
+        "background": "--zdr-selected",
+        "ratio": 6.688,
+        "requiredRatio": 3
+      },
+      {
+        "theme": "dark",
+        "foreground": "--zdr-text",
+        "background": "--zdr-surface",
+        "ratio": 13.984,
+        "requiredRatio": 4.5
+      },
+      {
+        "theme": "dark",
+        "foreground": "--zdr-text-secondary",
+        "background": "--zdr-surface",
+        "ratio": 8.547,
+        "requiredRatio": 4.5
+      },
+      {
+        "theme": "dark",
+        "foreground": "--zdr-text-secondary",
+        "background": "--zdr-navigation-background",
+        "ratio": 8.828,
+        "requiredRatio": 4.5
+      },
+      {
+        "theme": "dark",
+        "foreground": "--zdr-text",
+        "background": "--zdr-hover",
+        "ratio": 10.915,
+        "requiredRatio": 4.5
+      },
+      {
+        "theme": "dark",
+        "foreground": "--zdr-primary",
+        "background": "--zdr-surface",
+        "ratio": 9.625,
+        "requiredRatio": 4.5
+      },
+      {
+        "theme": "dark",
+        "foreground": "--zdr-selected-text",
+        "background": "--zdr-selected",
+        "ratio": 8.043,
+        "requiredRatio": 4.5
+      },
+      {
+        "theme": "dark",
+        "foreground": "--zdr-focus-color",
+        "background": "--zdr-surface",
+        "ratio": 9.625,
+        "requiredRatio": 3
+      },
+      {
+        "theme": "dark",
+        "foreground": "--zdr-focus-color",
+        "background": "--zdr-navigation-background",
+        "ratio": 9.942,
+        "requiredRatio": 3
+      },
+      {
+        "theme": "dark",
+        "foreground": "--zdr-focus-color",
+        "background": "--zdr-selected",
+        "ratio": 6.741,
+        "requiredRatio": 3
+      }
+    ],
+    "layoutBudgetType": "候选列宽的静态布局预算",
+    "widthChecks": [
+      {
+        "viewportWidthCssPx": 360,
+        "sidebarCssPx": 0,
+        "outlineCssPx": 0,
+        "inlinePaddingPerSideCssPx": 16,
+        "availableCssPx": 328,
+        "defaultColumnCssPx": 328,
+        "wideColumnCssPx": 328,
+        "fullColumnCssPx": 328
+      },
+      {
+        "viewportWidthCssPx": 885,
+        "sidebarCssPx": 0,
+        "outlineCssPx": 0,
+        "inlinePaddingPerSideCssPx": 16,
+        "availableCssPx": 853,
+        "defaultColumnCssPx": 768,
+        "wideColumnCssPx": 853,
+        "fullColumnCssPx": 853
+      },
+      {
+        "viewportWidthCssPx": 899,
+        "sidebarCssPx": 0,
+        "outlineCssPx": 0,
+        "inlinePaddingPerSideCssPx": 16,
+        "availableCssPx": 867,
+        "defaultColumnCssPx": 768,
+        "wideColumnCssPx": 867,
+        "fullColumnCssPx": 867
+      },
+      {
+        "viewportWidthCssPx": 900,
+        "sidebarCssPx": 224,
+        "outlineCssPx": 0,
+        "inlinePaddingPerSideCssPx": 24,
+        "availableCssPx": 628,
+        "defaultColumnCssPx": 628,
+        "wideColumnCssPx": 628,
+        "fullColumnCssPx": 628
+      },
+      {
+        "viewportWidthCssPx": 1199,
+        "sidebarCssPx": 224,
+        "outlineCssPx": 0,
+        "inlinePaddingPerSideCssPx": 24,
+        "availableCssPx": 927,
+        "defaultColumnCssPx": 768,
+        "wideColumnCssPx": 927,
+        "fullColumnCssPx": 927
+      },
+      {
+        "viewportWidthCssPx": 1200,
+        "sidebarCssPx": 224,
+        "outlineCssPx": 200,
+        "inlinePaddingPerSideCssPx": 24,
+        "availableCssPx": 728,
+        "defaultColumnCssPx": 728,
+        "wideColumnCssPx": 728,
+        "fullColumnCssPx": 728
+      },
+      {
+        "viewportWidthCssPx": 1440,
+        "sidebarCssPx": 224,
+        "outlineCssPx": 200,
+        "inlinePaddingPerSideCssPx": 24,
+        "availableCssPx": 968,
+        "defaultColumnCssPx": 768,
+        "wideColumnCssPx": 960,
+        "fullColumnCssPx": 968
+      }
+    ]
+  },
+  "measurements": [
+    {
+      "id": "header-bar",
+      "label": "顶部栏高度、上下内距和分隔线",
+      "group": "布局",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "referenceValue": {
+        "viewportCssPx": {
+          "height": 731,
+          "width": 885
+        },
+        "heightCssPx": 64,
+        "style": {
+          "padding-top": "0px",
+          "padding-bottom": "0px",
+          "border-bottom-width": "1px",
+          "border-bottom-style": "solid",
+          "border-bottom-color": "rgb(222, 224, 227)"
+        }
+      },
+      "referenceSummary": "64 px；上下内距 0；底线 1 px 实线 `#DEE0E3`",
+      "targetSummary": "56 px；上下内距 0、左右 20 px；1 px 分隔线",
+      "targetValue": {
+        "light": {
+          "--zdr-header-height": "56px",
+          "--zdr-header-padding-block": "0px",
+          "--zdr-header-padding-inline": "20px",
+          "--zdr-border-width": "1px",
+          "--zdr-border": "#D9E0E9",
+          "--zdr-surface": "#FFFFFF"
+        },
+        "darkOverrides": {
+          "--zdr-border": "#3B4658",
+          "--zdr-surface": "#181F2A"
+        },
+        "behavior": "导航控件垂直居中。"
+      },
+      "evidence": [
+        "UIB-DOM-04",
+        "UIB-DOM-05"
+      ],
+      "evidenceLevels": [
+        "DOM"
+      ],
+      "rationale": "为阅读区留出垂直空间，同时容纳搜索、设置与原文入口。",
+      "verificationStatus": "DOM_CAPTURED",
+      "pending": "等待个人测试文档 F12 复核。"
+    },
+    {
+      "id": "left-navigation",
+      "label": "左侧导航宽度",
+      "group": "布局",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "referenceValue": {
+        "viewportCssPx": {
+          "height": 731,
+          "width": 885
+        },
+        "observationsCssPx": [
+          300,
+          268
+        ]
+      },
+      "referenceSummary": "同一 885 px 视口分别观察到 300 px、268 px",
+      "targetSummary": "展开 224 px；收起 52 px；内距 12 px",
+      "targetValue": {
+        "light": {
+          "--zdr-sidebar-width": "224px",
+          "--zdr-sidebar-collapsed-width": "52px",
+          "--zdr-sidebar-padding": "12px",
+          "--zdr-nav-row-height": "36px",
+          "--zdr-navigation-background": "#EFF2F6"
+        },
+        "darkOverrides": {
+          "--zdr-navigation-background": "#141C29"
+        },
+        "behavior": "显示产品入口与当前阅读队列。"
+      },
+      "evidence": [
+        "UIB-DOM-04",
+        "UIB-DOM-05"
+      ],
+      "evidenceLevels": [
+        "DOM"
+      ],
+      "rationale": "导航信息层级较短，收窄后为正文保留行宽。",
+      "verificationStatus": "DOM_CAPTURED",
+      "pending": "等待个人测试文档 F12 复核。"
+    },
+    {
+      "id": "outline-placement",
+      "label": "目录实际位置、宽度与对齐",
+      "group": "布局",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "referenceValue": {
+        "viewportCssPx": {
+          "height": 731,
+          "width": 885
+        },
+        "leftCssPx": 268,
+        "collapsedWidthCssPx": 4,
+        "expandedWidthCssPx": 210.078125,
+        "entries": [
+          {
+            "level": 1,
+            "leftCssPx": 272,
+            "topCssPx": 142,
+            "itemWidthCssPx": 191.078125,
+            "itemHeightCssPx": 22
+          },
+          {
+            "level": 2,
+            "leftCssPx": 286,
+            "topCssPx": 172,
+            "itemWidthCssPx": 177.078125,
+            "itemHeightCssPx": 22
+          },
+          {
+            "level": 3,
+            "leftCssPx": 300,
+            "topCssPx": 202,
+            "itemWidthCssPx": 163.078125,
+            "itemHeightCssPx": 22
+          }
+        ]
+      },
+      "referenceSummary": "主区左缘 x=268 px；展开约 210.08 px；条目逐级缩进 14 px",
+      "targetSummary": "正文右侧 200 px；内距 12 px；逐级缩进 12 px",
+      "targetValue": {
+        "light": {
+          "--zdr-outline-width": "200px",
+          "--zdr-outline-padding": "12px",
+          "--zdr-outline-indent": "12px",
+          "--zdr-outline-background": "#F7F8FA"
+        },
+        "darkOverrides": {
+          "--zdr-outline-background": "#111821"
+        },
+        "behavior": "目录在辅助区内独立滚动。"
+      },
+      "evidence": [
+        "UIB-DOM-07"
+      ],
+      "evidenceLevels": [
+        "DOM",
+        "A"
+      ],
+      "rationale": "保留左侧用于产品导航，章节定位放在正文右侧。",
+      "verificationStatus": "DOM_CAPTURED",
+      "pending": "等待个人测试文档复核布局与固定状态。"
+    },
+    {
+      "id": "right-auxiliary",
+      "label": "右侧辅助区与可用空间",
+      "group": "布局",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "referenceValue": null,
+      "referenceSummary": "右侧辅助区未独立观测",
+      "targetSummary": "共用 200 px 右侧区；常驻或覆盖由视口决定",
+      "targetValue": {
+        "light": {
+          "--zdr-outline-width": "200px",
+          "--zdr-outline-padding": "12px"
+        },
+        "darkOverrides": {},
+        "behavior": "目录、阅读进度与问答页的当前回答列表共享右侧区。"
+      },
+      "evidence": [],
+      "evidenceLevels": [],
+      "rationale": "遵循 PDT 的右侧信息层级，避免添加额外常驻列。",
+      "verificationStatus": "UNVERIFIED",
+      "pending": "记录右侧区域的存在、类型、打开和关闭后的文宽。"
+    },
+    {
+      "id": "content-default",
+      "label": "默认正文区宽度",
+      "group": "布局",
+      "widthMode": "default",
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "referenceValue": {
+        "viewportCssPx": {
+          "height": 731,
+          "width": 1440
+        },
+        "mode": "default",
+        "widthCssPx": 820
+      },
+      "referenceSummary": "1440 × 731 CSS px 下为 820 px",
+      "targetSummary": "上限 768 px；受可用空间约束",
+      "targetValue": {
+        "light": {
+          "--zdr-content-width": "768px",
+          "--zdr-content-padding-inline": "24px",
+          "--zdr-content-padding-inline-compact": "16px"
+        },
+        "darkOverrides": {},
+        "behavior": "文档标题与正文共用列宽。"
+      },
+      "evidence": [
+        "UIB-DOM-01"
+      ],
+      "evidenceLevels": [
+        "DOM"
+      ],
+      "rationale": "缩短连续中文行长，为问答和专栏提供稳定的默认阅读宽度。",
+      "verificationStatus": "DOM_CAPTURED",
+      "pending": "等待个人测试文档 F12 复核。"
+    },
+    {
+      "id": "content-wide",
+      "label": "较宽正文区宽度",
+      "group": "布局",
+      "widthMode": "wide",
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "referenceValue": {
+        "viewportCssPx": {
+          "height": 731,
+          "width": 1440
+        },
+        "mode": "wide",
+        "widthCssPx": 1008
+      },
+      "referenceSummary": "1440 × 731 CSS px 下为 1008 px",
+      "targetSummary": "上限 960 px；受可用空间约束",
+      "targetValue": {
+        "light": {
+          "--zdr-content-width-wide": "960px",
+          "--zdr-content-padding-inline": "24px",
+          "--zdr-content-padding-inline-compact": "16px"
+        },
+        "darkOverrides": {},
+        "behavior": "文档标题与正文共用列宽。"
+      },
+      "evidence": [
+        "UIB-DOM-02"
+      ],
+      "evidenceLevels": [
+        "DOM"
+      ],
+      "rationale": "给宽图、表格及长代码更大的容纳空间。",
+      "verificationStatus": "DOM_CAPTURED",
+      "pending": "等待个人测试文档 F12 复核。"
+    },
+    {
+      "id": "content-full",
+      "label": "全宽正文区宽度",
+      "group": "布局",
+      "widthMode": "full",
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "referenceValue": {
+        "viewportCssPx": {
+          "height": 731,
+          "width": 1440
+        },
+        "mode": "full",
+        "widthCssPx": 1008
+      },
+      "referenceSummary": "1440 × 731 CSS px 下为 1008 px",
+      "targetSummary": "占正文可用区 100%；保留两侧内距",
+      "targetValue": {
+        "light": {
+          "--zdr-content-width-full": "100%",
+          "--zdr-content-padding-inline": "24px",
+          "--zdr-content-padding-inline-compact": "16px"
+        },
+        "darkOverrides": {},
+        "behavior": "文档标题与正文共用列宽。"
+      },
+      "evidence": [
+        "UIB-DOM-03"
+      ],
+      "evidenceLevels": [
+        "DOM"
+      ],
+      "rationale": "满宽跟随阅读区尺寸，保留内侧易读留白。",
+      "verificationStatus": "DOM_CAPTURED",
+      "pending": "等待个人测试文档 F12 复核。"
+    },
+    {
+      "id": "content-padding",
+      "label": "正文内外间距与有效行宽",
+      "group": "布局",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "referenceValue": {
+        "viewportCssPx": {
+          "height": 731,
+          "width": 885
+        },
+        "sharedColumnCssPx": 438,
+        "containerPadding": {
+          "display": "block",
+          "position": "static",
+          "box-sizing": "border-box",
+          "width": "438px",
+          "max-width": "none",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "padding-right": "0px",
+          "padding-bottom": "0px",
+          "margin-top": "0px",
+          "margin-bottom": "0px",
+          "background-color": "rgba(0, 0, 0, 0)",
+          "color": "rgb(31, 35, 41)"
+        },
+        "editableBlockCssPx": 450
+      },
+      "referenceSummary": "外框内距均 0；438 px 外框与 450 px 编辑块边界已记录，有效文本内线待测",
+      "targetSummary": "横向 24 px；窄屏 16 px；纵向 32 px",
+      "targetValue": {
+        "light": {
+          "--zdr-content-padding-inline": "24px",
+          "--zdr-content-padding-inline-compact": "16px",
+          "--zdr-content-padding-block": "32px"
+        },
+        "darkOverrides": {},
+        "behavior": "列宽在横向内距之间计算，纵向留白不计入字体段距。"
+      },
+      "evidence": [
+        "UIB-DOM-04",
+        "UIB-DOM-05"
+      ],
+      "evidenceLevels": [
+        "DOM"
+      ],
+      "rationale": "清楚区分外壳留白和正文有效宽度。",
+      "verificationStatus": "PARTIAL",
+      "pending": "同一页宽模式测外框、文字列及外距。"
+    },
+    {
+      "id": "responsive-layout",
+      "label": "窄视口布局",
+      "group": "布局",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "referenceValue": {
+        "views": [
+          {
+            "viewportCssPx": {
+              "height": 731,
+              "width": 1440
+            },
+            "mode": "default",
+            "columnWidthCssPx": 820
+          },
+          {
+            "viewportCssPx": {
+              "height": 731,
+              "width": 885
+            },
+            "mode": null,
+            "columnWidthCssPx": 438
+          },
+          {
+            "viewportCssPx": {
+              "height": 731,
+              "width": 885
+            },
+            "mode": null,
+            "columnWidthCssPx": 470
+          }
+        ]
+      },
+      "referenceSummary": "1440 px 默认列宽 820；885 px 两次为 438 / 470，窄视口页宽档未确认",
+      "targetSummary": "1200 px 起允许双侧栏；900–1199 px 右侧覆盖；低于 900 px 双侧栏按需打开",
+      "targetValue": {
+        "light": {
+          "--zdr-sidebar-width": "224px",
+          "--zdr-sidebar-collapsed-width": "52px",
+          "--zdr-outline-width": "200px",
+          "--zdr-content-padding-inline": "24px",
+          "--zdr-content-padding-inline-compact": "16px"
+        },
+        "darkOverrides": {},
+        "behavior": "面板变更保留阅读锚点，窄屏两侧覆盖面板互斥。"
+      },
+      "evidence": [
+        "UIB-DOM-01",
+        "UIB-DOM-04",
+        "UIB-DOM-05"
+      ],
+      "evidenceLevels": [
+        "DOM"
+      ],
+      "rationale": "以正文剩余宽度为先，在窄窗仍能找到导航和目录。",
+      "verificationStatus": "PARTIAL",
+      "pending": "固定同一档和面板状态，跨 900 / 1200 px 做真实窗口验证。"
+    },
+    {
+      "id": "document-title",
+      "label": "文档主标题",
+      "group": "排版与富文本",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "referenceValue": {
+        "style": {
+          "font-size": "34px",
+          "font-weight": "600",
+          "line-height": "55.25px",
+          "font-family": "LarkHackSafariFont, LarkEmojiFont, LarkChineseQuote, -apple-system, BlinkMacSystemFont, \"Helvetica Neue\", Tahoma, \"PingFang SC\", \"Microsoft Yahei\", Arial, \"Hiragino Sans GB\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
+        },
+        "rectCssPx": {
+          "height": 55.25,
+          "left": 366,
+          "top": 112,
+          "width": 438
+        }
+      },
+      "referenceSummary": "34 px / 600 / 55.25 px",
+      "targetSummary": "32 px / 700 / 1.25（40 px）",
+      "targetValue": {
+        "light": {
+          "--zdr-title-size": "32px",
+          "--zdr-title-weight": "700",
+          "--zdr-title-line-height": "1.25",
+          "--zdr-font-family": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif"
+        },
+        "darkOverrides": {},
+        "behavior": "文档题名独立于正文章节层级。"
+      },
+      "evidence": [
+        "UIB-DOM-04",
+        "UIB-DOM-05"
+      ],
+      "evidenceLevels": [
+        "DOM"
+      ],
+      "rationale": "提高主标题字重，在多行题名下控制首屏占用。",
+      "verificationStatus": "DOM_CAPTURED",
+      "pending": "等待个人测试文档 F12 复核。"
+    },
+    {
+      "id": "heading-1",
+      "label": "H1",
+      "group": "排版与富文本",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "referenceValue": {
+        "level": 1,
+        "textStyle": {
+          "font-size": "26px",
+          "font-weight": "600",
+          "line-height": "36.4px",
+          "letter-spacing": "-0.52px"
+        },
+        "blockMargins": {
+          "margin-top": "26px",
+          "margin-bottom": "10px"
+        }
+      },
+      "referenceSummary": "26 px / 600 / 36.4 px",
+      "targetSummary": "24 px / 600 / 1.4（33.6 px）",
+      "targetValue": {
+        "light": {
+          "--zdr-h1-size": "24px",
+          "--zdr-h1-line-height": "1.4",
+          "--zdr-heading-weight": "600",
+          "--zdr-heading-letter-spacing": "normal",
+          "--zdr-heading-gap-before": "28px",
+          "--zdr-heading-gap-after": "8px"
+        },
+        "darkOverrides": {},
+        "behavior": "章节标题采用正常字距，统一上 28 px、下 8 px 的块间距。"
+      },
+      "evidence": [
+        "UIB-DOM-06"
+      ],
+      "evidenceLevels": [
+        "DOM"
+      ],
+      "rationale": "正文一级标题与主标题保有明显层级。",
+      "verificationStatus": "DOM_CAPTURED",
+      "pending": "等待个人测试文档 F12 复核。"
+    },
+    {
+      "id": "heading-2",
+      "label": "H2",
+      "group": "排版与富文本",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "referenceValue": {
+        "level": 2,
+        "textStyle": {
+          "font-size": "22px",
+          "font-weight": "600",
+          "line-height": "30.8px",
+          "letter-spacing": "-0.44px"
+        },
+        "blockMargins": {
+          "margin-top": "22px",
+          "margin-bottom": "8px"
+        }
+      },
+      "referenceSummary": "22 px / 600 / 30.8 px",
+      "targetSummary": "20 px / 600 / 1.45（29 px）",
+      "targetValue": {
+        "light": {
+          "--zdr-h2-size": "20px",
+          "--zdr-h2-line-height": "1.45",
+          "--zdr-heading-weight": "600",
+          "--zdr-heading-letter-spacing": "normal",
+          "--zdr-heading-gap-before": "28px",
+          "--zdr-heading-gap-after": "8px"
+        },
+        "darkOverrides": {},
+        "behavior": "章节标题采用正常字距，统一上 28 px、下 8 px 的块间距。"
+      },
+      "evidence": [
+        "UIB-DOM-06"
+      ],
+      "evidenceLevels": [
+        "DOM"
+      ],
+      "rationale": "两个相邻章节层级可通过字号直接辨别。",
+      "verificationStatus": "DOM_CAPTURED",
+      "pending": "等待个人测试文档 F12 复核。"
+    },
+    {
+      "id": "heading-3",
+      "label": "H3",
+      "group": "排版与富文本",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "referenceValue": {
+        "level": 3,
+        "textStyle": {
+          "font-size": "20px",
+          "font-weight": "600",
+          "line-height": "28px",
+          "letter-spacing": "-0.4px"
+        },
+        "blockMargins": {
+          "margin-top": "20px",
+          "margin-bottom": "8px"
+        }
+      },
+      "referenceSummary": "20 px / 600 / 28 px",
+      "targetSummary": "18 px / 600 / 1.5（27 px）",
+      "targetValue": {
+        "light": {
+          "--zdr-h3-size": "18px",
+          "--zdr-h3-line-height": "1.5",
+          "--zdr-heading-weight": "600",
+          "--zdr-heading-letter-spacing": "normal",
+          "--zdr-heading-gap-before": "28px",
+          "--zdr-heading-gap-after": "8px"
+        },
+        "darkOverrides": {},
+        "behavior": "章节标题采用正常字距，统一上 28 px、下 8 px 的块间距。"
+      },
+      "evidence": [
+        "UIB-DOM-06"
+      ],
+      "evidenceLevels": [
+        "DOM"
+      ],
+      "rationale": "三级标题紧邻正文，保持同色和清晰字重。",
+      "verificationStatus": "DOM_CAPTURED",
+      "pending": "等待个人测试文档 F12 复核。"
+    },
+    {
+      "id": "paragraph",
+      "label": "正文字体、字号、字重和行高",
+      "group": "排版与富文本",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "referenceValue": {
+        "style": {
+          "font-size": "16px",
+          "font-weight": "400",
+          "line-height": "26px",
+          "font-family": "LarkHackSafariFont, LarkEmojiFont, LarkChineseQuote, -apple-system, BlinkMacSystemFont, \"Helvetica Neue\", Tahoma, \"PingFang SC\", \"Microsoft Yahei\", Arial, \"Hiragino Sans GB\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "letter-spacing": "0.28px"
+        }
+      },
+      "referenceSummary": "16 px / 400 / 26 px；字体候选栈见测量记录",
+      "targetSummary": "系统字体栈；17 px / 400 / 1.7（28.9 px）",
+      "targetValue": {
+        "light": {
+          "--zdr-font-family": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif",
+          "--zdr-font-size": "17px",
+          "--zdr-line-height": "1.7",
+          "--zdr-text-weight": "400",
+          "--zdr-text": "#1F2937"
+        },
+        "darkOverrides": {
+          "--zdr-text": "#E8ECF4"
+        },
+        "behavior": "中文和拉丁文字使用本地字体候选栈。"
+      },
+      "evidence": [
+        "UIB-DOM-04"
+      ],
+      "evidenceLevels": [
+        "DOM"
+      ],
+      "rationale": "增大正文一档并增加行高，兼顾问答长段和中英混排。",
+      "verificationStatus": "DOM_CAPTURED",
+      "pending": "等待个人测试文档 F12 复核。"
+    },
+    {
+      "id": "paragraph-gap",
+      "label": "段落实际间距",
+      "group": "排版与富文本",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "referenceValue": {
+        "gapCssPx": 8,
+        "viewportCssPx": {
+          "height": 731,
+          "width": 885
+        }
+      },
+      "referenceSummary": "相邻正文块实测 8 px",
+      "targetSummary": "12 px",
+      "targetValue": {
+        "light": {
+          "--zdr-paragraph-gap": "12px"
+        },
+        "darkOverrides": {},
+        "behavior": "一般段落间距以一个明确规则计算。"
+      },
+      "evidence": [
+        "UIB-DOM-04"
+      ],
+      "evidenceLevels": [
+        "DOM"
+      ],
+      "rationale": "加强长文的段落边界与扫读节奏。",
+      "verificationStatus": "DOM_CAPTURED",
+      "pending": "等待个人测试文档 F12 复核。"
+    },
+    {
+      "id": "blockquote",
+      "label": "引用",
+      "group": "排版与富文本",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "referenceValue": null,
+      "referenceSummary": "未测",
+      "targetSummary": "左线 3 px；左右 16 px、上下 10 px；独立浅底",
+      "targetValue": {
+        "light": {
+          "--zdr-quote-rule-width": "3px",
+          "--zdr-quote-rule-color": "#5375A4",
+          "--zdr-quote-padding-inline": "16px",
+          "--zdr-quote-padding-block": "10px",
+          "--zdr-quote-background": "#EEF3FA",
+          "--zdr-block-gap": "16px",
+          "--zdr-line-height": "1.7"
+        },
+        "darkOverrides": {
+          "--zdr-quote-rule-color": "#8CA8DE",
+          "--zdr-quote-background": "#202B3D"
+        },
+        "behavior": "保留原引用语义与正文行高。"
+      },
+      "evidence": [],
+      "evidenceLevels": [],
+      "rationale": "通过线条和留白识别引文，不压缩字阶。",
+      "verificationStatus": "UNVERIFIED",
+      "pending": "补引文样本、几何、计算样式和可公开截图。"
+    },
+    {
+      "id": "ordered-list",
+      "label": "有序列表",
+      "group": "排版与富文本",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "referenceValue": null,
+      "referenceSummary": "未测",
+      "targetSummary": "每级缩进 24 px；项间距 4 px",
+      "targetValue": {
+        "light": {
+          "--zdr-list-indent": "24px",
+          "--zdr-list-item-gap": "4px",
+          "--zdr-line-height": "1.7"
+        },
+        "darkOverrides": {},
+        "behavior": "保留编号和原始起始值，换行与文字列对齐。"
+      },
+      "evidence": [],
+      "evidenceLevels": [],
+      "rationale": "让多行列表项清楚收束，保持正文排版节奏。",
+      "verificationStatus": "UNVERIFIED",
+      "pending": "补两级嵌套样本与标记、缩进、行高。"
+    },
+    {
+      "id": "unordered-list",
+      "label": "无序列表",
+      "group": "排版与富文本",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "referenceValue": null,
+      "referenceSummary": "未测",
+      "targetSummary": "每级缩进 24 px；项间距 4 px",
+      "targetValue": {
+        "light": {
+          "--zdr-list-indent": "24px",
+          "--zdr-list-item-gap": "4px",
+          "--zdr-line-height": "1.7"
+        },
+        "darkOverrides": {},
+        "behavior": "保留项目符号和嵌套层级，换行与文字列对齐。"
+      },
+      "evidence": [],
+      "evidenceLevels": [],
+      "rationale": "让多行列表项清楚收束，保持正文排版节奏。",
+      "verificationStatus": "UNVERIFIED",
+      "pending": "补两级嵌套样本与标记、缩进、行高。"
+    },
+    {
+      "id": "inline-code",
+      "label": "行内代码",
+      "group": "排版与富文本",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "referenceValue": null,
+      "referenceSummary": "未测",
+      "targetSummary": "14 px 等宽；上下 2 px、左右 4 px；4 px 圆角",
+      "targetValue": {
+        "light": {
+          "--zdr-code-font-family": "ui-monospace, SFMono-Regular, Consolas, \"Liberation Mono\", monospace",
+          "--zdr-code-font-size": "14px",
+          "--zdr-inline-code-padding-block": "2px",
+          "--zdr-inline-code-padding-inline": "4px",
+          "--zdr-inline-code-radius": "4px",
+          "--zdr-code-background": "#EEF2F7"
+        },
+        "darkOverrides": {
+          "--zdr-code-background": "#202B3D"
+        },
+        "behavior": "用背景帮助辨识，在窄列允许按需要换行。"
+      },
+      "evidence": [],
+      "evidenceLevels": [],
+      "rationale": "区分技术标记并降低字号突变。",
+      "verificationStatus": "UNVERIFIED",
+      "pending": "补行内代码样本及字形、盒子取证。"
+    },
+    {
+      "id": "code-block",
+      "label": "代码块",
+      "group": "排版与富文本",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "referenceValue": null,
+      "referenceSummary": "未测",
+      "targetSummary": "14 px / 1.55；内距 16 px；8 px 圆角",
+      "targetValue": {
+        "light": {
+          "--zdr-code-font-family": "ui-monospace, SFMono-Regular, Consolas, \"Liberation Mono\", monospace",
+          "--zdr-code-font-size": "14px",
+          "--zdr-code-line-height": "1.55",
+          "--zdr-code-block-padding": "16px",
+          "--zdr-radius": "8px",
+          "--zdr-code-background": "#EEF2F7",
+          "--zdr-block-gap": "16px"
+        },
+        "darkOverrides": {
+          "--zdr-code-background": "#202B3D"
+        },
+        "behavior": "长行由代码块内部水平滚动。"
+      },
+      "evidence": [],
+      "evidenceLevels": [],
+      "rationale": "保留缩进并避免长代码撑破整页。",
+      "verificationStatus": "UNVERIFIED",
+      "pending": "补多行长代码样本、容器样式和溢出观察。"
+    },
+    {
+      "id": "image",
+      "label": "图片",
+      "group": "排版与富文本",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "referenceValue": null,
+      "referenceSummary": "未测",
+      "targetSummary": "最大宽度 100%；比例自适应；圆角 8 px",
+      "targetValue": {
+        "light": {
+          "--zdr-image-max-width": "100%",
+          "--zdr-image-radius": "8px",
+          "--zdr-block-gap": "16px"
+        },
+        "darkOverrides": {},
+        "behavior": "在列内居中，保持原始宽高比；失败时保留原入口与适用的替代文字。"
+      },
+      "evidence": [],
+      "evidenceLevels": [],
+      "rationale": "宽图服从正文列尺寸，避免水平溢出。",
+      "verificationStatus": "UNVERIFIED",
+      "pending": "补授权样本中的宽图与图片外框证据。"
+    },
+    {
+      "id": "caption",
+      "label": "图注",
+      "group": "排版与富文本",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "referenceValue": null,
+      "referenceSummary": "未测",
+      "targetSummary": "13 px / 1.5；图下 8 px；居中",
+      "targetValue": {
+        "light": {
+          "--zdr-caption-font-size": "13px",
+          "--zdr-caption-line-height": "1.5",
+          "--zdr-caption-gap": "8px",
+          "--zdr-text-secondary": "#526071"
+        },
+        "darkOverrides": {
+          "--zdr-text-secondary": "#B1BBCB"
+        },
+        "behavior": "仅显示源内容实际提供的图注。"
+      },
+      "evidence": [],
+      "evidenceLevels": [],
+      "rationale": "图注随图阅读，弱于正文且保持可辨识。",
+      "verificationStatus": "UNVERIFIED",
+      "pending": "补带图注的实际样本及间距、颜色。"
+    },
+    {
+      "id": "link",
+      "label": "超链接",
+      "group": "排版与富文本",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "referenceValue": null,
+      "referenceSummary": "未测",
+      "targetSummary": "使用主题主色，常驻下划线偏移 3 px",
+      "targetValue": {
+        "light": {
+          "--zdr-primary": "#284B97",
+          "--zdr-link-underline-offset": "3px",
+          "--zdr-focus-color": "#284B97",
+          "--zdr-focus-ring-width": "2px",
+          "--zdr-focus-ring-offset": "2px"
+        },
+        "darkOverrides": {
+          "--zdr-primary": "#ADC5FF",
+          "--zdr-focus-color": "#ADC5FF"
+        },
+        "behavior": "支持键盘焦点，链接行为沿用 PDT 的富文本安全约束。"
+      },
+      "evidence": [],
+      "evidenceLevels": [],
+      "rationale": "下划线让链接在颜色以外仍可辨识。",
+      "verificationStatus": "UNVERIFIED",
+      "pending": "补正常、悬停和焦点的真实链接样本。"
+    },
+    {
+      "id": "surface-colors",
+      "label": "页面、顶栏、侧栏、正文和目录背景",
+      "group": "颜色与交互",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "referenceValue": {
+        "page": "rgb(255, 255, 255)",
+        "header": "rgb(255, 255, 255)",
+        "navigation": "rgb(245, 246, 247)",
+        "column": "rgba(0, 0, 0, 0)"
+      },
+      "referenceSummary": "页面、顶栏 `#FFFFFF`；左栏 `#F5F6F7`；正文容器透明",
+      "targetSummary": "浅色阅读面 `#FFFFFF`，外壳 `#F7F8FA`，左栏 `#EFF2F6`；深色按语义覆盖",
+      "targetValue": {
+        "light": {
+          "--zdr-surface": "#FFFFFF",
+          "--zdr-background": "#F7F8FA",
+          "--zdr-navigation-background": "#EFF2F6",
+          "--zdr-outline-background": "#F7F8FA"
+        },
+        "darkOverrides": {
+          "--zdr-surface": "#181F2A",
+          "--zdr-background": "#111821",
+          "--zdr-navigation-background": "#141C29",
+          "--zdr-outline-background": "#111821"
+        },
+        "behavior": "顶栏和正文共用阅读面，目录使用目录面。"
+      },
+      "evidence": [
+        "UIB-DOM-04",
+        "UIB-DOM-05"
+      ],
+      "evidenceLevels": [
+        "DOM"
+      ],
+      "rationale": "用轻微面色差异识别正文区和导航。",
+      "verificationStatus": "PARTIAL",
+      "pending": "测目录承托背景及深色实际样本。"
+    },
+    {
+      "id": "text-colors",
+      "label": "正文、辅助文字与强调色",
+      "group": "颜色与交互",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "referenceValue": {
+        "body": "rgb(31, 35, 41)",
+        "title": "rgb(31, 35, 41)"
+      },
+      "referenceSummary": "正文与标题文字 `#1F2329`；辅助、强调色待测",
+      "targetSummary": "浅色正文 `#1F2937`、辅助 `#526071`、主色 `#284B97`；深色同组覆盖",
+      "targetValue": {
+        "light": {
+          "--zdr-text": "#1F2937",
+          "--zdr-text-secondary": "#526071",
+          "--zdr-primary": "#284B97"
+        },
+        "darkOverrides": {
+          "--zdr-text": "#E8ECF4",
+          "--zdr-text-secondary": "#B1BBCB",
+          "--zdr-primary": "#ADC5FF"
+        },
+        "behavior": "正文、辅助信息和可操作文字各用对应语义色。"
+      },
+      "evidence": [
+        "UIB-DOM-04",
+        "UIB-DOM-06"
+      ],
+      "evidenceLevels": [
+        "DOM"
+      ],
+      "rationale": "以阅读对比度为先，采用独立的深蓝强调色。",
+      "verificationStatus": "PARTIAL",
+      "pending": "测辅助、强调色、暗色文字及相邻背景。"
+    },
+    {
+      "id": "borders-radius-shadow",
+      "label": "边框、圆角和阴影",
+      "group": "颜色与交互",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S"
+      ],
+      "referenceValue": {
+        "header": {
+          "border-bottom-width": "1px",
+          "border-bottom-color": "rgb(222, 224, 227)",
+          "box-shadow": "none",
+          "border-top-left-radius": "0px"
+        },
+        "leftNavigation": {
+          "border-right-width": "1px",
+          "border-right-color": "rgba(31, 35, 41, 0.04)"
+        }
+      },
+      "referenceSummary": "顶栏底线 1 px `#DEE0E3`，左栏右线 1 px `rgba(31,35,41,0.04)`；顶栏圆角 0、阴影无",
+      "targetSummary": "分隔线 1 px；控件圆角 8 px；阴影限覆盖面板",
+      "targetValue": {
+        "light": {
+          "--zdr-border-width": "1px",
+          "--zdr-border": "#D9E0E9",
+          "--zdr-radius": "8px",
+          "--zdr-shadow-overlay": "0 8px 24px rgba(18, 29, 52, 0.14)"
+        },
+        "darkOverrides": {
+          "--zdr-border": "#3B4658",
+          "--zdr-shadow-overlay": "0 8px 24px rgba(0, 0, 0, 0.38)"
+        },
+        "behavior": "固定顶栏以边线分隔。"
+      },
+      "evidence": [
+        "UIB-DOM-04",
+        "UIB-DOM-05"
+      ],
+      "evidenceLevels": [
+        "DOM"
+      ],
+      "rationale": "常驻框架视觉安静，覆盖面板拥有可见层级。",
+      "verificationStatus": "PARTIAL",
+      "pending": "补控件、浮层实际圆角与阴影。"
+    },
+    {
+      "id": "item-hover",
+      "label": "导航及目录项悬停",
+      "group": "颜色与交互",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "referenceValue": null,
+      "referenceSummary": "未测",
+      "targetSummary": "浅色填充 `#E8EEF6`；圆角 8 px",
+      "targetValue": {
+        "light": {
+          "--zdr-hover": "#E8EEF6",
+          "--zdr-radius": "8px",
+          "--zdr-nav-row-height": "36px"
+        },
+        "darkOverrides": {
+          "--zdr-hover": "#243248"
+        },
+        "behavior": "悬停只强调当前可操作项。"
+      },
+      "evidence": [],
+      "evidenceLevels": [],
+      "rationale": "让点选范围易见且保持布局尺寸稳定。",
+      "verificationStatus": "UNVERIFIED",
+      "pending": "同一导航项和目录项比较默认及悬停的计算样式。"
+    },
+    {
+      "id": "item-selected",
+      "label": "导航及目录项选中",
+      "group": "颜色与交互",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "referenceValue": null,
+      "referenceSummary": "未测",
+      "targetSummary": "浅色填充 `#DDE8FB`、文字 `#203F77`、标记宽 3 px",
+      "targetValue": {
+        "light": {
+          "--zdr-selected": "#DDE8FB",
+          "--zdr-selected-text": "#203F77",
+          "--zdr-primary": "#284B97",
+          "--zdr-selected-marker-width": "3px",
+          "--zdr-heading-weight": "600"
+        },
+        "darkOverrides": {
+          "--zdr-selected": "#29385B",
+          "--zdr-selected-text": "#C6D7FF",
+          "--zdr-primary": "#ADC5FF"
+        },
+        "behavior": "当前页或章节使用语义当前状态和可见标记。"
+      },
+      "evidence": [],
+      "evidenceLevels": [],
+      "rationale": "用形状、状态语义和颜色共同说明当前项。",
+      "verificationStatus": "UNVERIFIED",
+      "pending": "测当前导航项、当前目录项和滚动时的选中变化。"
+    },
+    {
+      "id": "keyboard-focus",
+      "label": "键盘焦点",
+      "group": "颜色与交互",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "referenceValue": null,
+      "referenceSummary": "未测",
+      "targetSummary": "主题焦点色，轮廓 2 px、外偏移 2 px",
+      "targetValue": {
+        "light": {
+          "--zdr-focus-ring-width": "2px",
+          "--zdr-focus-ring-offset": "2px",
+          "--zdr-focus-color": "#284B97"
+        },
+        "darkOverrides": {
+          "--zdr-focus-color": "#ADC5FF"
+        },
+        "behavior": "Tab 顺序遵循可见控件，覆盖面板关闭后焦点归触发入口。"
+      },
+      "evidence": [],
+      "evidenceLevels": [],
+      "rationale": "使焦点在浅／深背景、悬停和选中状态中可辨识。",
+      "verificationStatus": "UNVERIFIED",
+      "pending": "在个人文档用 Tab 实测可达性、可见性和环线。"
+    },
+    {
+      "id": "navigation-collapse",
+      "label": "导航及目录固定与折叠",
+      "group": "颜色与交互",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "S",
+        "A"
+      ],
+      "referenceValue": {
+        "outlineHoverCollapsedWidthCssPx": 4,
+        "outlineHoverExpandedWidthCssPx": 210.078125,
+        "fixedToggleObserved": false
+      },
+      "referenceSummary": "目录悬停从 4 px 展开至约 210.08 px；固定与折叠开关未测",
+      "targetSummary": "左栏 224 / 52 px；右侧展开 200 px，收起释放列宽",
+      "targetValue": {
+        "light": {
+          "--zdr-sidebar-width": "224px",
+          "--zdr-sidebar-collapsed-width": "52px",
+          "--zdr-outline-width": "200px",
+          "--zdr-shadow-overlay": "0 8px 24px rgba(18, 29, 52, 0.14)"
+        },
+        "darkOverrides": {
+          "--zdr-shadow-overlay": "0 8px 24px rgba(0, 0, 0, 0.38)"
+        },
+        "behavior": "展开和收起可由显式入口触发，覆盖状态可关。"
+      },
+      "evidence": [
+        "UIB-DOM-07"
+      ],
+      "evidenceLevels": [
+        "DOM",
+        "A"
+      ],
+      "rationale": "提供可预期的操作入口，适配窄视口。",
+      "verificationStatus": "PARTIAL",
+      "pending": "验证左右栏固定、取消固定、折叠、恢复及持续性。"
+    },
+    {
+      "id": "outline-navigation",
+      "label": "目录锚点、当前项与滚动",
+      "group": "颜色与交互",
+      "widthMode": null,
+      "expectedEvidenceLevels": [
+        "A"
+      ],
+      "referenceValue": {
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "anchor": {
+          "testedLevel": 3,
+          "topBeforeClickCssPx": 748.4453125,
+          "topAfterClickCssPx": 302.9453125,
+          "visibleAfterClick": true
+        }
+      },
+      "referenceSummary": "列出 H1–H3；点击 H3 后标题从 y=748.45 移至 302.95 px，进入视口",
+      "targetSummary": "按 H1–H3 建目录；锚点顶部留 68 px；当前章节有选中标记",
+      "targetValue": {
+        "light": {
+          "--zdr-anchor-offset": "calc(var(--zdr-header-height) + 12px)",
+          "--zdr-header-height": "56px",
+          "--zdr-selected": "#DDE8FB",
+          "--zdr-selected-text": "#203F77",
+          "--zdr-selected-marker-width": "3px"
+        },
+        "darkOverrides": {
+          "--zdr-selected": "#29385B",
+          "--zdr-selected-text": "#C6D7FF"
+        },
+        "behavior": "锚点留出 56 px 顶栏和额外 12 px。滚动时同步所处章节。"
+      },
+      "evidence": [
+        "UIB-DOM-07"
+      ],
+      "evidenceLevels": [
+        "A"
+      ],
+      "rationale": "便于跳到段落并在长篇阅读中重新定位。",
+      "verificationStatus": "PARTIAL",
+      "pending": "现有跳转无需重测；补当前项跟随滚动及复位。"
+    }
+  ]
+}

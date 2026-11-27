@@ -2,7 +2,7 @@
 
 [PDT v1.2](PDT-V1.2.md) · [中文 README](../README_CN.md) · [English README](../README.md)
 
-PDT v1.2 是产品范围与验收基线。当前 **2 / 14 项实施任务**达到验收条件。M00-A 通过，M00-B 的 B01–B14 通过且已正式结项。M00-B-R 补齐 B01 浏览器环境及 B14 分层异常降级证据。负责人已正式确认 V1.0 采用 DOM-only，主动真实 Feed 请求为 0。保留原版探针 20/20 与修订版 21/21 的离线证据。M00-UI-A 已完成公开研究与测量准备，M00-UI-B 已采集真实编辑器布局和 H1–H3 样式，实测目录生成和跳转。正式实测待补证。M01–M05 等待 Gate 01 通过。 [M00 验证记录](M00-VALIDATION.md) · [上游锁定](UPSTREAM-LOCK.md)
+PDT v1.2 是产品范围与验收基线。当前 **2 / 14 项实施任务**达到验收条件。M00-A 通过，M00-B 的 B01–B14 通过且已正式结项。M00-B-R 补齐 B01 浏览器环境及 B14 分层异常降级证据。负责人已正式确认 V1.0 采用 DOM-only，主动真实 Feed 请求为 0。保留原版探针 20/20 与修订版 21/21 的离线证据。M00-UI-A 已完成公开研究与测量准备，M00-UI-B-R 已回填 31 项视觉矩阵并形成候选规范与 Tokens。M00-UI 为 BLOCKED，待个人环境、剩余证据和负责人确认。M01–M05 等待 Gate 01 通过。 [M00 验证记录](M00-VALIDATION.md) · [上游锁定](UPSTREAM-LOCK.md)
 
 ## 模块与版本
 
@@ -23,7 +23,7 @@ PDT v1.2 是产品范围与验收基线。当前 **2 / 14 项实施任务**达�
 | --- | --- | --- | --- |
 | M00-A | 锁定上游源码，审计许可、权限、依赖、网络和构建 | [M00-VALIDATION.md](M00-VALIDATION.md) · [UPSTREAM-LOCK.md](UPSTREAM-LOCK.md) | PASS（审计与构建） |
 | M00-B | 在 Chrome 和 Edge 验证知乎页面、登录状态、数据源及降级 | [执行记录](M00-VALIDATION.md#m00-b-真实页面与数据源验证) · [分层取证与验收例外](M00-VALIDATION.md#m00-b-r-分层取证与验收例外) | PASS（已结项） |
-| M00-UI | A 阶段准备公开参考与测量工具，B 阶段在个人测试文档实测和确认 | [视觉规范草案](design/UI-SPEC-DRAFT.md) · [采集工具及模板](../validation/m00-ui/README.md)。B 阶段提交三张真实截图、`docs/design/UI-SPEC.md` 与 `src/styles/tokens.css` | A 已完成，B 已测基础布局、H1–H3 和目录跳转，待 F12、剩余样本和目标值确认 |
+| M00-UI | A 阶段准备公开参考与测量工具，B 阶段在个人测试文档实测和确认 | [31 项测量矩阵](design/UI-SPEC-DRAFT.md) · [规范候选](design/UI-SPEC.md) · [Tokens 候选](../src/styles/tokens.css) · [取证记录](M00-VALIDATION.md#m00-ui-b-r-视觉证据复核与基线候选) | BLOCKED；候选待确认，F12、余项实测和三张截图待补 |
 | M01-A | 初始化工程、锁定依赖，剥离 AI、Wiki 和 Embedding | AT23、AT24、AT26 | LOCKED |
 | M01-B | 实现路由、生命周期、模式切换和原生页面恢复 | AT02、AT11、AT12、AT19 | LOCKED |
 | M02-A | 实现顶部栏、左侧导航、正文、右侧目录和响应式布局 | 冻结后的 UI-SPEC 视觉对照 | LOCKED |
@@ -51,7 +51,7 @@ PDT v1.2 是产品范围与验收基线。当前 **2 / 14 项实施任务**达�
 
 | 节点 | 放行条件 | 结果 |
 | --- | --- | --- |
-| Gate 01 · 技术与视觉基线 | M00 三项验证通过，负责人确认。DOM-only 已批准，视觉实测及目标值冻结待完成。 | 待验收，通过后开始 M01–M03 |
+| Gate 01 · 技术与视觉基线 | M00 三项验证通过，负责人确认。DOM-only 已批准，视觉证据与负责人确认待齐。 | 暂缓放行，通过后开始 M01–M03 |
 | Gate 02 · P0 核心功能 | 核对 M01–M03 对应的 PDT 用例，验证 Chrome 和 Edge 安装及阅读流程，覆盖原生恢复和降级。 | V0.1 内测交付 |
 | Gate 03 · 正式发布 | P0、P1 与 PDT 全部 28 项验收用例完成复测，记录用例适用性和结果。通过 Chrome 和 Edge 实机、视觉对照、安全回归与 GitHub CI。 | V1.0 GitHub Release |
 
