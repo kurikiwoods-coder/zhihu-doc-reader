@@ -1,0 +1,338 @@
+{
+  "sizes": {
+    "current": {
+      "bytes": 49041,
+      "gzip": 12862
+    },
+    "readability": {
+      "bytes": 90944,
+      "gzip": 25320
+    },
+    "purify": {
+      "bytes": 31131,
+      "gzip": 12439
+    }
+  },
+  "results": [
+    {
+      "channel": "chrome",
+      "version": "157.0.8103.52",
+      "results": [
+        {
+          "name": "article",
+          "current": {
+            "status": "ready",
+            "complete": true,
+            "p50": 0.1,
+            "p95": 0.2
+          },
+          "readability": {
+            "hasResult": true,
+            "main": true,
+            "otherAnswer": false,
+            "p50": 0.6,
+            "p95": 0.9
+          },
+          "purify": {
+            "version": "3.5.0",
+            "keepsHeading": true,
+            "limitedSet": true,
+            "defaultRetainsForm": true
+          }
+        },
+        {
+          "name": "target-answer",
+          "current": {
+            "status": "ready",
+            "complete": true,
+            "p50": 0.1,
+            "p95": 0.2
+          },
+          "readability": {
+            "hasResult": true,
+            "main": false,
+            "otherAnswer": true,
+            "p50": 0.4,
+            "p95": 0.5
+          },
+          "purify": {
+            "version": "3.5.0",
+            "keepsHeading": true,
+            "limitedSet": true,
+            "defaultRetainsForm": true
+          }
+        },
+        {
+          "name": "clipped-answer",
+          "current": {
+            "status": "unavailable",
+            "complete": false,
+            "p50": 0,
+            "p95": 0.1
+          },
+          "readability": {
+            "hasResult": true,
+            "main": true,
+            "otherAnswer": false,
+            "p50": 0.5,
+            "p95": 0.6
+          },
+          "purify": {
+            "version": "3.5.0",
+            "keepsHeading": true,
+            "limitedSet": true,
+            "defaultRetainsForm": true
+          }
+        },
+        {
+          "name": "missing-body",
+          "current": {
+            "status": "unavailable",
+            "complete": false,
+            "p50": 0,
+            "p95": 0.1
+          },
+          "readability": {
+            "hasResult": true,
+            "main": false,
+            "otherAnswer": false,
+            "p50": 0.4,
+            "p95": 0.6
+          },
+          "purify": {
+            "version": "3.5.0",
+            "keepsHeading": true,
+            "limitedSet": true,
+            "defaultRetainsForm": true
+          }
+        },
+        {
+          "name": "list-preview",
+          "current": {
+            "status": "ready",
+            "complete": false,
+            "p50": 0,
+            "p95": 0.1
+          },
+          "readability": {
+            "hasResult": true,
+            "main": false,
+            "otherAnswer": false,
+            "p50": 0.3,
+            "p95": 0.5
+          },
+          "purify": {
+            "version": "3.5.0",
+            "keepsHeading": true,
+            "limitedSet": true,
+            "defaultRetainsForm": true
+          }
+        },
+        {
+          "name": "restricted",
+          "current": {
+            "status": "restricted",
+            "complete": false,
+            "p50": 0,
+            "p95": 0.1
+          },
+          "readability": {
+            "hasResult": true,
+            "main": true,
+            "otherAnswer": false,
+            "p50": 0.5,
+            "p95": 0.7
+          },
+          "purify": {
+            "version": "3.5.0",
+            "keepsHeading": true,
+            "limitedSet": true,
+            "defaultRetainsForm": true
+          }
+        },
+        {
+          "name": "long-article",
+          "current": {
+            "status": "ready",
+            "complete": true,
+            "p50": 2.5,
+            "p95": 3.1
+          },
+          "readability": {
+            "hasResult": true,
+            "main": true,
+            "otherAnswer": false,
+            "p50": 8.7,
+            "p95": 10.2
+          },
+          "purify": {
+            "version": "3.5.0",
+            "keepsHeading": true,
+            "limitedSet": true,
+            "defaultRetainsForm": true
+          }
+        }
+      ]
+    },
+    {
+      "channel": "msedge",
+      "version": "157.0.4341.60",
+      "results": [
+        {
+          "name": "article",
+          "current": {
+            "status": "ready",
+            "complete": true,
+            "p50": 0.1,
+            "p95": 0.1
+          },
+          "readability": {
+            "hasResult": true,
+            "main": true,
+            "otherAnswer": false,
+            "p50": 0.5,
+            "p95": 0.8
+          },
+          "purify": {
+            "version": "3.5.0",
+            "keepsHeading": true,
+            "limitedSet": true,
+            "defaultRetainsForm": true
+          }
+        },
+        {
+          "name": "target-answer",
+          "current": {
+            "status": "ready",
+            "complete": true,
+            "p50": 0.1,
+            "p95": 0.2
+          },
+          "readability": {
+            "hasResult": true,
+            "main": false,
+            "otherAnswer": true,
+            "p50": 0.4,
+            "p95": 0.5
+          },
+          "purify": {
+            "version": "3.5.0",
+            "keepsHeading": true,
+            "limitedSet": true,
+            "defaultRetainsForm": true
+          }
+        },
+        {
+          "name": "clipped-answer",
+          "current": {
+            "status": "unavailable",
+            "complete": false,
+            "p50": 0,
+            "p95": 0.1
+          },
+          "readability": {
+            "hasResult": true,
+            "main": true,
+            "otherAnswer": false,
+            "p50": 0.6,
+            "p95": 0.7
+          },
+          "purify": {
+            "version": "3.5.0",
+            "keepsHeading": true,
+            "limitedSet": true,
+            "defaultRetainsForm": true
+          }
+        },
+        {
+          "name": "missing-body",
+          "current": {
+            "status": "unavailable",
+            "complete": false,
+            "p50": 0,
+            "p95": 0.1
+          },
+          "readability": {
+            "hasResult": true,
+            "main": false,
+            "otherAnswer": false,
+            "p50": 0.4,
+            "p95": 0.6
+          },
+          "purify": {
+            "version": "3.5.0",
+            "keepsHeading": true,
+            "limitedSet": true,
+            "defaultRetainsForm": true
+          }
+        },
+        {
+          "name": "list-preview",
+          "current": {
+            "status": "ready",
+            "complete": false,
+            "p50": 0,
+            "p95": 0.1
+          },
+          "readability": {
+            "hasResult": true,
+            "main": false,
+            "otherAnswer": false,
+            "p50": 0.3,
+            "p95": 0.4
+          },
+          "purify": {
+            "version": "3.5.0",
+            "keepsHeading": true,
+            "limitedSet": true,
+            "defaultRetainsForm": true
+          }
+        },
+        {
+          "name": "restricted",
+          "current": {
+            "status": "restricted",
+            "complete": false,
+            "p50": 0,
+            "p95": 0.1
+          },
+          "readability": {
+            "hasResult": true,
+            "main": true,
+            "otherAnswer": false,
+            "p50": 0.4,
+            "p95": 0.6
+          },
+          "purify": {
+            "version": "3.5.0",
+            "keepsHeading": true,
+            "limitedSet": true,
+            "defaultRetainsForm": true
+          }
+        },
+        {
+          "name": "long-article",
+          "current": {
+            "status": "ready",
+            "complete": true,
+            "p50": 2.2,
+            "p95": 3.3
+          },
+          "readability": {
+            "hasResult": true,
+            "main": true,
+            "otherAnswer": false,
+            "p50": 10.8,
+            "p95": 13.8
+          },
+          "purify": {
+            "version": "3.5.0",
+            "keepsHeading": true,
+            "limitedSet": true,
+            "defaultRetainsForm": true
+          }
+        }
+      ]
+    }
+  ]
+}
