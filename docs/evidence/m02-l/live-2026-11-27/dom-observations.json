@@ -1,0 +1,555 @@
+{
+  "capturedThrough": "2026-11-27T15:30:50.695Z",
+  "chromeHomeStarted": "2026-11-27T15:15:54.578Z",
+  "measurements": {
+    "chromeHome": {
+      "articleCount": 1,
+      "articlesWithText": 1,
+      "buttons": [
+        "导航",
+        "目录",
+        "默认",
+        "较宽",
+        "全宽",
+        "浅色",
+        "深色",
+        "退出阅读模式"
+      ],
+      "headingCount": 1,
+      "open": true,
+      "paragraphs": 2,
+      "sourceLinks": 1
+    },
+    "chromeEscape": {
+      "entryFocused": true,
+      "inside": true,
+      "scroll": 0
+    },
+    "chromeScroll": {
+      "before": 848,
+      "after": {
+        "focus": true,
+        "scroll": 848
+      }
+    },
+    "edgeHome": {
+      "articles": 1,
+      "focus": "退出阅读模式",
+      "links": 1,
+      "paragraphs": 2,
+      "toc": true
+    },
+    "edgeEntry": {
+      "bottom": 897,
+      "buttons": 1,
+      "left": 16,
+      "viewport": 913
+    },
+    "edgeEscape": {
+      "entryFocused": true,
+      "scroll": 0
+    },
+    "edgeScroll": {
+      "before": 1369,
+      "after": {
+        "focus": true,
+        "main": true,
+        "scroll": 1369
+      }
+    },
+    "chromeQuestion": {
+      "body": {
+        "answers": 5,
+        "text": [
+          {
+            "excluded": false,
+            "len": 217,
+            "p": 6,
+            "visible": true
+          },
+          {
+            "excluded": false,
+            "len": 2520,
+            "p": 18,
+            "visible": true
+          },
+          {
+            "excluded": false,
+            "len": 146,
+            "p": 4,
+            "visible": true
+          },
+          {
+            "excluded": false,
+            "len": 263,
+            "p": 5,
+            "visible": true
+          },
+          {
+            "excluded": false,
+            "len": 68,
+            "p": 3,
+            "visible": true
+          }
+        ]
+      },
+      "fallback": {
+        "feedback": [
+          "当前页面暂无可读取的已加载内容。"
+        ],
+        "main": true,
+        "reader": 0,
+        "scroll": 0
+      },
+      "crop": [
+        {
+          "ancestors": [
+            {
+              "clamp": "",
+              "client": 0,
+              "cls": "RichText ztext CopyrightRichText-richText css-u8299y",
+              "overflow": "visible",
+              "scroll": 0,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 0,
+              "cls": "",
+              "overflow": "visible",
+              "scroll": 0,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 0,
+              "cls": "css-376mun",
+              "overflow": "visible",
+              "scroll": 0,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 297,
+              "cls": "RichContent-inner RichContent-inner--collapsed",
+              "overflow": "hidden",
+              "scroll": 298,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 0,
+              "cls": "",
+              "overflow": "visible",
+              "scroll": 0,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 553,
+              "cls": "RichContent RichContent--unescapable",
+              "overflow": "visible",
+              "scroll": 553,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 648,
+              "cls": "ContentItem AnswerItem",
+              "overflow": "visible",
+              "scroll": 648,
+              "visible": "visible"
+            }
+          ],
+          "badAncestor": false,
+          "flags": true,
+          "rects": 3
+        },
+        {
+          "ancestors": [
+            {
+              "clamp": "",
+              "client": 0,
+              "cls": "RichText ztext CopyrightRichText-richText css-u8299y",
+              "overflow": "visible",
+              "scroll": 0,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 0,
+              "cls": "",
+              "overflow": "visible",
+              "scroll": 0,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 0,
+              "cls": "css-376mun",
+              "overflow": "visible",
+              "scroll": 0,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 3510,
+              "cls": "RichContent-inner",
+              "overflow": "hidden",
+              "scroll": 3510,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 0,
+              "cls": "",
+              "overflow": "visible",
+              "scroll": 0,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 3766,
+              "cls": "RichContent RichContent--unescapable",
+              "overflow": "visible",
+              "scroll": 3766,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 3861,
+              "cls": "ContentItem AnswerItem",
+              "overflow": "visible",
+              "scroll": 3861,
+              "visible": "visible"
+            }
+          ],
+          "badAncestor": false,
+          "flags": true,
+          "rects": 3
+        },
+        {
+          "ancestors": [
+            {
+              "clamp": "",
+              "client": 0,
+              "cls": "RichText ztext CopyrightRichText-richText css-u8299y",
+              "overflow": "visible",
+              "scroll": 0,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 0,
+              "cls": "",
+              "overflow": "visible",
+              "scroll": 0,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 0,
+              "cls": "css-376mun",
+              "overflow": "visible",
+              "scroll": 0,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 183,
+              "cls": "RichContent-inner",
+              "overflow": "hidden",
+              "scroll": 183,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 0,
+              "cls": "",
+              "overflow": "visible",
+              "scroll": 0,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 266,
+              "cls": "RichContent RichContent--unescapable",
+              "overflow": "visible",
+              "scroll": 266,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 359,
+              "cls": "ContentItem AnswerItem",
+              "overflow": "visible",
+              "scroll": 359,
+              "visible": "visible"
+            }
+          ],
+          "badAncestor": false,
+          "flags": true,
+          "rects": 3
+        },
+        {
+          "ancestors": [
+            {
+              "clamp": "",
+              "client": 0,
+              "cls": "RichText ztext CopyrightRichText-richText css-u8299y",
+              "overflow": "visible",
+              "scroll": 0,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 0,
+              "cls": "",
+              "overflow": "visible",
+              "scroll": 0,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 0,
+              "cls": "css-376mun",
+              "overflow": "visible",
+              "scroll": 0,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 276,
+              "cls": "RichContent-inner",
+              "overflow": "hidden",
+              "scroll": 276,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 0,
+              "cls": "",
+              "overflow": "visible",
+              "scroll": 0,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 359,
+              "cls": "RichContent RichContent--unescapable",
+              "overflow": "visible",
+              "scroll": 359,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 452,
+              "cls": "ContentItem AnswerItem",
+              "overflow": "visible",
+              "scroll": 452,
+              "visible": "visible"
+            }
+          ],
+          "badAncestor": false,
+          "flags": true,
+          "rects": 3
+        },
+        {
+          "ancestors": [
+            {
+              "clamp": "",
+              "client": 0,
+              "cls": "RichText ztext CopyrightRichText-richText css-u8299y",
+              "overflow": "visible",
+              "scroll": 0,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 0,
+              "cls": "",
+              "overflow": "visible",
+              "scroll": 0,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 0,
+              "cls": "css-376mun",
+              "overflow": "visible",
+              "scroll": 0,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 114,
+              "cls": "RichContent-inner",
+              "overflow": "hidden",
+              "scroll": 114,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 0,
+              "cls": "",
+              "overflow": "visible",
+              "scroll": 0,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 197,
+              "cls": "RichContent RichContent--unescapable",
+              "overflow": "visible",
+              "scroll": 197,
+              "visible": "visible"
+            },
+            {
+              "clamp": "",
+              "client": 290,
+              "cls": "ContentItem AnswerItem",
+              "overflow": "visible",
+              "scroll": 290,
+              "visible": "visible"
+            }
+          ],
+          "badAncestor": false,
+          "flags": true,
+          "rects": 3
+        }
+      ]
+    },
+    "edgeQuestion": {
+      "body": {
+        "answers": 5,
+        "text": [
+          {
+            "excluded": false,
+            "len": 217,
+            "p": 6,
+            "visible": true
+          },
+          {
+            "excluded": false,
+            "len": 2520,
+            "p": 18,
+            "visible": true
+          },
+          {
+            "excluded": false,
+            "len": 146,
+            "p": 4,
+            "visible": true
+          },
+          {
+            "excluded": false,
+            "len": 263,
+            "p": 5,
+            "visible": true
+          },
+          {
+            "excluded": false,
+            "len": 68,
+            "p": 3,
+            "visible": true
+          }
+        ]
+      },
+      "fallback": {
+        "feedback": [
+          "当前页面暂无可读取的已加载内容。"
+        ],
+        "reader": 0
+      },
+      "crop": [
+        {
+          "client": 297,
+          "collapsed": true,
+          "innerClass": "RichContent-inner RichContent-inner--collapsed",
+          "overflow": "hidden",
+          "scroll": 298,
+          "visible": true,
+          "wrapper": true
+        },
+        {
+          "client": 3510,
+          "collapsed": false,
+          "innerClass": "RichContent-inner",
+          "overflow": "hidden",
+          "scroll": 3510,
+          "visible": true,
+          "wrapper": true
+        },
+        {
+          "client": 183,
+          "collapsed": false,
+          "innerClass": "RichContent-inner",
+          "overflow": "hidden",
+          "scroll": 183,
+          "visible": true,
+          "wrapper": true
+        },
+        {
+          "client": 276,
+          "collapsed": false,
+          "innerClass": "RichContent-inner",
+          "overflow": "hidden",
+          "scroll": 276,
+          "visible": true,
+          "wrapper": true
+        },
+        {
+          "client": 114,
+          "collapsed": false,
+          "innerClass": "RichContent-inner",
+          "overflow": "hidden",
+          "scroll": 114,
+          "visible": true,
+          "wrapper": true
+        }
+      ]
+    },
+    "chromeArticle": {
+      "h": 0,
+      "images": 9,
+      "list": 0,
+      "p": 68
+    },
+    "edgeArticle": {
+      "h": 0,
+      "images": 9,
+      "list": 0,
+      "p": 68
+    },
+    "console": {
+      "homeAndQuestion": [
+        {
+          "status403": 0,
+          "parameterError": 0
+        },
+        {
+          "status403": 0,
+          "parameterError": 0
+        },
+        {
+          "status403": 0,
+          "parameterError": 0
+        },
+        {
+          "status403": 0,
+          "parameterError": 0
+        }
+      ],
+      "article": [
+        {
+          "status403": 0,
+          "parameterError": 0
+        },
+        {
+          "status403": 0,
+          "parameterError": 0
+        }
+      ]
+    }
+  }
+}

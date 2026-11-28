@@ -97,6 +97,10 @@ M00-UI-B 的飞书参考证据按原状态保存，正式飞书截图为 0 / 3�
 
 M03-R 选型及隔离实验已获负责人批准。原始研究保存在 `research/m03-r`，归档保留复现脚本和结果。批准范围包括保留现有架构、局部复用 MIT 纯 DOM 选择器及独立实现会话状态保护。M03–M05 处于 LOCKED。[归档](research/M03-R/RESOURCE-INVENTORY.md) · [实施建议](research/M03-R/IMPLEMENTATION-RECOMMENDATIONS.md)
 
+### 2026-11-27 双浏览器补测
+
+Chrome 与 Edge 各自通过推荐页入口、预览、原页与滚动恢复、Esc 焦点恢复以及热榜路由切换。两端专栏样本均已读取富文本并量测窄视口。Edge 专栏可用键盘打开，固定投票栏遮挡鼠标入口。普通问答在两端因旧折叠规则误判而回退。修复及回归纳入独立分支 `fix/m02-visible-question-answers`。专用配置的安装指纹、修复版实机、章节目录跳转及历史访问异常归因待核验。Gate 01-V 为 BLOCKED，M03–M05 保持 LOCKED。[实机验收记录](M02-VALIDATION.md#2026-11-27-双浏览器实站复测)
+
 ## 2026-11-28 M02 进度
 
 `dev` 为 `181ad56`（`0.0.3`）。本地 `0.0.4` 候选 `3c10e85` 的构建、30 项产品 DOM 回归和 Chrome／Edge 定向合成测试通过。独立配置尚待安装候选并完成双端知乎验证，GitHub 登录完成后同步候选和核验 Draft PR 的 CI。Gate 01-V 保持 `BLOCKED`。 [候选验收](M02-VALIDATION.md#2026-11-28-m02-修复候选) · [实机交接](evidence/m02-l/HANDOFF.md#2026-11-28-修复候选接手)

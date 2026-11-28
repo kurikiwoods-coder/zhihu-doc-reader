@@ -94,6 +94,33 @@ M01-L-R、联合实机验收及 Gate 01-V 保持 `BLOCKED`。双端实站通过�
 | 访问异常归因 | UNKNOWN | 日常 Chrome 启停两侧均可访问首页。既有 Edge 专栏 HTTP 403、Chrome 历史会话登录要求及「请求参数异常」的原因仍待查。 |
 | M01／M02 联合实机、Gate 01-V | BLOCKED | 双端联验、阻断关闭以及真实阅读器视觉证据齐备后申请 Gate 01-V。 |
 
+### 2026-11-27 双浏览器实站复测
+
+测试窗口为北京时间 23:15–23:30。负责人确认已准备两个测试窗口。自动化各连接到一个 Chrome 与一个 Edge 配置并独立操作，Chrome 连接与先前日常对照使用的连接相同，现有接口未能复核窗口与专用配置的对应关系。两端在 https://www.zhihu.com/ 均观测到项目入口。Tampermonkey 的启用数量、已安装版本和指纹及浏览器完整版本在此次会话中未取得。仓库 0.0.3 的固定安装文件 SHA-256 为 `dabe299440412d6591c0a5555775711f985139fd4d034e33a1b9fa362a382693`。以下为当前连接下的实测结果。
+
+| 用例 | Chrome | Edge |
+| --- | --- | --- |
+| 推荐页入口及读取 | 只有一个入口，点击进入，显示 1 条推荐预览、2 个段落及原文链接。 | 只有一个入口，位于左侧 16 CSS px、底部 16 CSS px。点击进入，显示 1 条推荐预览、2 个段落及原文链接。 |
+| 退出、键盘焦点和滚动 | Esc 关闭并归还入口焦点。退出按钮关闭并恢复原页，滚动位置 848 → 848 CSS px。 | Esc 关闭并归还入口焦点。退出按钮关闭并恢复原页，滚动位置 1369 → 1369 CSS px。 |
+| 路由切换 | 推荐 → 热榜 → 推荐，热榜只有一个入口且阅读器默认关闭。 | 推荐 → 热榜 → 推荐，热榜只有一个入口且阅读器默认关闭。 |
+| 已加载问答正文 | BLOCKED。5 个可见答案，首条折叠，后 4 条正文容器没有实测裁切。入口提示「当前页面暂无可读取的已加载内容。」原页保留。 | BLOCKED。同样本独立复现，5 个可见答案、同样的正文状态、回退提示和原页保留。 |
+| 专栏正文、富文本和目录 | 同一篇专栏，原生正文 67 个段落，阅读器内 68 个段落节点、9 个图像元素。文章无二级和三级标题，目录跳转待测。 | 同样本独立读取，原生正文 67 个段落，阅读器内 68 个段落节点、9 个图像元素。Enter 可打开阅读器。鼠标入口被知乎固定投票栏截获，详见下文。目录跳转待测。 |
+| 窄视口 | 设定 420 × 850，文档可用宽度 405 CSS px，阅读正文宽 358 CSS px，68 个段落节点保留，看到导航和目录控件。最终截图捕获到恢复后的桌面布局，窄视口以 DOM 量测为证。 | 同尺寸独立测得相同的正文宽度及段落数，工具栏换行。两端阅读器工作区和正文的可视宽度等于其滚动宽度，底层知乎文档为 405 / 1032 CSS px。Edge 截图可见原生横向滚动条。 |
+
+问答的生产正文选择器在两端均命中。五张回答卡共享 `.RichContent--unescapable` 外层。第一张正文另有 `.RichContent-inner--collapsed`，高度为 297 / 298 CSS px。后四张正文的可视高度和滚动高度各自相等（3510、183、276、114 CSS px）。0.0.3 仅因共同外层标记就拒绝这些已呈现答案。独立修复分支 `fix/m02-visible-question-answers` 处理这一兼容性问题，须在相同样本复测。
+
+Edge 专栏在 906 × 913 CSS px 下复现鼠标入口遮挡。入口中心约为 (68, 879)，入口测试时 5 个采样点均命中知乎固定底部操作栏的投票按钮。命中元素为 `.Post-Main .Sticky.RichContent-actions.is-fixed.is-bottom .VoteButton`，原生按钮范围为 x 32–148、y 869–903 CSS px。用 Enter 成功进入。历史入口修复仍适用于已测推荐页。专栏避让修复及同一视口复测纳入独立候选分支。
+
+#### HTTP 403 与「请求参数异常」
+
+本轮在各自连接的推荐、问答及同一专栏页面可正常显示原生内容。两端六个页面记录的错误和警告控制台日志未命中 403 或「请求参数异常」，可见异常在这些样本中记为 `NOT REPRODUCED`。工具未取得主文档状态、相关请求状态、Initiator 或同一配置同一 URL 的启停网络对照。历史 Edge 专栏 403 及「请求参数异常」的归因仍为 `UNKNOWN`。
+
+固定产物在 `document-idle` 注入。生产代码审查未发现读取阶段主动发出、拦截或改写知乎请求的路径。阅读器提供的原文链接可规范化 URL，用户点击时触发浏览器正常导航并使用 `no-referrer`。历史异常缺少请求发起者及启停对照，无法将其归因给某个脚本、浏览器或站点因素。
+
+本轮留档包括 [两端 DOM 测量和脱敏控制台计数](evidence/m02-l/live-2026-11-27/dom-observations.json)、[Chrome 首页阅读器](evidence/m02-l/live-2026-11-27/chrome-home.jpg)、[Chrome 专栏](evidence/m02-l/live-2026-11-27/chrome-article.jpg)、[Chrome 问答回退](evidence/m02-l/live-2026-11-27/chrome-question-fallback.jpg)、[Edge 首页入口](evidence/m02-l/live-2026-11-27/edge-home.jpg)、[Edge 专栏](evidence/m02-l/live-2026-11-27/edge-article.jpg)、[Edge 窄视口](evidence/m02-l/live-2026-11-27/edge-narrow.jpg)和 [Edge 问答回退](evidence/m02-l/live-2026-11-27/edge-question-fallback.jpg)。
+
+全项目可行性检查记录为架构与运行时依赖 `PASS`，真实问答端到端及 Edge 专栏指针入口 `BLOCKED`，历史访问异常归因 `UNKNOWN`，正式 Gate 01-V `BLOCKED`。剩余专用配置安装身份、候选修复、目录交互及双端剩余实机用例见 [交接文档](evidence/m02-l/HANDOFF.md)。
+
 ## 2026-11-28 M02 修复候选
 
 远端 `dev` 核对为 `181ad56b1806f6bc9e489c1a70a4e59ab1363eb3`，安装基线为 `0.0.3`。本地修复分支 `fix/m02-visible-question-answers` 的产品候选 `3c10e8522876bb0f5bdce33ecf166dd1446bb7c0` 为 `0.0.4`，处理完整可见问答被误判为折叠和专栏固定投票栏遮挡入口。重新构建的 `dist/bundle.user.js` 与签入产物一致，SHA-256 为 `f482e9b63bd1089b250735e9a022cd8db9211480024d7379de16e6dc688e9791`。 [远端基线](https://github.com/kurikiwoods-coder/zhihu-doc-reader/commit/181ad56b1806f6bc9e489c1a70a4e59ab1363eb3) · [候选产物](../dist/bundle.user.js)
@@ -104,6 +131,6 @@ M01-L-R、联合实机验收及 Gate 01-V 保持 `BLOCKED`。双端实站通过�
 | 固定投票栏的浏览器合成用例 | PASS | Windows Chrome `158.0.8127.38`、Edge `158.0.4370.45` 分别通过隔离 Playwright 验证。906 CSS px 下入口抬升 54 px，与投票栏留有 16 px 间距，两个按钮各自可点击。缩放、Escape、焦点归位和撤去投票栏后的入口复位通过。 |
 | `0.0.4` 双浏览器实机 | BLOCKED | 候选实机用例尚未执行。已打开的 Chrome 推荐首页和 Edge 专栏各观察到一个入口，安装版本和构建指纹尚待确认。待分别核验完整问答、专栏入口、目录跳转、退出后的焦点与滚动、异常回退及实站截图。 |
 | 历史 HTTP 403 与「请求参数异常」 | UNKNOWN | 页面和已抽样的控制台未复现异常。主文档和相关请求的状态、请求发起方及候选的同配置同 URL 启停对照尚未取得，脚本归因保持 `UNKNOWN`。 |
-| 候选 Draft PR 与 GitHub CI | BLOCKED | 远端修复分支仍指向 `07198e1faa50373cf970f0c7e847ce5bd5a09d94`，当前无打开的 PR。本地候选与 `dev` 合并预检通过。`gh` 不在 PATH，终端发起 Git Credential Manager 浏览器登录返回「此平台上不支持操作」，待交互登录后推送并核验 `verify` 与 Chrome、Edge 合成 CI。 |
+| 候选 Draft PR 与 GitHub CI | BLOCKED | 远端修复分支仍指向 `07198e1faa50373cf970f0c7e847ce5bd5a09d94`，当前无打开的 PR。已将 `dev` 验收证据合入本地候选分支。`gh` 不在 PATH，终端发起 Git Credential Manager 浏览器登录返回「此平台上不支持操作」，待交互登录后推送并核验 `verify` 与 Chrome、Edge 合成 CI。 |
 
 Gate 01-V 保持 `BLOCKED`，待双浏览器实机、真实界面证据、阻断关闭及候选 CI 齐备后提交。 [候选安装、复测与交接](evidence/m02-l/HANDOFF.md#2026-11-28-修复候选接手)
