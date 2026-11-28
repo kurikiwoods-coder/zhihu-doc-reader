@@ -6,7 +6,7 @@
 
 ## 参考与初始目标
 
-Reference Value 使用 UIB-DOM-01 至 UIB-DOM-07 已取得的读数。Target Value 是负责人确认的初始设计基线。所有宽度、高度和字体像素均为 CSS px，百分比以正文可用区为基准。
+表中的 Reference Value 为 2026-11-27 的 UIB-DOM-01 至 UIB-DOM-07 历史读数。Target Value 是负责人确认的初始设计基线。所有宽度、高度和字体像素均为 CSS px，百分比以正文可用区为基准。
 
 | 参数 | Reference Value | Target Value（初始基线） | Evidence |
 | --- | --- | --- | --- |
@@ -24,7 +24,7 @@ Reference Value 使用 UIB-DOM-01 至 UIB-DOM-07 已取得的读数。Target Val
 | 段落实际间距 | 相邻正文块实测 8 px | 12 px | `UIB-DOM-04` |
 | 页面、顶栏、侧栏、正文和目录背景 | 页面、顶栏 `#FFFFFF`；左栏 `#F5F6F7`；正文容器透明 | 浅色阅读面 `#FFFFFF`，外壳 `#F7F8FA`，左栏 `#EFF2F6`；深色按语义覆盖 | `UIB-DOM-04`、`UIB-DOM-05` |
 
-状态汇总为已有 DOM 读数 12 项、部分取证 7 项、待实测 12 项。逐项理由与补证范围见草案矩阵。 [机器可读记录](../../validation/m00-ui/evidence/visual-review-matrix.json)
+历史矩阵登记 DOM 读数 12 项、部分取证 7 项、待实测 12 项。2026-11-28 补测标准页宽下的 64 px 顶栏、820 px 正文外框、H1–H3、目录子树折叠与恢复、Enter 跳转后的当前项及焦点。视觉差异供负责人评审。产品参数调整如获批准，通过 Tokens 与布局变量实施，并复测响应式、富文本和键盘交互。 [机器可读历史记录](../../validation/m00-ui/evidence/visual-review-matrix.json) · [飞书补测与视觉差异](FEISHU-VISUAL-REVIEW.md)
 
 ## 页面与视口
 

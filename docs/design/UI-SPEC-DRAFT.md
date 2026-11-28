@@ -2,7 +2,7 @@
 
 2026-11-27（UTC+08:00） · PDT V1.2 §20–22 · DOM-only · M00-UI-B-R
 
-这份矩阵汇总负责人已接受的 UIB-DOM-01 至 UIB-DOM-07。阅读器采用左侧产品导航、居中正文和右侧阅读辅助区。目标值均为候选，供负责人确认。 [视觉规范候选](UI-SPEC.md) · [脱敏测量原记录](../../validation/m00-ui/evidence/editor-dom-precheck.json) · [机器可读矩阵](../../validation/m00-ui/evidence/visual-review-matrix.json)
+这份历史矩阵汇总负责人已接受的 UIB-DOM-01 至 UIB-DOM-07，并保留当时的候选目标。现行阅读器采用左侧产品导航、居中正文和右侧阅读辅助区。2026-11-28 在标准页宽补测正文、目录布局和交互，结果与剩余缺项见补测报告。 [现行视觉规范](UI-SPEC.md) · [飞书补测报告](FEISHU-VISUAL-REVIEW.md) · [脱敏测量原记录](../../validation/m00-ui/evidence/editor-dom-precheck.json) · [机器可读历史矩阵](../../validation/m00-ui/evidence/visual-review-matrix.json)
 
 ## 公开参考研究
 
@@ -19,7 +19,7 @@
 
 ## 视觉测量矩阵
 
-Reference Value 写入已有的真实测量或观察。Target Value 是待确认的产品设计值。Evidence 使用实体样本编号。Rationale 说明目标的选择与调整依据。已有 Chrome DOM 读数作为参考记录，PDT S 级仍以真实个人测试文档的 F12 为准。A 级用于已执行的布局或交互观察，三张正式截图单独核对。
+Reference Value 写入 2026-11-27 真实测量或观察，Target Value 是当时的候选设计值。Evidence 使用原样本编号。Rationale 说明目标的选择与调整依据。下列状态及待补列为该日期的快照。2026-11-28 的计算样式、几何、目录键鼠观察和截图状态见补测报告。 [M00-UI-FINAL 补测](FEISHU-VISUAL-REVIEW.md)
 
 | 证据状态 | 项数 | 含义 |
 | --- | ---: | --- |
