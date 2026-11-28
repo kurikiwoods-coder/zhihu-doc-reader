@@ -79,7 +79,7 @@ PDT V1.3 是产品与验收基线。M00-A、M00-B 与 Gate 01-T 已通过。M01-
 3. 查明上游构建入口和 Node.js 要求，审阅构建文件后在隔离目录运行 `node build.js`，记录环境、结果和 `dist/bundle.user.js` 的生成情况。
 4. 在 `docs/M00-VALIDATION.md` 登记可复用模块、依赖审计结果、证据和未解决项。审计 DOMPurify 与 Playwright，Lucide 按需评估，Semi Design 仅作为视觉参考。
 
-M00-UI-B 历史快照中的可公开截图为 0 / 3。2026-11-28 已采集三张脱敏参考图并补测同文档三档页宽、窄窗与 Hover。目录缩进和默认列宽候选待负责人审核。Gate 01-V 依据独立阅读器的真实运行表现。M01–M02 采用 Tokens 与布局、排版、组件样式分层，适配器与渲染隔离。 [初始视觉规范](design/UI-SPEC.md) · [飞书视觉补测](design/FEISHU-VISUAL-REVIEW.md)
+M00-UI-B 历史快照中的可公开截图为 0 / 3。2026-11-28 已采集三张脱敏参考图并补测同文档三档页宽、窄窗与 Hover。1920 CSS px 复测确认标准和较宽档的宽度，已登记两次全宽读数及复测环境。目录缩进和默认列宽候选待负责人审核。Gate 01-V 依据独立阅读器的真实运行表现。M01–M02 采用 Tokens 与布局、排版、组件样式分层，适配器与渲染隔离。 [初始视觉规范](design/UI-SPEC.md) · [飞书视觉补测](design/FEISHU-VISUAL-REVIEW.md)
 
 ## 分支与提交
 
