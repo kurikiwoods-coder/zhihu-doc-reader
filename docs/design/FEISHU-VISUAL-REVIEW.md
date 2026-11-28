@@ -119,4 +119,15 @@
 | `[data-block-type="heading3"] .ace-line` | 20 px | 28 px | 600 |
 | `[data-block-type="text"]:not(.isEmpty) .ace-line` | 16 px | 26 px | 400 |
 
-正文容器内只有标题和文本区块。引用、有序列表、无序列表和代码块均为 **NOT TESTED**，该测试文档无相应样本。从标签发送 F12 未能观察到原生 DevTools Computed 面板，面板截图为 **BLOCKED**。复核了现有规范中的 75 项基础 Tokens、16 项深色覆盖、7 组宽度预算与 18 组对比度，结果与源码和计算一致。 [参考图索引](#环境与截图) · [CSS Tokens](../../src/styles/tokens.css)
+正文容器内只有标题和文本区块。引用、有序列表、无序列表和代码块均为 **NOT TESTED**，该测试文档无相应样本。15:31 从标签发送 F12 未能观察到原生 DevTools Computed 面板，当时缺少面板截图。复核了现有规范中的 75 项基础 Tokens、16 项深色覆盖、7 组宽度预算与 18 组对比度，结果与源码和计算一致。 [参考图索引](#环境与截图) · [CSS Tokens](../../src/styles/tokens.css)
+
+## 2026-11-28 原生 Elements / Computed 证据
+
+负责人提供的两张截图均显示飞书文档的原生 DevTools，时间为 15:39（UTC+08:00）。两端都选中 `body#zh-CN`。表内尺寸取自截图中的盒模型中心，四周外边距、边框和内边距均为 0 CSS px。Chrome 同屏可见 `background-color: rgb(255, 255, 255)`。
+
+| 浏览器及 DevTools 停靠位置 | `body#zh-CN` 盒模型 | 证据 |
+| --- | --- | --- |
+| Windows Chrome，右侧停靠 | 1365 × 911 CSS px | [脱敏 Computed 面板](../../references/feishu/04-chrome-native-computed-body-redacted.png) |
+| Windows Edge，底部停靠 | 1912 × 601 CSS px | [脱敏 Computed 面板](../../references/feishu/05-edge-native-computed-body-redacted.png) |
+
+原生面板取证为 **PARTIALLY_MEASURED**。这两次截图的显示器归属、物理分辨率、Windows 缩放、浏览器缩放、CSS 视口、DPR、页宽模式及滚动条占位均为 **UNKNOWN**。盒尺寸仅对应选中的根节点。正文容器和排版节点的原生面板读数待采集，上节的只读 DOM 读数属于独立记录。 [双显示器测量规程](UI-SPEC.md#页面与视口)引用、有序列表、无序列表和代码块为 **NOT TESTED**。
