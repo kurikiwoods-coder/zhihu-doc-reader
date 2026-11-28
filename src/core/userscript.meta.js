@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Zhihu Doc Reader
 // @namespace    https://github.com/kurikiwoods-coder/zhihu-doc-reader
-// @version      0.0.3
+// @version      0.0.4
 // @description  DOM-only document reading for Zhihu
 // @match        https://www.zhihu.com/*
 // @match        https://zhuanlan.zhihu.com/p/*

@@ -94,7 +94,6 @@ M01-L-R、联合实机验收及 Gate 01-V 保持 `BLOCKED`。双端实站通过�
 | 访问异常归因 | UNKNOWN | 日常 Chrome 启停两侧均可访问首页。既有 Edge 专栏 HTTP 403、Chrome 历史会话登录要求及「请求参数异常」的原因仍待查。 |
 | M01／M02 联合实机、Gate 01-V | BLOCKED | 双端联验、阻断关闭以及真实阅读器视觉证据齐备后申请 Gate 01-V。 |
 
-
 ### 2026-11-27 双浏览器实站复测
 
 测试窗口为北京时间 23:15–23:30。负责人确认已准备两个测试窗口。自动化各连接到一个 Chrome 与一个 Edge 配置并独立操作，Chrome 连接与先前日常对照使用的连接相同，现有接口未能复核窗口与专用配置的对应关系。两端在 https://www.zhihu.com/ 均观测到项目入口。Tampermonkey 的启用数量、已安装版本和指纹及浏览器完整版本在此次会话中未取得。仓库 0.0.3 的固定安装文件 SHA-256 为 `dabe299440412d6591c0a5555775711f985139fd4d034e33a1b9fa362a382693`。以下为当前连接下的实测结果。
@@ -121,3 +120,21 @@ Edge 专栏在 906 × 913 CSS px 下复现鼠标入口遮挡。入口中心约�
 本轮留档包括 [两端 DOM 测量和脱敏控制台计数](evidence/m02-l/live-2026-11-27/dom-observations.json)、[Chrome 首页阅读器](evidence/m02-l/live-2026-11-27/chrome-home.jpg)、[Chrome 专栏](evidence/m02-l/live-2026-11-27/chrome-article.jpg)、[Chrome 问答回退](evidence/m02-l/live-2026-11-27/chrome-question-fallback.jpg)、[Edge 首页入口](evidence/m02-l/live-2026-11-27/edge-home.jpg)、[Edge 专栏](evidence/m02-l/live-2026-11-27/edge-article.jpg)、[Edge 窄视口](evidence/m02-l/live-2026-11-27/edge-narrow.jpg)和 [Edge 问答回退](evidence/m02-l/live-2026-11-27/edge-question-fallback.jpg)。
 
 全项目可行性检查记录为架构与运行时依赖 `PASS`，真实问答端到端及 Edge 专栏指针入口 `BLOCKED`，历史访问异常归因 `UNKNOWN`，正式 Gate 01-V `BLOCKED`。剩余专用配置安装身份、候选修复、目录交互及双端剩余实机用例见 [交接文档](evidence/m02-l/HANDOFF.md)。
+
+## 2026-11-28 M02 修复候选
+
+远端 `dev` 核对为 `181ad56b1806f6bc9e489c1a70a4e59ab1363eb3`，安装基线为 `0.0.3`。本地修复分支 `fix/m02-visible-question-answers` 的产品候选 `3c10e8522876bb0f5bdce33ecf166dd1446bb7c0` 为 `0.0.4`，处理完整可见问答被误判为折叠和专栏固定投票栏遮挡入口。重新构建的 `dist/bundle.user.js` 与签入产物一致，SHA-256 为 `f482e9b63bd1089b250735e9a022cd8db9211480024d7379de16e6dc688e9791`。 [远端基线](https://github.com/kurikiwoods-coder/zhihu-doc-reader/commit/181ad56b1806f6bc9e489c1a70a4e59ab1363eb3) · [候选产物](../dist/bundle.user.js)
+
+| 核验项 | 状态 | 证据与缺项 |
+| --- | --- | --- |
+| 候选构建、离线与静态检查 | PASS | Node.js `24.22.3` 重建及语法检查通过。单元与静态检查 10/10，固定 LinkeDOM 工作文件的产品 DOM 回归 30/30，M00-B 历史探针 21/21。问答回归覆盖完整与折叠回答、直达回答及非问答页面。 |
+| 固定投票栏的浏览器合成用例 | PASS | Windows Chrome `158.0.8127.38`、Edge `158.0.4370.45` 分别通过隔离 Playwright 验证。906 CSS px 下入口抬升 54 px，与投票栏留有 16 px 间距，两个按钮各自可点击。缩放、Escape、焦点归位和撤去投票栏后的入口复位通过。 |
+| `0.0.4` 双浏览器实机 | BLOCKED | 候选实机用例尚未执行。已打开的 Chrome 推荐首页和 Edge 专栏各观察到一个入口，安装版本和构建指纹尚待确认。待分别核验完整问答、专栏入口、目录跳转、退出后的焦点与滚动、异常回退及实站截图。 |
+| 历史 HTTP 403 与「请求参数异常」 | UNKNOWN | 页面和已抽样的控制台未复现异常。主文档和相关请求的状态、请求发起方及候选的同配置同 URL 启停对照尚未取得，脚本归因保持 `UNKNOWN`。 |
+| 候选 Draft PR 与 GitHub CI | BLOCKED | [Draft PR #2](https://github.com/kurikiwoods-coder/zhihu-doc-reader/pull/2) 的目标分支为 `dev`。首轮在 `bcb02f9` 运行，`verify` 通过。Chrome 以 31 CSS px 报告预期为 16 CSS px 的入口底部间距。Edge 的 WebDriver 窗口调整请求超时。 [首轮 CI](https://github.com/kurikiwoods-coder/zhihu-doc-reader/actions/runs/46120259746) |
+
+首轮 Chrome 断言可在本地两端的原合成样本复现。横向滚动条占 15 CSS px，`innerHeight` 为 920，布局视口高 905。改用布局视口测得预期的 16 CSS px。合成运行器改用两端驱动的 CDP 接口设置并核对视口宽高，避开 Edge 首轮超时的窗口调整命令。宽度上限断言先收起两列并核实可用宽度至少为 960 CSS px，再检查正文宽度上限。
+
+本地 Windows Chrome `158.0.8127.38` 与 Edge `158.0.4370.45` 通过隔离 Playwright/CDP 适配的完整合成断言，单元检查 10/10。GitHub 托管 WebDriver 的复跑结果待核验。候选安装文件复核 SHA-256 为 `f482e9b63bd1089b250735e9a022cd8db9211480024d7379de16e6dc688e9791`。 [本地合成运行器修复](../validation/m02/run-browser.mjs)
+
+Gate 01-V 保持 `BLOCKED`，待双浏览器实机、真实界面证据、阻断关闭及候选 CI 齐备后提交。 [候选安装、复测与交接](evidence/m02-l/HANDOFF.md#2026-11-28-修复候选接手)

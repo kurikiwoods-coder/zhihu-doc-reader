@@ -80,9 +80,9 @@ function publishedText(card, view) {
   return label?.startsWith('发布于') ? label.slice(3).trim() || null : null;
 }
 
-function readFullBody(card, selector, view, sourceUrl) {
+function readFullBody(card, selector, view, sourceUrl, isQuestionAnswer) {
   const element = firstRendered(card, selector, view);
-  if (!element || !isUnclippedBody(element, card, view)) return null;
+  if (!element || !isUnclippedBody(element, card, view, isQuestionAnswer)) return null;
   const content = captureRichChildren(element, view, sourceUrl);
   return hasReadableContent(content) ? content : null;
 }
@@ -100,7 +100,7 @@ function readNativePage(document, view, route) {
     const title = profile.body ? heading?.innerText?.trim() : boundedText(heading, 160);
     if (!title) continue;
     const source = answer || (route.contentId ? route : cardAddress(card, heading, view, route));
-    const content = profile.body ? readFullBody(card, profile.body, view, source.sourceUrl) : null;
+    const content = profile.body ? readFullBody(card, profile.body, view, source.sourceUrl, route.kind === 'question') : null;
     if (profile.body && !content) continue;
     return {
       status: 'ready',
