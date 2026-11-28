@@ -23,7 +23,7 @@ PDT V1.3 是产品与验收基线。M00-A、M00-B 与 Gate 01-T 已通过。M01-
 | --- | --- | --- | --- |
 | M00-A | 锁定上游源码，审计许可、权限、依赖、网络和构建 | [M00-VALIDATION.md](M00-VALIDATION.md) · [UPSTREAM-LOCK.md](UPSTREAM-LOCK.md) | PASS（审计与构建） |
 | M00-B | 在 Chrome 和 Edge 验证知乎页面、登录状态、数据源及降级 | [执行记录](M00-VALIDATION.md#m00-b-真实页面与数据源验证) · [分层取证与验收例外](M00-VALIDATION.md#m00-b-r-分层取证与验收例外) | PASS（已结项） |
-| M00-UI | 飞书历史参考与独立产品初始设计基线 | [31 项测量矩阵](design/UI-SPEC-DRAFT.md) · [初始规范](design/UI-SPEC.md) · [初始 Tokens](../src/styles/tokens.css) | 历史取证 BLOCKED；初始设计目标已确认 |
+| M00-UI | 飞书参考与独立产品初始设计基线 | [31 项历史测量矩阵](design/UI-SPEC-DRAFT.md) · [本轮补测](design/FEISHU-VISUAL-REVIEW.md) · [初始规范](design/UI-SPEC.md) · [初始 Tokens](../src/styles/tokens.css) | 已补三档页宽、标准档窄窗、目录与真实悬停。原生 F12 等缺项见报告，CSS 候选方案待评审。 |
 | M01-A | 初始化工程、锁定依赖，剥离 AI、Wiki 和 Embedding | AT23、AT24、AT26 | PASS（基础工程与构建） |
 | M01-B | 实现路由、生命周期、模式切换和原生页面恢复 | AT02、AT11、AT12、AT19 | PASS（离线），浏览器证据见 M01-L |
 | M01-L | 分层核验正式脚本安装、合成回归、六类原生路径及恢复 | 固定产物 SHA-256、双浏览器安装记录、各 14 项合成回归、6 张合成截图及实站缺口 | 整体 BLOCKED／I、S PASS（本地证据获负责人接受）／R BLOCKED |
@@ -43,7 +43,7 @@ PDT V1.3 是产品与验收基线。M00-A、M00-B 与 Gate 01-T 已通过。M01-
 
 | 模块 | 主要路径 |
 | --- | --- |
-| M00 | `docs/M00-VALIDATION.md`、`docs/design/UI-SPEC.md`、`docs/design/references/`、`src/styles/tokens.css` |
+| M00 | `docs/M00-VALIDATION.md`、`docs/design/UI-SPEC.md`、`docs/design/FEISHU-VISUAL-REVIEW.md`、`references/feishu/`、`src/styles/tokens.css` |
 | M01 | `src/core/` 的状态与生命周期，`src/adapters/` 的路由与 DOM，`src/renderer/reader-shell.js` 的验证界面，`src/styles/` 的视觉分层 |
 | M02 | `src/renderer/` 的文档、侧栏、目录和工具栏，以及问答、专栏适配器和 `src/styles/` |
 | M03 | `src/adapters/` 的热榜、推荐和搜索适配器，以及 `src/navigation/reading-queue.js`、`src/navigation/navigation-manager.js` |
@@ -79,7 +79,7 @@ PDT V1.3 是产品与验收基线。M00-A、M00-B 与 Gate 01-T 已通过。M01-
 3. 查明上游构建入口和 Node.js 要求，审阅构建文件后在隔离目录运行 `node build.js`，记录环境、结果和 `dist/bundle.user.js` 的生成情况。
 4. 在 `docs/M00-VALIDATION.md` 登记可复用模块、依赖审计结果、证据和未解决项。审计 DOMPurify 与 Playwright，Lucide 按需评估，Semi Design 仅作为视觉参考。
 
-M00-UI-B 的飞书参考证据按原状态保存，正式飞书截图为 0 / 3。后续视觉验收依据独立阅读器的真实运行表现。M01–M02 采用 Tokens 与布局、排版、组件样式分层；顶部栏、左侧导航、正文与右侧目录分区，适配器与渲染隔离。 [初始视觉规范](design/UI-SPEC.md)
+M00-UI-B 历史快照中的可公开截图为 0 / 3。2026-11-28 已采集三张脱敏参考图并补测同文档三档页宽、窄窗与 Hover。1920 CSS px 复测确认标准和较宽档的宽度，已登记两次全宽读数及复测环境。目录缩进和默认列宽候选待负责人审核。Gate 01-V 依据独立阅读器的真实运行表现。M01–M02 采用 Tokens 与布局、排版、组件样式分层，适配器与渲染隔离。 [初始视觉规范](design/UI-SPEC.md) · [飞书视觉补测](design/FEISHU-VISUAL-REVIEW.md)
 
 ## 分支与提交
 

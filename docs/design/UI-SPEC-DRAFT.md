@@ -2,7 +2,7 @@
 
 2026-11-27（UTC+08:00） · PDT V1.2 §20–22 · DOM-only · M00-UI-B-R
 
-这份矩阵汇总负责人已接受的 UIB-DOM-01 至 UIB-DOM-07。阅读器采用左侧产品导航、居中正文和右侧阅读辅助区。目标值均为候选，供负责人确认。 [视觉规范候选](UI-SPEC.md) · [脱敏测量原记录](../../validation/m00-ui/evidence/editor-dom-precheck.json) · [机器可读矩阵](../../validation/m00-ui/evidence/visual-review-matrix.json)
+这份历史矩阵汇总负责人已接受的 UIB-DOM-01 至 UIB-DOM-07，并保留当时的候选目标。现行阅读器采用左侧产品导航、居中正文和右侧阅读辅助区。2026-11-28 的补测覆盖同一视口的三档页宽、标准档的窄窗口、目录位置与真实指针悬停。 [现行视觉规范](UI-SPEC.md) · [飞书补测报告](FEISHU-VISUAL-REVIEW.md) · [脱敏测量原记录](../../validation/m00-ui/evidence/editor-dom-precheck.json) · [机器可读历史矩阵](../../validation/m00-ui/evidence/visual-review-matrix.json)
 
 ## 公开参考研究
 
@@ -19,7 +19,7 @@
 
 ## 视觉测量矩阵
 
-Reference Value 写入已有的真实测量或观察。Target Value 是待确认的产品设计值。Evidence 使用实体样本编号。Rationale 说明目标的选择与调整依据。已有 Chrome DOM 读数作为参考记录，PDT S 级仍以真实个人测试文档的 F12 为准。A 级用于已执行的布局或交互观察，三张正式截图单独核对。
+Reference Value 写入 2026-11-27 真实测量或观察，Target Value 是当时的候选设计值。Evidence 使用原样本编号。Rationale 说明目标的选择与调整依据。下列状态及待补列为该日期的快照。2026-11-28 的计算样式、几何、目录键鼠观察和截图状态见补测报告。 [M00-UI-FINAL 补测](FEISHU-VISUAL-REVIEW.md)
 
 | 证据状态 | 项数 | 含义 |
 | --- | ---: | --- |
@@ -73,8 +73,10 @@ Reference Value 写入已有的真实测量或观察。Target Value 是待确认
 | `navigation-collapse` 导航及目录固定与折叠 | 目录悬停从 4 px 展开至约 210.08 px；固定与折叠开关未测 | 左栏 224 / 52 px；右侧展开 200 px，收起释放列宽 | `UIB-DOM-07` | DOM 读数＋A 级观察 | 提供可预期的操作入口，适配窄视口。 | `PARTIAL` | 验证左右栏固定、取消固定、折叠、恢复及持续性。 |
 | `outline-navigation` 目录锚点、当前项与滚动 | 列出 H1–H3；点击 H3 后标题从 y=748.45 移至 302.95 px，进入视口 | 按 H1–H3 建目录；锚点顶部留 68 px；当前章节有选中标记 | `UIB-DOM-07` | A 级观察 | 便于跳到段落并在长篇阅读中重新定位。 | `PARTIAL` | 现有跳转无需重测；补当前项跟随滚动及复位。 |
 
-## 复核与冻结条件
+## 2026-11-27 复核与冻结条件
 
 1. 补完整浏览器、系统与缩放环境，运行 F12 脚本并取实际输出。固定档位与面板状态，再验证窄窗及目标断点。 [本地采集步骤](../../validation/m00-ui/README.md)
 2. 在个人测试文档补齐富文本、目录固定／折叠、当前项、单项悬停及键盘焦点，取得三张可公开的截图。 [缺项与截图状态](../../validation/m00-ui/evidence/visual-review-matrix.json)
 3. 负责人确认目标值及视觉取证结果后，冻结候选规范和 CSS Tokens。Gate 01 由负责人按 PDT 单独确认。
+
+2026-11-28 已补标准档的窄窗口、三档页宽、真实悬停和目录状态。当前缺项及待评审的最小 CSS 方案见补测报告。 [当前补测范围](FEISHU-VISUAL-REVIEW.md)

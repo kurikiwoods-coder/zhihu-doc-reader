@@ -325,4 +325,14 @@ M00-UI-B 需负责人授权后取证，并提交环境、三档宽度、核心�
 
 **Gate 01-T 通过，M01-A／M01-B 可实施。** M02–M05 继续锁定。上游原包直装状态仍为 BLOCKED，原探针证据与正式产品验收分列。
 
-**Gate 01-V 待验收。** 负责人确认 [初始 UI-SPEC](design/UI-SPEC.md) 和 [Tokens](../src/styles/tokens.css)，允许根据后续合规证据调整。原矩阵 12 项 DOM 读数、7 项部分取证、12 项待实测。飞书正式截图为 0 / 3，F12 正式实跑及完整环境缺证。后续验收依据阅读器真实渲染、可读性、响应式、富文本与交互。历史记录保留 BLOCKED。
+**Gate 01-V 待验收。** 负责人确认 [初始 UI-SPEC](design/UI-SPEC.md) 和 [Tokens](../src/styles/tokens.css)，允许根据后续合规证据调整。2026-11-27 的快照包含 12 项 DOM 读数、7 项部分取证、12 项待实测，可公开飞书截图为 0 / 3。该历史取证记录为 BLOCKED。独立产品的验收依据为阅读器真实渲染、可读性、响应式、富文本与交互。
+
+## M00-UI-FINAL 飞书参考补测
+
+2026-11-28（UTC+08:00）。在负责人已打开的 Chrome 测试文档取样，采集顶栏、Wiki 左导航、正文左侧目录、正文框、H1–H3 和段落的只读计算样式及几何。鼠标折叠并展开目录子树，按 Enter 跳转 H3 后该目录项保有焦点并显示当前章节状态。14:17–14:20 补测 DPR 为 1。在 1920 × 911 CSS px 下三档正文宽度为 820、1020、1251.5 px。在 1280、960、760 px 视口补测标准档及目录位置。真实 H3 指针悬停出现提示，采样项背景透明。 [飞书视觉补测](design/FEISHU-VISUAL-REVIEW.md)
+
+三张脱敏参考图来自 13:09 的标准档。发送 F12 后可控标签未出现可观察的原生面板，原生前台仍为另一标签。原生面板复核、引用／列表／代码块样本、其余焦点与滚动状态以及精确布局断点尚待补。Gate 01-V 为 **BLOCKED**，待独立阅读器的双浏览器实站、产品截图以及阻断问题处理证据齐备后由负责人确认。
+
+14:49–14:50 在相同 1920 × 911 CSS px 视口通过只读 DOM 复测，标准／较宽仍为 820／1020 px，全宽为 1236.5 px，先前的 1251.5 px 继续按原次测量引用。全宽滚动容器外宽与客户区相差 15 px，差值与两次正文宽度差一致，成因待验证。复核了顶栏、目录列表、首个链接和正文各层级的计算样式。实测结束恢复标准档并关闭菜单。 [同视口复测](design/FEISHU-VISUAL-REVIEW.md#同视口复测)
+
+15:31 在 1365 × 911 CSS px 视口复核 H1–H3 和正文计算样式，结果与既有读数一致。引用、列表和代码块为 **NOT TESTED**，样本文档无对应区块。15:39 已补两张脱敏原生 F12 Computed 面板截图，证据为 **PARTIALLY_MEASURED**。两端选中的均为页面根节点，正文容器及显示环境仍待核对。三张脱敏参考图、研究文档及视觉差异随 Draft PR #3 待评审。该 PR 的 `336a5ae` 通过 `verify`、Chrome 和 Edge 合成 CI。 [原生面板取证](design/FEISHU-VISUAL-REVIEW.md#2026-11-28-原生-elements--computed-证据) · [排版复核](design/FEISHU-VISUAL-REVIEW.md#2026-11-28-排版复核) · [Draft PR #3](https://github.com/kurikiwoods-coder/zhihu-doc-reader/pull/3) · [CI 记录](https://github.com/kurikiwoods-coder/zhihu-doc-reader/actions/runs/46121354594)
