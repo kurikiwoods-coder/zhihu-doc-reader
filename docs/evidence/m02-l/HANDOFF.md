@@ -34,6 +34,6 @@
 1. 在独立 Chrome 和 Edge 配置分别安装候选，核对用户脚本源码指纹并确认每端只启用一份。记录浏览器、Tampermonkey、脚本版本和测试时间。
 2. 两端分别核验普通问答的完整回答、专栏固定投票栏旁的入口、正常打开与退出、目录跳转、Escape 和焦点与滚动恢复、同标签路由及正文缺失回退。保存脱敏的阅读器、富文本、目录和窄窗口截图。
 3. 在同一浏览器配置和 URL 对照停用与启用，记录主文档和相关请求的 HTTP 状态、发起方及是否重复。若触发登录、HTTP 403 或网站安全验证，暂停该样本。历史异常归因保持 `UNKNOWN`，直至取得相应证据。
-4. GitHub 登录后将候选推送到修复分支，创建基于 `dev` 的 Draft PR 并核验三项 CI。双端实机、视觉证据、阻断关闭与 CI 齐备后提交 Gate 01-V。
+4. 在面向 `dev` 的 Draft PR #2 检查 CI。首轮 `verify` 通过，Chrome 合成用例报告入口底部间距错误，Edge 合成用例在调整视口时超时。双端实机、视觉证据、阻断关闭与 CI 齐备后提交 Gate 01-V。 [候选 PR](https://github.com/kurikiwoods-coder/zhihu-doc-reader/pull/2) · [首轮 CI](https://github.com/kurikiwoods-coder/zhihu-doc-reader/actions/runs/46120259746)
 
 [M01 验收](../../M01-VALIDATION.md) · [M02 验收](../../M02-VALIDATION.md) · [路线图](../../ROADMAP.md)

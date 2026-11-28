@@ -131,6 +131,10 @@ Edge 专栏在 906 × 913 CSS px 下复现鼠标入口遮挡。入口中心约�
 | 固定投票栏的浏览器合成用例 | PASS | Windows Chrome `158.0.8127.38`、Edge `158.0.4370.45` 分别通过隔离 Playwright 验证。906 CSS px 下入口抬升 54 px，与投票栏留有 16 px 间距，两个按钮各自可点击。缩放、Escape、焦点归位和撤去投票栏后的入口复位通过。 |
 | `0.0.4` 双浏览器实机 | BLOCKED | 候选实机用例尚未执行。已打开的 Chrome 推荐首页和 Edge 专栏各观察到一个入口，安装版本和构建指纹尚待确认。待分别核验完整问答、专栏入口、目录跳转、退出后的焦点与滚动、异常回退及实站截图。 |
 | 历史 HTTP 403 与「请求参数异常」 | UNKNOWN | 页面和已抽样的控制台未复现异常。主文档和相关请求的状态、请求发起方及候选的同配置同 URL 启停对照尚未取得，脚本归因保持 `UNKNOWN`。 |
-| 候选 Draft PR 与 GitHub CI | BLOCKED | 远端修复分支仍指向 `07198e1faa50373cf970f0c7e847ce5bd5a09d94`，当前无打开的 PR。已将 `dev` 验收证据合入本地候选分支。`gh` 不在 PATH，终端发起 Git Credential Manager 浏览器登录返回「此平台上不支持操作」，待交互登录后推送并核验 `verify` 与 Chrome、Edge 合成 CI。 |
+| 候选 Draft PR 与 GitHub CI | BLOCKED | [Draft PR #2](https://github.com/kurikiwoods-coder/zhihu-doc-reader/pull/2) 的目标分支为 `dev`。首轮在 `bcb02f9` 运行，`verify` 通过。Chrome 以 31 CSS px 报告预期为 16 CSS px 的入口底部间距。Edge 的 WebDriver 窗口调整请求超时。 [首轮 CI](https://github.com/kurikiwoods-coder/zhihu-doc-reader/actions/runs/46120259746) |
+
+首轮 Chrome 断言可在本地两端的原合成样本复现。横向滚动条占 15 CSS px，`innerHeight` 为 920，布局视口高 905。改用布局视口测得预期的 16 CSS px。合成运行器改用两端驱动的 CDP 接口设置并核对视口宽高，避开 Edge 首轮超时的窗口调整命令。宽度上限断言先收起两列并核实可用宽度至少为 960 CSS px，再检查正文宽度上限。
+
+本地 Windows Chrome `158.0.8127.38` 与 Edge `158.0.4370.45` 通过隔离 Playwright/CDP 适配的完整合成断言，单元检查 10/10。GitHub 托管 WebDriver 的复跑结果待核验。候选安装文件复核 SHA-256 为 `f482e9b63bd1089b250735e9a022cd8db9211480024d7379de16e6dc688e9791`。 [本地合成运行器修复](../validation/m02/run-browser.mjs)
 
 Gate 01-V 保持 `BLOCKED`，待双浏览器实机、真实界面证据、阻断关闭及候选 CI 齐备后提交。 [候选安装、复测与交接](evidence/m02-l/HANDOFF.md#2026-11-28-修复候选接手)
