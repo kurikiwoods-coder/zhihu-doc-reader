@@ -10,8 +10,8 @@ import { setTimeout as delay } from 'node:timers/promises';
 import { pathToFileURL } from 'node:url';
 
 const profiles = {
-  chrome: { name: 'chrome', options: 'goog:chromeOptions', driver: 'chromedriver', driverHome: 'CHROMEWEBDRIVER' },
-  edge: { name: 'MicrosoftEdge', options: 'ms:edgeOptions', driver: 'msedgedriver', driverHome: 'EDGEWEBDRIVER' },
+  chrome: { name: 'chrome', options: 'goog:chromeOptions', driver: 'chromedriver', driverHome: 'CHROMEWEBDRIVER', cdp: '/goog/cdp/execute' },
+  edge: { name: 'MicrosoftEdge', options: 'ms:edgeOptions', driver: 'msedgedriver', driverHome: 'EDGEWEBDRIVER', cdp: '/ms/cdp/execute' },
 };
 const browser = process.argv[2];
 const profile = profiles[browser];
@@ -189,12 +189,12 @@ function evaluate(action, ...args) {
 }
 
 async function setViewport(width) {
-  await commandFor('POST', '/window/rect', { width, height: 920 });
-  const actual = await evaluate(() => ({ width: innerWidth, outer: outerWidth }));
-  if (actual.width !== width) {
-    await commandFor('POST', '/window/rect', { width: width + actual.outer - actual.width, height: 920 });
-  }
-  await until(() => evaluate(w => innerWidth === w, width), width + ' CSS px viewport');
+  const height = 920;
+  await commandFor('POST', profile.cdp, {
+    cmd: 'Emulation.setDeviceMetricsOverride',
+    params: { width, height, deviceScaleFactor: 1, mobile: false },
+  });
+  await until(() => evaluate((w, h) => innerWidth === w && innerHeight === h, width, height), width + ' × ' + height + ' CSS px viewport');
 }
 
 async function openReader() {
@@ -265,11 +265,12 @@ function measureArticleActions() {
     const voteRect = vote.getBoundingClientRect();
     const center = rect => [Math.floor(rect.x + rect.width / 2), Math.floor(rect.y + rect.height / 2)];
     const [x, y] = center(launcher);
-    const originalY = Math.floor(innerHeight - 16 - launcher.height / 2);
+    const viewportBottom = document.documentElement.clientHeight;
+    const originalY = Math.floor(viewportBottom - 16 - launcher.height / 2);
     return {
       x, y,
       left: launcher.left,
-      bottomInset: innerHeight - launcher.bottom,
+      bottomInset: viewportBottom - launcher.bottom,
       actionsLeft: actions.left,
       actionsHeight: actions.height,
       stickyHeight: sticky.getBoundingClientRect().height,
@@ -441,9 +442,13 @@ try {
       await saveScreenshot('reader-layout.png', 'default light');
       await pressAction('nav');
       within((await measure()).nav, 52, 'collapsed left navigation width');
+      await pressAction('outline');
       await pressAction('width-wide');
-      within((await measure()).column, 960, 'wide cap with extra reading space');
+      const expanded = await measure();
+      assert.ok(expanded.available >= 960, 'collapsed sidebars expose the wide reading cap');
+      within(expanded.column, 960, 'wide cap with extra reading space');
       await pressAction('width-default');
+      await pressAction('outline');
       await pressAction('nav');
     }
 
